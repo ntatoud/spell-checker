@@ -1,0 +1,32 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage[hmargin=2cm,vmargin=0cm]{geometry}
+\begin{document}
+    \noindent
+    Nom: Mot \\
+    Utilise: Chaine de caracteres,Dictionnaire,NaturelNonNul,Caractere,Booleen \\
+    Opérations: \begin{itemize}[label=$\ $, leftmargin=2cm, itemsep=0cm]
+        \item estUnMot: Chaine de caracteres $\rightarrow $ Booleen
+        \item creerUnMot: ChaineDeCaracteres $ \rightarrow$ Mot
+          
+        \item proposerMot: Mot $ \times $ Dictionnaire $ \rightarrow$  Mot $ \times $ .. $ \times $Mot
+        \item longueur: Mot $ \rightarrow$  NaturelNonNul
+        \item accederAuIemeCaractere: Mot $ \times $ NaturelNonNul $ \nrightarrow$  Caractere
+    \end{itemize}
+    
+    Sémantique: \begin{itemize}[label=$\- $, leftmargin=2cm, itemsep=0cm]
+        \item estUnMot: verifier si le mot est bien composé des lettres, renvoit VRAI si le mot contient que les lettres et renvoit FAUX sinon.
+
+        \item creerUnMot:création d’un mot à partir d’une chaine de caractère.
+         
+        \item proposerMot: proposer des mots d’après le dictionnaire qui sont proches à celui mis enParamètre.
+        \item longueur: donner la longueur d’un mot.
+        \item accederAuIemeCaractere: accéder à un certain caractère d`un mot en precisqnt son indice.
+    \end{itemize}
+
+    Préconditions: \begin{itemize}[label=$\- $, leftmargin=2cm, itemsep=0cm]
+        \item accederAuIemeCaractere(mot, i) : i $\leq$ longueur(mot)
+    \end{itemize}
+\end{document}
