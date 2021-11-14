@@ -1,0 +1,29 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage[hmargin=2cm,vmargin=0cm]{geometry}
+\begin{document}
+    \noindent
+    \textbf{Nom}: Mot \\
+    \textbf{Utilise}: Chaine de caracteres,NaturelNonNul,Caractere,Booleen \\
+    \textbf{Opérations}: \begin{itemize}[label=$\ $, leftmargin=2cm, itemsep=0cm]
+        \item creerUnmot: Chaine de caracteres $\rightarrow $ Booleen
+        \item estUnMotValide: ChaineDeCaracteres $ \rightarrow$ Mot
+        \item longueur: Mot $ \rightarrow$  NaturelNonNul
+        \item accederAuIemeCaractere: Mot $ \times $ NaturelNonNul $ \nrightarrow$  Caractere
+        \item sontIdentiques Mot $ \times $ Mot $ \rightarrow$  Booléen
+    \end{itemize}
+    
+    \textbf{Sémantique}: \begin{itemize}[label=$\- $, leftmargin=2cm, itemsep=0cm]
+      \item creerUnMot:création d’un mot à partir d’une chaine de caractère.
+        \item estUnMotValide: verifier si le mot est bien composé des lettres, renvoit VRAI si le mot contient que les lettres et renvoit FAUX sinon.
+        \item longueur: donner la longueur d’un mot.
+        \item accederAuIemeCaractere: accéder à un certain caractère d`un mot en precisant son indice.
+         \item sontIdentiques : vérifier si deux mots sont identiques.
+    \end{itemize}
+
+    \textbf{Préconditions}: \begin{itemize}[label=$\- $, leftmargin=2cm, itemsep=0cm]
+        \item accederAuIemeCaractere(mot, i) : 1 $\leq$ i $\leq$ longueur(mot)
+    \end{itemize}
+\end{document}
