@@ -1,0 +1,39 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{times}
+\usepackage{fancyhdr,graphicx,amsmath,amssymb}
+\usepackage[ruled,vlined, french]{algorithm2e}
+    \SetKwInput{Declaration}{Declaration}
+    \SetKw{KwA}{a}
+    \SetKw{Retour}{retourner}
+    \SetKwBlock{Deb}{debut}{fin}
+    \SetKwIF{Si}{SinonSi}{Sinon}{si}{alors}{sinon si}{sinon}{finsi}
+    \SetKwFor{Tq}{tant que}{faire}{finTantQue}
+    \SetKwFor{Pour}{pour}{faire}{finPour}
+    \SetKwRepeat{Repeter}{repeter}{jusqu’a}
+    \SetKw{Pre}{Precondition(s)}
+\usepackage[hmargin=2cm,vmargin=0cm]{geometry}
+
+\begin{document}
+    \pagestyle{empty}
+    \noindent
+
+    \section*{Mot}
+    \subsection*{Conception préliminaire}
+    
+    \subsubsection*{Signatures}
+
+	\begin{itemize}[label=$\ $, leftmargin=1cm]
+		 \item \textbf{fonction} estUnMotValide(uneChaine : Chaine de Caractère) :Booleen
+		 \item \textbf{fonction} creerUnMot(uneChaine : Chaine de Caractère) : Mot
+		 \item \textbf{fonction} longueur(unMot : Mot) : Naturel
+		 \item \textbf{fonction} accederAuIemeCaractere(unMot : Mot, position : NaturelNonNul) : Caractere
+		 \begin{itemize}[label=$| $]
+            \item \textbf{précondition:} position $<$ longueur(unMot)
+         \end{itemize}
+         \item \textbf{fonction} sontEgaux(unMot, unAutreMot : Mot) : Booleen
+	\end{itemize} 
+    
+\end{document}
