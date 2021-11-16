@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{times}
+\usepackage{fancyhdr,graphicx,amsmath,amssymb}
+\usepackage[ruled,vlined, french]{algorithm2e}
+    \SetKwInput{Declaration}{Declaration}
+    \SetKw{KwA}{a}
+    \SetKw{Retour}{retourner}
+    \SetKwBlock{Deb}{debut}{fin}
+    \SetKwIF{Si}{SinonSi}{Sinon}{si}{alors}{sinon si}{sinon}{finsi}
+    \SetKwFor{Tq}{tant que}{faire}{finTantQue}
+    \SetKwFor{Pour}{pour}{faire}{finPour}
+    \SetKwRepeat{Repeter}{repeter}{jusqu’a}
+    \SetKw{Pre}{Precondition(s)}
+\usepackage[hmargin=2cm,vmargin=0cm]{geometry}
+
+\begin{document}
+    \pagestyle{empty}
+    \noindent
+
+    \section*{Dictionnaire}
+    \subsection*{Conception préliminaire}
+    \subsubsection*{Signatures}
+
+	\begin{itemize}[label=$\ $, leftmargin=1cm]
+		 \item \textbf{procédure} creerDictionnaire(E  liste : ListeMots, S dictionnaire : Dictionnaire )
+		 \item \textbf{fonction} contientMot(dictionnaire : Dictionnaire, unMot : Mot):Booléen
+         \item \textbf{procédure} chargerMots(E dictionnaire : Dictionnaire, liste : ListeMots S dictionnaire : Dictionnaire) 
+         \item \textbf{fonction} enregistrer(dictionnaire : Dictionnaire): Booléen
+	\end{itemize}
+	
+ 
+\end{document}
