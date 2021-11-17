@@ -42,7 +42,7 @@
          \end{itemize}
          \item \textbf{fonction} decomposerMot(mot : Mot, i : NaturelNonNul):Mot:Mot
 		 \begin{itemize}[label=$| $]
-            \item \textbf{précondition:} i$<$ longueur(mot)+1
+            \item \textbf{précondition:} i$<$ longueur(mot)
          \end{itemize}
          \item \textbf{fonction} reduireLaCasse(mot : Mot):Mot
         
