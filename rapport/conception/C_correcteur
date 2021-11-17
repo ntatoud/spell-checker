@@ -1,0 +1,73 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{times}
+\usepackage{fancyhdr,graphicx,amsmath,amssymb}
+\usepackage[ruled,vlined, french]{algorithm2e}
+    \SetKwInput{Declaration}{Declaration}
+    \SetKw{KwA}{a}
+    \SetKw{Retour}{retourner}
+    \SetKwBlock{Deb}{debut}{fin}
+    \SetKwIF{Si}{SinonSi}{Sinon}{si}{alors}{sinon si}{sinon}{finsi}
+    \SetKwFor{Tq}{tant que}{faire}{finTantQue}
+    \SetKwFor{Pour}{pour}{faire}{finPour}
+    \SetKwRepeat{Repeter}{repeter}{jusqu’a}
+    \SetKw{Pre}{Precondition(s)}
+\usepackage[hmargin=2cm,vmargin=0cm]{geometry}
+
+\begin{document}
+    \pagestyle{empty}
+    \noindent
+
+    \section*{Correcteur Orthographique}
+    \subsection*{Conception préliminaire}
+   
+    \subsubsection*{Signatures}
+
+	\begin{itemize}[label=$\ $, leftmargin=1cm]
+		 \item \textbf{fonction} remplacerIemeLettre(mot : Mot, i : NaturelNonNul):Mot
+		 \item \textbf{fonction} supprimerIemeLettre(mot : Mot, i : NaturelNonNul):Mot
+		 \begin{itemize}[label=$| $]
+            \item \textbf{précondition:} longueur(mot)$>$1 et i$<$longueur
+         \end{itemize}
+		 \item \textbf{fonction} inverserDeuxLettresConsecutives(mot : Mot, i : NaturelNonNul):Mot
+		 \begin{itemize}[label=$| $]
+            \item \textbf{précondition:} longueur(mot)$>$1 et i$<$longueur-1
+         \end{itemize}
+		 
+		 \item \textbf{fonction} insererLettre(mot : Mot, i : NaturelNonNul):ListeMots
+		 \begin{itemize}[label=$| $]
+            \item \textbf{précondition:} i$<$ longueur(mot)+1
+         \end{itemize}
+         \item \textbf{fonction} decomposerMot(mot : Mot, i : NaturelNonNul):Mot:Mot
+		 \begin{itemize}[label=$| $]
+            \item \textbf{précondition:} i$<$ longueur(mot)+1
+         \end{itemize}
+         \item \textbf{fonction} reduireLaCasse(mot : Mot):Mot
+        
+	\end{itemize} 
+    
+    \subsection*{Conception détaillée}
+
+    \begin{function}
+    \SetAlgoLined
+    \caption{fichierTexte(chaine : Chaine de Caractere):FichierTexte}
+    \Declaration{}
+    \Deb{
+        \Retour{}
+    }
+    \end{function}
+    
+    \begin{procedure}
+    \SetAlgoLined
+    \caption{ouvrir(E/S fichier:FichierTexte, E mode : Mode)}
+    \Declaration{}
+    \Pre{non estOuvert(f)} \\
+    \Deb{
+        \Retour{}
+    }
+    \end{procedure}
+
+ 
+\end{document}
