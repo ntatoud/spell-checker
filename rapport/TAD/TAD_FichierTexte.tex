@@ -1,0 +1,41 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage[hmargin=2cm,vmargin=0cm]{geometry}
+\begin{document}
+    \noindent
+    Type Mode = \{lecture,ecriture\} \\
+    \textbf{Nom}: FichierTexte \\
+    \textbf{Utilise}: Chaine de caracteres,Mode,Caractere,Booleen \\
+    \textbf{Opérations}: \begin{itemize}[label=$\ $, leftmargin=2cm, itemsep=0cm]
+        \item fichierTexte: Chaine de caracteres $\rightarrow $ FichierTexte
+        \item ouvrir: FichierTexte $ \times $ Mode $ \nrightarrow$ Fichier
+        \item fermer: FichierTexte$  \nrightarrow $ FichierTexte
+        \item estOuvert: FichierTexte$ \nrightarrow$  Booleen
+        \item mode: FichierTexte $\nrightarrow $ Mode
+        \item finFichier: FichierTexte $ \nrightarrow $ Booleen
+        \item ecrireChaine: FichierTexte $ \times $ Chaine $ \nrightarrow$  FichierTexte
+        \item lireChaine: FichierTexte $ \nrightarrow$  FichierTexte $ \times $ Chaine
+        \item ecrireCaractere: FichierTexte $ \times $ Caractere $ \nrightarrow$  FichierTexte
+        \item lireCaractere: FichierTexte $ \nrightarrow$  FichierTexte $ \times $ Caractere
+    \end{itemize}
+    
+    \textbf{Sémantique}: \begin{itemize}[label=$\- $, leftmargin=2cm, itemsep=0cm]
+        \item fichierTexte: création d’un fichier texte à partir d’un fichier identifié par son nom.
+        \item ouvrir: ouvre un fichier texte en lecture ou écriture. Si le mode est écriture et que le fichier existe, alors ce dernier est écrasé.
+        \item fermer: ferme un fichier texte.
+        \item lireCaractere: lit un caractère à partir de la position courante du fichier.
+        \item lireChaine: lit une chaîne (jusqu'à un retour à la ligne ou la fin de fichier) à partir de la position courante du fichier.
+        \item ecrireCaractere: écrit un caractère à partir de la position courante du fichier.
+        \item ecrireChaine: écrit une chaîne suivie d'un retour à la ligne à partir de la position courante du fichier.
+    \end{itemize}
+
+    \textbf{Préconditions}: \begin{itemize}[label=$\- $, leftmargin=2cm, itemsep=0cm]
+        \item ouvrir(f): non(estOuvert(f))
+        \item fermer(f): estOuvert(f)
+        \item finFichier(f): mode(f)=lecture
+        \item lireXX(f): estOuvert(f) et mode(f)=lecture et non finFichier(f)
+        \item ecrireXX(f): estOuvert(f) et mode(f)=ecriture
+    \end{itemize}
+\end{document}
