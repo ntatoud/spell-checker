@@ -14,6 +14,7 @@
     \SetKwFor{Pour}{pour}{faire}{finPour}
     \SetKwRepeat{Repeter}{repeter}{jusqu’a}
     \SetKw{Pre}{Precondition(s)}
+    \SetKwFor{PourCh}{pour chaque}{faire}{finprch}
 \usepackage[hmargin=2cm,vmargin=0cm]{geometry}
 
 \begin{document}
@@ -22,6 +23,13 @@
 
     \section*{Mot}
     \subsection*{Conception préliminaire}
+
+    \textebf{Type} Mot = Structure
+	\begin{itemize}[label=$\ $, leftmargin=2cm]
+		 \item ch : ChaineDeCaractere
+		 \item long : Naturel
+	\end{itemize}
+    finStructure
     
     \subsubsection*{Signatures}
 
@@ -35,5 +43,78 @@
          \end{itemize}
          \item \textbf{fonction} sontEgaux(unMot, unAutreMot : Mot) : Booleen
 	\end{itemize} 
+
+    \subsection*{Conception détaillée}
+
+    \begin{function}
+        \SetAlgoLined
+        \caption{estUnMotValide(chaine : Chaine de Caractere):Booleen}
+        \Declaration{valide : Booleen}
+        \Deb{
+            estValide $\gets$ VRAI \\
+            i $\gets$ 1 \\
+            \Tq {(i \le longueur(unMot)) et (valide)}{
+                c $\gets$ accederAuIemeCaractere(unMot,i) \\
+                valide $\gets$ Ensemble.estPresent(CaractereAlphabetique,c) \\
+                i $\gets$ i+1 \\
+            }
+            \Retour{valide}
+        }
+    \end{function}
+        
+    \begin{function}
+        \SetAlgoLined
+        \caption{creerUnMot(chaine : Chaine de Caractere):Mot}
+        \Declaration{mot : Mot}
+        \Deb{
+            \Si{estValide(chaine)}{
+                mot.ch $\gets$ ch \\ 
+                mot.long $\gets$ ChaineDeCaractere.longueur(chaine) \\
+                \Retour{mot}
+            }
+        }
+    \end{function}
+    
+    \begin{function}
+        \SetAlgoLined
+        \caption{longueur(unMot : Mot):Naturel}
+        \Declaration{}
+        \Deb{
+            \Retour{unMot.long}
+        }
+        \end{function}
+        
+        \begin{function}
+        \SetAlgoLined
+        \caption{accederAuIemeCaractere(unMot : Mot, position :NaturelNonNul):Caractere}
+        \Pre{position \le longueur(unMot)}
+        \Declaration{}
+        \Deb{
+            \Retour{ChaineDeCaractere.iemeCaractere(unMot.ch,position)}
+        }
+    \end{function}
+    
+    \begin{function}
+        \SetAlgoLined
+        \caption{sontEgaux(unMot,unAutreMot : Mot):Booleen}
+        \Declaration{
+            i : Naturel \\
+            egaux : Booleen \\
+        }
+        \Deb{
+            \Si {longueur(unMot) \ne longueur(unAutreMot)}{
+                \Retour{FAUX}
+            }
+            \Sinon{
+                egaux $\gets$ VRAI \\
+                i $\gets$ 1 \\
+                \Tq {(i \le longueur(unMot)) et (egaux)}{
+                    egaux $\gets$ accederAuIemeCaractere(unMot,i) = accederAuIemeCaractere(unAutreMot,i) \\
+                    i $\gets$ i+1 \\
+                }
+                \Retour{egaux}
+            }
+        }
+    \end{function} 
     
 \end{document}
