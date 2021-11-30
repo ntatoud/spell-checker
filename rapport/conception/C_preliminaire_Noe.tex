@@ -1,0 +1,73 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{times}
+\usepackage{fancyhdr,graphicx,amsmath,amssymb}
+\usepackage[ruled,vlined, french]{algorithm2e}
+    \SetKwInput{Declaration}{Declaration}
+    \SetKw{KwA}{a}
+    \SetKw{Retour}{retourner}
+    \SetKwBlock{Deb}{debut}{fin}
+    \SetKwIF{Si}{SinonSi}{Sinon}{si}{alors}{sinon si}{sinon}{finsi}
+    \SetKwFor{Tq}{tant que}{faire}{finTantQue}
+    \SetKwFor{Pour}{pour}{faire}{finPour}
+    \SetKwRepeat{Repeter}{repeter}{jusqu’a}
+    \SetKw{Pre}{Precondition(s)}
+\usepackage[hmargin=2cm,vmargin=0cm]{geometry}
+
+\begin{document}
+    \pagestyle{empty}
+    \noindent
+    \\
+    On suppose possèder la conception des TAD Liste, ainsi que de la SDD ListeChainee et donc toutes les opérations rattachées
+    \\
+    \subsubsection*{Structures}
+    \textbf{Type} ListeChainee = \^ \- Noeud \\
+    \textbf{Type} Noeud = \textbf{Structure}
+	\begin{itemize}[label=$\ $, leftmargin=2cm]
+		 \item element : Element
+		 \item listeSuivante: ListeChainee
+	\end{itemize}
+    \textbf{finStructure}
+    \\
+    \\
+    \textbf{Type} Liste = \textbf{Structure}
+	\begin{itemize}[label=$\ $, leftmargin=2cm]
+		 \item lesElements : ListeChainee
+		 \item nbElements : Entier
+    \end{itemize}
+    \textbf{finStructure} \\
+    \\
+    \textbf{Type} LettreDUnMot = \textbf{Structure}
+	\begin{itemize}[label=$\ $, leftmargin=2cm]
+		 \item lettre : Char
+		 \item estEnFinDeMot : Booléen
+	\end{itemize}
+    \textbf{finStructure}
+    \\
+    \\
+    \textbf{Type} ArbreDeLettres = \textbf{Structure}
+	\begin{itemize}[label=$\ $, leftmargin=2cm]
+		 \item lettre : LettreDUnMot
+		 \item fils : Liste$<$ArbreDeLettres$>$
+	\end{itemize}
+    \textbf{finStructure}\\
+    Accompagnées des fonctions obtenirLettre(a : ArbreDeLettres) et obtenirFils(a : ArbreDeLettres)
+    
+    
+    \subsubsection*{Signatures}
+
+	\begin{itemize}[label=$\ $, leftmargin=1cm]
+		 \item \textbf{fonction} obtenirLettresFils(unArbre : ArbreDeLettres):Liste$<$Caractere$>$
+         \item \textbf{fonction} obtenirFils(unArbre : ArbreDeLettres):Liste$<$ArbreDeLettres$>$
+         \item \textbf{procédure} insererLettreALaBonnePlace(E/S unArbre : ArbreDeLettres, E indiceInsertion : NaturelNonNul, uneLettre : LettreDUnMot)
+		 \item \textbf{procédure} insererMotALaBonnePlace(E/S unArbre : ArbreDeLettres, E unMot : Mot)
+		 
+         \item \textbf{fonction} genererArbreAvecEnsembleDeMot(lesMots : Ensemble$<$Mot$>$): ArbreDeLettres
+         
+        \begin{itemize}[label=$| $]
+            \item \textbf{précondition:} non estOuvert(f)
+         \end{itemize}
+	\end{itemize} 
+\end{document}
