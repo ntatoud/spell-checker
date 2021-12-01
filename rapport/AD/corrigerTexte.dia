@@ -245,7 +245,7 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#verfierMots#</dia:string>
+            <dia:string>#estUnMotDuDictionnaire#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="sans" style="0" name="Helvetica"/>
@@ -2676,7 +2676,7 @@ caractères#</dia:string>
         <dia:point val="39.1435,-22.7793"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.093,-23.1239;41.2817,-22.4622"/>
+        <dia:rectangle val="39.093,-23.1239;41.2817,-22.4621"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="39.1435,-22.7793"/>

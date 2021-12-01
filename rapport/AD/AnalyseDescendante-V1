@@ -209,7 +209,7 @@
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="128.838,7.19914"/>
+            <dia:point val="128.838,7.19913"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000ff"/>
@@ -2170,7 +2170,7 @@ caractères#</dia:string>
         <dia:point val="136.763,6.04257"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="136.71,5.81752;138.956,6.47766"/>
+        <dia:rectangle val="136.71,5.81751;138.956,6.47766"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="136.763,6.04257"/>
