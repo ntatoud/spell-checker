@@ -39,18 +39,13 @@
     \end{itemize}
     \textbf{finStructure} \\
     \\
-    \textbf{Type} LettreDUnMot = \textbf{Structure}
+    \\
+    \textbf{Type} ArbreDeLettres = ArbreBinaire$<$Element$>$ \\
+    \textbf{Type} Element = \textbf{Structure}
 	\begin{itemize}[label=$\ $, leftmargin=2cm]
-		 \item lettre : Char
+		 \item lettre : Caractere
+		 \item fd,fg : ArbreDeLettres
 		 \item estEnFinDeMot : Booléen
-	\end{itemize}
-    \textbf{finStructure}
-    \\
-    \\
-    \textbf{Type} ArbreDeLettres = \textbf{Structure}
-	\begin{itemize}[label=$\ $, leftmargin=2cm]
-		 \item lettre : LettreDUnMot
-		 \item fils : Liste$<$ArbreDeLettres$>$
 	\end{itemize}
     \textbf{finStructure}\\
     Accompagnées des fonctions obtenirLettre(a : ArbreDeLettres) et obtenirFils(a : ArbreDeLettres)
