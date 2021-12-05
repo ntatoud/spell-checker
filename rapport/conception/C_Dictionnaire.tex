@@ -25,11 +25,81 @@
     \subsubsection*{Signatures}
 
 	\begin{itemize}[label=$\ $, leftmargin=1cm]
-		 \item \textbf{fonction} genererArbreAvecFichierTexte(fic : fichierTexte, unArbre ArbreDeLettres)
-		 \item \textbf{fonction} estUnMotDuDictionnaire(dictionnaire : Dictionnaire, unMot : Mot):Booléen
-         \item \textbf{procédure} chargerDico(E dictionnaire : Dictionnaire, liste : ListeMots S dictionnaire : Dictionnaire) 
-         \item \textbf{fonction} sauvegarderMotEnDictionnaire(unArbre : Arbre): Dictionnaire
+		 \item \textbf{fonction} genererArbreAvecEnsembleDeMots(lesMots : Ensemble$<$Mot$>$): ArbreDeLettres
+		 \begin{itemize}[label=$| $] 
+            \item \textbf{précondition:} non estVide(lesMots) 
+         \end{itemize}
+		 \item \textbf{fonction} estUnMotDuDictionnaire(unArbre : ArbreDeLettres, unMot : Mot):Booléen
+         \item \textbf{procédure} chargerDico(E dictionnaire : Dictionnaire, S unArbre : ArbreDeLettres) 
+         \item \textbf{fonction} sauvegarderArbreEnDictionnaire(unArbre : Arbre): Dictionnaire
 	\end{itemize}
 	
+    \subsection*{Conception détaillée}
+
+    \begin{function}
+    \SetAlgoLined
+    \caption{genererArbreAvecEnsembleDeMots(lesMots : Ensemble$<$Mot$>$): ArbreDeLettres}
+    \Pre{non estVide(lesMots)} \\
+    \Declaration{\\
+        unArbre : ArbreDeLettres \\
+        i : Entier
+        }
+    \Deb{
+        \Pour{i $<$- 1 \textbf{allant à} longueur(lesMots)}
+        {insererMotALaBonnePlace(unArbre, obtenirElement(lesMots, i))}
+        \Retour{unArbre}
+    }
+    \end{function}
+    
+    \begin{procedure}
+    \SetAlgoLined
+    \caption{chargerDico(E dictionnaire : Dictionnaire, S unArbre : ArbreDeLettres)}
+    \Declaration{}
+    
+    \Deb{
+        \Retour{}
+    }
+    \end{procedure}
+    
+      \begin{function}
+    \SetAlgoLined
+    \caption{estUnMotDuDictionnaire(unArbre : ArbreDeLettres, unMot : Mot):Booléen}
+    \Declaration{\\ temp : ArbreDeLettres
+        }
+    \Deb{
+        \Si{longueur(unMot) = 1}
+            {
+            \Retour{non(estVide(unArbre) ou non(obtenirBooleen(unArbre))}
+            }
+        \Sinon
+            {\Si{non estVide(unArbre)}
+                {\Si{iemeCaractere(unMot,1 = obtenirLettre(unArbre)}
+                    {
+                    unMot $<$- supprimerIemeLettre(unMot, 1) \\
+                    temp $<$- obtenirFilsGauche(unArbre)\\
+                    \Retour{estUnMotDuDictionnaire(unMot, temp}
+                    }
+                 \Sinon
+                    {
+                    temp $<$- obtenirFilsGauche(unArbre)\\
+                    \Retour{estUnMotDuDictionnaire(unMot, temp)}
+                    }
+                }
+             \Sinon{\Retour{FAUX}}
+            }
+        
+        }
+    \end{function}
+    
+      \begin{function}
+    \SetAlgoLined
+    \caption{sauvegarderArbreEnDictionnaire(unArbre : Arbre): Dictionnaire}
+    \Declaration{\\
+        }
+    \Deb{
+        \Retour{}
+    }
+    \end{function}
+    
  
 \end{document}
