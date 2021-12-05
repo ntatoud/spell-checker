@@ -25,12 +25,12 @@
     \subsubsection*{Signatures}
 
 	\begin{itemize}[label=$\ $, leftmargin=1cm]
-		 \item \textbf{fonction} genererArbreAvecEnsembleDeMots(lesMots : Ensemble$<$Mot$>$): ArbreDeLettres
+		 \item \textbf{fonction} genererArbreAvecEnsembleDeMot(lesMots : Ensemble$<$Mot$>$): ArbreDeLettres
 		 \begin{itemize}[label=$| $] 
             \item \textbf{précondition:} non estVide(lesMots) 
          \end{itemize}
 		 \item \textbf{fonction} estUnMotDuDictionnaire(unArbre : ArbreDeLettres, unMot : Mot):Booléen
-         \item \textbf{procédure} chargerDico(E dictionnaire : Dictionnaire, S unArbre : ArbreDeLettres) 
+         \item \textbf{fonction} chargerDico(unDictionnaire : Dictionnaire) :ArbreDeLettres 
          \item \textbf{fonction} sauvegarderArbreEnDictionnaire(unArbre : Arbre): Dictionnaire
 	\end{itemize}
 	
@@ -38,7 +38,7 @@
 
     \begin{function}
     \SetAlgoLined
-    \caption{genererArbreAvecEnsembleDeMots(lesMots : Ensemble$<$Mot$>$): ArbreDeLettres}
+    \caption{genererArbreAvecEnsembleDeMot (lesMots : Ensemble$<$Mot$>$): ArbreDeLettres}
     \Pre{non estVide(lesMots)} \\
     \Declaration{\\
         unArbre : ArbreDeLettres \\
@@ -51,15 +51,15 @@
     }
     \end{function}
     
-    \begin{procedure}
+       \begin{function}
     \SetAlgoLined
-    \caption{chargerDico(E dictionnaire : Dictionnaire, S unArbre : ArbreDeLettres)}
-    \Declaration{}
-    
+    \caption{chargerDico(unDictionnaire : Dictionnaire) :ArbreDeLettres }
+    \Declaration{\\
+        }
     \Deb{
         \Retour{}
     }
-    \end{procedure}
+    \end{function}
     
       \begin{function}
     \SetAlgoLined
