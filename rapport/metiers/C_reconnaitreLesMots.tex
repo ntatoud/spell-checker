@@ -1,0 +1,81 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{times}
+\usepackage{fancyhdr,graphicx,amsmath,amssymb}
+\usepackage[ruled,vlined, french]{algorithm2e}
+    \SetKwInput{Declaration}{Declaration}
+    \SetKw{KwA}{a}
+    \SetKw{Retour}{retourner}
+    \SetKwBlock{Deb}{debut}{fin}
+    \SetKwIF{Si}{SinonSi}{Sinon}{si}{alors}{sinon si}{sinon}{finsi}
+    \SetKwFor{Tq}{tant que}{faire}{finTantQue}
+    \SetKwFor{Pour}{pour}{faire}{finPour}
+    \SetKwRepeat{Repeter}{repeter}{jusqu’a}
+    \SetKw{Pre}{Precondition(s)}
+    \SetKwFor{PourCh}{pour chaque}{faire}{finprch}
+\usepackage[hmargin=2cm,vmargin=0cm]{geometry}
+
+\begin{document}
+    \pagestyle{empty}
+    \noindent
+
+    \section*{reconnaitreLesMots}
+    \subsection*{Conception préliminaire}
+    
+    \subsubsection*{Signatures}
+
+	\begin{itemize}[label=$\ $, leftmargin=1cm]
+		 \item \textbf{fonction} reconnaitreLesMots(uneChaine : Chaine de Caractère) : Ensemble$<$Mot$>$
+		 \item \textbf{fonction} reconnaitreUnMot(uneChaine : Chaine de Caractère) : Mot
+		 \item \textbf{fonction} creerSousChaine(uneChaine : Chaine de Caractère, position : NaturelNonNul, long : Naturel ) : Chaine de Caractère
+		 \begin{itemize}[label=$| $]
+            \item \textbf{précondition:} long $\le$ longueur(uneChaine)-position+1
+         \end{itemize}
+		 
+	\end{itemize} 
+
+    \subsection*{Conception détaillée}
+
+        
+    \begin{function}
+        \SetAlgoLined
+        \caption{reconnaitreLesMots(uneChaine : Chaine de Caractère) : Ensemble$<$Mot$>$ }
+        \Declaration{long,d,i : Naturel, lesMots : Ensemble$<$Mot$>$}
+        \Deb{
+        	d $\gets$ 1\;
+        	\Tq{}{}
+            \Si{reconnaitreUnMot(ch) $\ne$ NULL}{
+                Ensemble.ajouter(lesMots, reconnaitreUnMot(ch))\;
+            }
+            \Retour{lesMots}
+        }
+    \end{function}
+    
+    \begin{function}
+        \SetAlgoLined
+        \caption{reconnaitreUnMot(uneChaine : Chaine de Caractère) : Mot}
+        \Declaration{}
+        \Deb{\Retour{creerUnMot(uneChaine)}}
+    \end{function}
+    
+    \begin{function}
+        \SetAlgoLined
+        \caption{creerSousChaine(uneChaine : Chaine de Caractère, position : NaturelNonNul, long : Naturel ) : Chaine de Caractère}
+        \Declaration{resultat : Chaine de caracteres, i : Naturel}
+        \Deb{
+        	resultat $\gets$ ""\;
+        	\Pour{i $\gets$ 1 à long-1}{
+        		resultat $\gets$ resultat + iemeCaractere(uneChaine,position+i) \;
+        	}
+            \Retour{resultat}
+        }
+    \end{function}
+    
+    
+        
+
+    
+    
+\end{document}
