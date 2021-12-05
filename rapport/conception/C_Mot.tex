@@ -53,7 +53,7 @@
         \Deb{
             estValide $\gets$ VRAI \;
             i $\gets$ 1 \;
-            \Tq {(i \le longueur(unMot)) et (valide)}{
+            \Tq {(i $\le$ longueur(unMot)) et (valide)}{
                 c $\gets$ accederAuIemeCaractere(unMot,i) \;
                 valide $\gets$ Ensemble.estPresent(CaractereAlphabetique,c) \;
                 i $\gets$ i+1 \;
@@ -88,7 +88,7 @@
     \begin{function}
         \SetAlgoLined
         \caption{accederAuIemeCaractere(unMot : Mot, position :NaturelNonNul):Caractere}
-        \Pre{position \le longueur(unMot)}
+        \Pre{position $\le$ longueur(unMot)}
         \Declaration{}
         \Deb{
             \Retour{ChaineDeCaractere.iemeCaractere(unMot.ch,position)}
@@ -102,13 +102,13 @@
             i : Naturel \;
             egaux : Booleen \;}
         \Deb{
-            \Si {longueur(unMot) \ne longueur(unAutreMot)}{
+            \Si {longueur(unMot) $\ne$ longueur(unAutreMot)}{
                 \Retour{FAUX}
             }
             \Sinon{
                 egaux $\gets$ VRAI \;
                 i $\gets$ 1 \;
-                \Tq {(i \le longueur(unMot)) et (egaux)}{
+                \Tq {(i $\le$ longueur(unMot)) et (egaux)}{
                     egaux $\gets$ accederAuIemeCaractere(unMot,i) = accederAuIemeCaractere(unAutreMot,i) \;
                     i $\gets$ i+1 \;
                 }
