@@ -2,6 +2,11 @@
 #define __TAD_CORRECTEURORTHOGRAPHIQUE__
 #include "TAD_Mot.h"
 
+/*               TODO
+i devrait être non nul en général, j'ai mis unsigned, on pourra mettre une précond
+idem comment renvoyer plusieurs éléments?
+*/
+
 CO_Mot CO_remplacerIemeLEttre(CO_Mot mot, unsigned int i);
 
 CO_Mot CO_supprimerIemeLEttre(CO_Mot mot, unsigned int i);

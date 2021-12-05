@@ -1,5 +1,8 @@
 #ifndef __TAD_MOT__
 #define __TAD_MOT__
+/*				TODO
+est-ce qu'il y a besoin de créer une structure mot ?
+*/
 
 typedef struct {
   char c[]; 
