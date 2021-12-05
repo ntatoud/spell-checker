@@ -1,0 +1,24 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage[hmargin=2cm,vmargin=0cm]{geometry}
+\begin{document}
+    \noindent
+    \textbf{Nom: Dictionnaire}\\
+    \textbf{Utilise: Mot,Liste$<$Mot$>$,Booleen} \\
+    \textbf{Opérations:} \begin{itemize}[label=$\ $, leftmargin=2cm, itemsep=0cm]
+        \item creerDictionnaire: \textbf{Liste$<$Mots$>$ $\rightarrow $ Dictionnaire}
+        \item contientMot: \textbf{Dictionnaire $\times$ Mot $\rightarrow $ Booléen}
+        \item chargerMots : \textbf{Dictionnaire $\times$ Liste$<$Mot$>$ $ \rightarrow$ Dictionnaire}
+        \item enregistrer : \textbf{Dictionnaire $\rightarrow$ Booléen}
+        
+    \end{itemize}
+    
+    \textbf{Sémantique: }\begin{itemize}[label=$\- $, leftmargin=2cm, itemsep=0cm]
+        \item creerDictionnaire : création d’un dictionnaire à partir d’une liste de mots
+        \item contientMot : renvoit VRAI si le mot est dans le dictionnaire, FAUX sinon
+        \item chargerMots: ouvrir un fichier dico pour lecture
+        \item serialiser : enregistrer le dictionnaire sous forme de fichie
+    \end{itemize}
+\end{document}
