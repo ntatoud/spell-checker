@@ -33,25 +33,38 @@
 		 \begin{itemize}[label=$| $]
             \item \textbf{précondition:} long $\le$ longueur(uneChaine)-position+1
          \end{itemize}
+         \item \textbf{fonction} estUnSeparateur(c : Caractere) : Booleen
 		 
 	\end{itemize} 
 
     \subsection*{Conception détaillée}
 
+	CDC : ChaineDeCaractere
         
-    \begin{function}
+    \begin{procedure}
         \SetAlgoLined
-        \caption{reconnaitreLesMots(uneChaine : Chaine de Caractère) : Ensemble$<$Mot$>$ }
-        \Declaration{long,d,i : Naturel, lesMots : Ensemble$<$Mot$>$}
+        \caption{reconnaitreLesMots(\textbf{E :} uneChaine : Chaine de Caractère, \textbf{E/S :} lesMots : Ensemble$<$Mot$>$) }
+        \Declaration{d,i : Naturel, c : Caractere, ch : ChaineDeCaractere, mot : Mot}
         \Deb{
-        	d $\gets$ 1\;
-        	\Tq{}{}
-            \Si{reconnaitreUnMot(ch) $\ne$ NULL}{
-                Ensemble.ajouter(lesMots, reconnaitreUnMot(ch))\;
+        	\Tq{CDC.longueur(uneChaine) $\ne$ 0}{
+        		d $\gets$ 1\;
+        		i $\gets$ 1\;
+        		lesMots $\gets$ Ensemble.ensemble()\;
+        		c $\gets$ CDC.obtenirIemeCaractere(uneChaine,d)\;
+        		\Tq{(non(estUnSeparateur(c)))}{
+        			i $\gets$ i+1\;
+        			c $\gets$ CDC.obtenirIemeCaractere(uneChaine,i)\;
+        		}
+        		ch $\gets$ creerSousChaine(uneChaine,d,i-d)\;
+        		mot $\gets$ reconnaitreUnMot(ch)\;
+            	\Si{mot $\ne$ NULL}{
+                	Ensemble.ajouter(lesMots, mot)\;
+            	}
+            	uneChaine $\gets$  creerSousChaine(uneChaine,i+1,CDC.longueur(uneChaine)-i)\;
+            	reconnaitreLesMots(uneChaine, lesMots)\;
             }
-            \Retour{lesMots}
         }
-    \end{function}
+    \end{procedure}
     
     \begin{function}
         \SetAlgoLined
@@ -73,6 +86,14 @@
         }
     \end{function}
     
+    \begin{function}
+        \SetAlgoLined
+        \caption{estUnSeparateur(c : Caractere) : Booleen}
+        \Declaration{}
+        \Deb{
+        	\Retour{c = " "}
+        }
+    \end{function}
     
         
 
