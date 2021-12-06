@@ -1,0 +1,147 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{times}
+\usepackage{fancyhdr,graphicx,amsmath,amssymb}
+\usepackage[ruled,vlined, french]{algorithm2e}
+    \SetKwInput{Declaration}{Declaration}
+    \SetKw{KwA}{a}
+    \SetKw{Retour}{retourner}
+    \SetKwBlock{Deb}{debut}{fin}
+    \SetKwIF{Si}{SinonSi}{Sinon}{si}{alors}{sinon si}{sinon}{finsi}
+    \SetKwFor{Tq}{tant que}{faire}{finTantQue}
+    \SetKwFor{Pour}{pour}{faire}{finPour}
+    \SetKwRepeat{Repeter}{repeter}{jusqu’a}
+    \SetKw{Pre}{Precondition(s)}
+\usepackage[hmargin=2cm,vmargin=0cm]{geometry}
+
+\begin{document}
+    \pagestyle{empty}
+    \noindent
+    Type Mot = Structure \\
+    \textbf{mot}: Tableau[1...Max]de Element \\
+    \textbf{longueur}: Naturel\\
+    Fin Structure
+
+    \section*{Correcteur Orthographique}
+    \subsection*{Conception préliminaire}
+   
+    \subsubsection*{Signatures}
+
+	\begin{itemize}[label=$\ $, leftmargin=1cm]
+		 \item \textbf{procedure} remplacerIemeLettre(E/S mot: Mot,E c: Caractere,E position : naturel)
+		 \item \textbf{procedure} supprimerIemeLettre(E/S UnMot, E position :Naturel )
+		 \begin{itemize}[label=$| $]
+            \item \textbf{précondition:} longueur(mot)$>$1 et i$<$longueur
+         \end{itemize}
+		 \item \textbf{procedure} inverserDeuxLettresConsecutives(UnMot : Mot, i : NaturelNonNul)
+		 \begin{itemize}[label=$| $]
+            \item \textbf{précondition:} longueur(mot)$>$1 et i$<$longueur-1
+         \end{itemize}
+		 
+		 \item \textbf{procedure} insererLettre((E/S Unmot : Mot, E position: Naturel, e: caractere)
+		 \begin{itemize}[label=$| $]
+            \item \textbf{précondition:} i$<$ longueur(mot)+1
+         \end{itemize}
+         \item \textbf{procedure} decomposerMotdecomposerMot(E Unmot : Mot, position :NaturelNonNul, S mot1 : Mot, mot2 : Mot )
+		 \begin{itemize}[label=$| $]
+            \item \textbf{précondition:} i$<$ longueur(mot)
+         \end{itemize}
+         \item \textbf{fonction} reduireLaCasse(mot : Mot)
+        
+	\end{itemize} 
+    
+    \subsection*{Conception détaillée}
+
+    \begin{procedure}
+    \SetAlgoLined
+    \caption{remplacerIemeLettre(E/S mot: Mot,E c: Caractere,E position : naturel)}
+    \Declaration{}
+    \Deb{
+        suppressionLettre(mot,position)
+        
+        insertionLettre(mot,c,position)
+        
+    }
+    \end{procedure}
+    
+     \begin{procedure}
+    \SetAlgoLined
+    \caption{supprimerIemeLettre(E/S UnMot, E position :Naturel )}
+    \Declaration{}
+    \Deb{
+       DecalerVersLaGauche(UnMot,position+1)
+       
+       UnMot.Longueur $\leftarrow$ UnMot.longueur-1 
+       
+    }
+    \end{procedure}
+    
+     \begin{procedure}
+    \SetAlgoLined
+    \caption{inverserDeuxLettresConsecutives(UnMot : Mot, i : NaturelNonNul)}
+    \Declaration{}
+    \Deb{
+    UnMot.echanger(UnMot.mot[i],UnMot.mot[i+1])
+    }
+    \end{procedure}
+    
+     \begin{procedure}
+    \SetAlgoLined
+    \caption{insererLettre(E/S Unmot : Mot, E position: Naturel, e: caractere)}
+    \Declaration{}
+    \Deb{
+       DecalerVersLaDroite(unMot,position)
+       
+       UnMot.longueur $\leftarrow$ UnMot.longueur+1
+       
+       UnMot.Mot[position] $\leftarrow$ e
+    
+        
+    }
+    \end{procedure}
+    
+     \begin{procedure}
+    \SetAlgoLined
+    \caption{decomposerMot(E Unmot : Mot, position :NaturelNonNul, S mot1 : Mot, mot2 : Mot )}
+    \Declaration{c:caractere , i:NaturelNonNul}
+    \Deb{
+       mot1 $\leftarrow$mot()
+       
+       pour i $\geq$ 1 à position-1 faire
+       
+       \quad c $\leftarrow$ IemeCaractere(mot,i)
+       
+       \quad insererCaractere(mot1,c,i)
+       
+        \quad mot1.longueur $\leftarrow$ longueur(mot1)+1
+       
+       Finpour
+       
+       mot2 $\leftarrow$ mot()
+       
+       pour i $\geq$ position à longueur(mot) faire
+       
+       \quad c $\leftarrow$ IemeCaractere(mot,i)
+       
+       \quad insererCaractere(mot2,c,i)
+       
+       \quad mot2.longueur $\leftarrow$ longueur(mot2)+1
+       
+       Finpour
+         
+        
+    }
+    \end{procedure}
+    
+    \begin{function}
+    \SetAlgoLined
+    \caption{reduireLaCasse(mot : Mot):Mot}
+    \Declaration{}
+    \Deb{
+        \Retour{}
+    }
+    \end{function}
+ 
+\end{document}
