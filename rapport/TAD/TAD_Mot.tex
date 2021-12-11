@@ -12,15 +12,19 @@
         \item creerUnmot: ChaineDeCaracteres $ \rightarrow$ Mot
         \item longueur: Mot $ \rightarrow$  NaturelNonNul
         \item accederAuIemeCaractere: Mot $ \times $ NaturelNonNul $ \nrightarrow$  Caractere
-        \item sontIdentiques Mot $ \times $ Mot $ \rightarrow$  Booléen
+        \item sontIdentiques: Mot $ \times $ Mot $ \rightarrow$  Booléen
+        \item fixerIemeCaractere:  Mot $ \times $ NaturelNonNul $ \times $ Caractere $ \rightarrow$ Mot
+        \item fixerLongueur: Mot $ \times $ Naturel $ \rightarrow$ Mot
     \end{itemize}
     
     \textbf{Sémantique}: \begin{itemize}[label=$\- $, leftmargin=2cm, itemsep=0cm]
       \item creerUnMot:création d’un mot à partir d’une chaine de caractère.
         \item estUnMotValide: verifier si le mot est bien composé des lettres, renvoit VRAI si le mot contient que les lettres et renvoit FAUX sinon.
         \item longueur: donner la longueur d’un mot.
-        \item accederAuIemeCaractere: accéder à un certain caractère d`un mot en precisant son indice.
-         \item sontIdentiques : vérifier si deux mots sont identiques.
+        \item accederAuIemeCaractere: accéder à un certain caractère d'un mot en precisant son indice.
+         \item sontIdentiques: vérifier si deux mots sont identiques.
+         \item fixerIemeCaractere: permet de changer une lettre du mot à une position donnée. 
+         \item fixerLongueur: permet de fixer la longueur d'un mot.
     \end{itemize}
 
     \textbf{Préconditions}: \begin{itemize}[label=$\- $, leftmargin=2cm, itemsep=0cm]
