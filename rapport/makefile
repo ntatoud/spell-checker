@@ -2,7 +2,7 @@
 TEX=pdflatex
 PDF_DIR=PDF
 TAD_DIR=TAD
-CON_DIR=Conception
+CON_DIR=conception
 
 .PHONY : all proper tad clean cleanPDF cleanTEX conception #Pour ne pas confondre commandes & fichiers
 
