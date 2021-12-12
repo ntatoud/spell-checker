@@ -30,21 +30,21 @@
     \subsubsection*{Signatures}
 
 	\begin{itemize}[label=$\ $, leftmargin=1cm]
-		 \item \textbf{procedure} remplacerIemeLettre(\textbf{E/S} mot : Mot, \textbf{E} c : Caractere, position : Naturel)
+		 \item \textbf{procedure} remplacerIemeLettre(\textbf{E/S} mot : Mot, \textbf{E} c : Caractere, \textbf{E} i : Naturel)
 		 \item \textbf{procedure} supprimerIemeLettre(\textbf{E/S} unMot : Mot, \textbf{E} position : Naturel)
 		 \begin{itemize}[label=$| $]
             \item \textbf{précondition:} longueur(mot)$\ge$1 et i$\le$longueur
          \end{itemize}
 		 \item \textbf{procedure} inverserDeuxLettresConsecutives(\textbf{E/S} unMot : Mot,  \textbf{E} i : NaturelNonNul)
 		 \begin{itemize}[label=$| $]
-            \item \textbf{précondition:} longueur(mot)$\ge$1 et i$\le$longueur
+            \item \textbf{précondition:} longueur(mot)$>$1 et i$\le$longueur
          \end{itemize}
 		 
-		 \item \textbf{procedure} insererLettre(\textbf{E/S} unMot : Mot, \textbf{E} position : Naturel, c : Caractere)
+		 \item \textbf{procedure} insererLettre(\textbf{E/S} unMot : Mot, \textbf{E} i : Naturel, \textbf{E} c : Caractere)
 		 \begin{itemize}[label=$| $]
             \item \textbf{précondition:} i$\le$ longueur(mot)
          \end{itemize}
-         \item \textbf{fonction} decomposerMot(unMot : Mot, position : NaturelNonNul) : Mot, Mot
+         \item \textbf{fonction} decomposerMot(unMot : Mot, i : NaturelNonNul) : Mot, Mot
 		 \begin{itemize}[label=$| $]
             \item \textbf{précondition:} i$\le$ longueur(mot)
          \end{itemize}
