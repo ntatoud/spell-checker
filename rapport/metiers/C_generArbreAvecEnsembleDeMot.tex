@@ -27,53 +27,80 @@
     \subsubsection*{Signatures}
 
 	\begin{itemize}[label=$\ $, leftmargin=1cm]
-		 \item \textbf{fonction} genererArbreEnFichierTexte(fic : FichierTexte): ArbreDeLettres
-		 \item \textbf{fonction} genererArbreAvecEnsembleDeMots(lesMots : Ensemble$<$Mot$>$
-		 \item \textbf{procedure} insererMot(E/S: unArbre : ArbreDeLettres, E: Mot)
-		 
-         \item \textbf{fonction} estPresentDansFils(unArbre : ArbreDeLettres, uneLettre: Caractere) : Booleen
-         
          \item \textbf{procedure } insererLettre(E/S: unArbre : ArbreDeLettres, E: uneLettre: Caractere)
+         \item \textbf{fonction} estPresentDansFils(unArbre : ArbreDeLettres, uneLettre: Caractere) : Booleen
+         \item \textbf{procedure} insererMot(E/S: unArbre : ArbreDeLettres, E: Mot)
+         \item \textbf{fonction} genererArbreAvecEnsembleDeMots(lesMots : Ensemble$<$Mot$>$
+		 \item \textbf{fonction} genererArbreEnFichierTexte(fic : FichierTexte): ArbreDeLettres
+		 
+		
+		 
+         
+         
 	\end{itemize} 
+         
 
     \subsection*{Conception détaillée}
     genererArbreAvecEnsembleDeMots est déjà détaillé dans la CD du TAD Dictionnaire
     
-    \begin{function}
-        \SetAlgoLined
-        \caption{genererArbreEnFichierTexte(fic : FichierTexte): ArbreDeLettres}
-        \Declaration{}
-        \Deb{
-        	\Retour{}
-        }
-    \end{function}
-
     \begin{procedure}
         \SetAlgoLined
-        \caption{insererMot(\textbf{E/S :} unArbre: ArbreDeLettres, \textbf{E/S :} lesMots : Ensemble$<$Mot$>$) }
-        \Declaration{}
-        \Deb{}
+        \caption{insererLettre(\textbf{E/S :} unArbre: ArbreDeLettres, \textbf{E/S :} uneLettre: Caractere) }
+        \Declaration{temp : ArbreDeLettres}
+        \Deb{
+            temp = A\_obtenirFilsDroit(unArbre) \\
+            A\_fixerLettre(temp) $\leftarrow$ uneLettre \\
+            A\_fixerFilsDroit(unArbre, temp)\\
+        }
     \end{procedure}
     
-     \begin{function}
+    \begin{function}
         \SetAlgoLined
         \caption{estPresentDansFils(unArbre : ArbreDeLettres, uneLettre: Caractere) : Booleen}
         \Declaration{}
         \Deb{
-        	\Retour{}
+
+        	\Retour{A\_obtenirLettre(unArbre) = uneLettre}
         }
     \end{function}
     
-      \begin{procedure}
+    A FINIR : 
+    \begin{procedure}
         \SetAlgoLined
-        \caption{insererLettre(\textbf{E/S :} unArbre: ArbreDeLettres, \textbf{E/S :} lesMots : Ensemble$<$Mot$>$) }
-        \Declaration{}
-        \Deb{}
+        \caption{insererMot(\textbf{E/S :} unArbre: ArbreDeLettres, \textbf{E/S :} unMot : Mot) }
+        \Declaration{temp : ArbreDeLettres}
+        \Deb{
+            \Si{estPresentDansFils(unArbre, M\_iemeCaractere(Mot, 1))}
+            {
+                temp $\leftarrow$ A\_obtenirFilsGauche(unArbre) \\
+                unMot $\leftarrow$ supprimerIemeLettre(unMot, 1) \\
+                insererMot(temp, unMot)
+            }
+            \Sinon
+            {
+                temp $\leftarrow$ A\_obtenirFilsDroit(unArbre)\\
+                \Si{A\_estVide(temp)}
+                {
+                    A\_fixerFilsDroit(unArbre, M\_iemeCaractere(Mot, 1)) \\
+                    temp $\leftarrow$ A\_obtenirFilsDroit(unArbre) \\
+                    temp $\leftarrow$ A\_obtenirFilsGauche(temp) \\
+                    insererMot
+                    
+                }
+            }
+            
+        }
     \end{procedure}
     
-    
-        
+    \begin{function}
+        \SetAlgoLined
+        \caption{genererArbreEnFichierTexte(fic : FichierTexte): ArbreDeLettres}
+        \Declaration{lesMots : Ensemble$<$Mot$>$, unArbre : ArbreDeLettres}
+        \Deb{
+            lesMots $\leftarrow$ genererEnsembleDeMot(fic) \\
+            unArbre $\leftarrow$ genererArbreAvecEnsembleDeMots(lesMots) \\
+        	\Retour{}
+        }
+    \end{function}
 
-    
-    
 \end{document}
