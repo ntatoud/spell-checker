@@ -1,5 +1,5 @@
-#ifndef __CORRIGERTEXTE__
-#define __CORRIGERTEXTE__
+#ifndef __CORRIGER_TEXTE__
+#define __CORRIGER_TEXTE__
 #include "Mot.h"
 #include "Dictionnaire.h"
 /*			TODO
