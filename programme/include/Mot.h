@@ -9,9 +9,9 @@ typedef struct Mot{
 int M_estUnMotValide(char c);
 Mot M_creerUnMot(char c);
 unsigned int M_longueurMot(Mot mot);
-char M_iemeCaractere(Mot mot);
+char M_iemeCaractere(Mot mot, unsigned int i);
 int M_sontIdentiques(Mot mot1, Mot mot2);
-void M_fixerIemeCaractere(Mot, unsigned int, char);
-void M_fixerLongueur(Mot, unsigned int);
+void M_fixerIemeCaractere(Mot*, unsigned int, char);
+void M_fixerLongueur(Mot*, unsigned int);
 
 #endif
