@@ -5,20 +5,32 @@
 #include "CorrecteurOrthographique.h"
 
 Mot CO_remplacerIemeLettre(Mot unMot, unsigned int i, char uneLettre){ 
-    CO_supprimerIemeLettre(unMot, i);
-    CO_insererLettre(unMot, i, uneLettre);
+    CO_supprimerIemeLettre(unMot, i-1);
+    CO_insererLettre(unMot, i-1, uneLettre);
     return unMot;
 }
 
 Mot CO_supprimerIemeLettre(Mot unMot, unsigned int i){
     assert(M_longueurMot(unMot) > 1 && M_longueurMot(unMot) < i);
+    
+    unsigned int j;
+    // Décalage de toutes les lettres
+    for(j=i; j < M_longueurMot(unMot) - 1; j++)
+        M_fixerIemeCaractere(&unMot, j-1, M_iemeCaractere(unMot, j));
+    // On oublie pas de vider la dernière qui a été dupliquée
+    M_fixerIemeCaractere(&unMot, M_longueurMot(unMot) - 1, ' ');
+
+    M_fixerLongueur(&unMot, M_longueurMot(unMot) - 1);
     return unMot;
 }
 
-Mot CO_inverserDeuxLettresConsecutives(Mot mot, unsigned int i){
-    Mot unMot;
-    unMot.chaine="a";
-    unMot.longueur=1;
+Mot CO_inverserDeuxLettresConsecutives(Mot unMot, unsigned int i){
+    assert(M_longueurMot(unMot) > 1 && M_longueurMot(unMot) < i);
+    char lettre1, lettre2; 
+    lettre1 = M_iemeCaractere(unMot, i);
+    lettre2 = M_iemeCaractere(unMot, i+1);
+    CO_remplacerIemeLettre(unMot, lettre2, i);
+    CO_remplacerIemeLettre(unMot, lettre1, i+1);
     return unMot;
 }
 
