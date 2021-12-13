@@ -2,7 +2,7 @@
 #define __MOT__
 
 typedef struct Mot{
-  char chaine; 
+  char* chaine; 
   unsigned int longueur; 
 } Mot;
 
@@ -11,5 +11,7 @@ Mot M_creerUnMot(char c);
 unsigned int M_longueurMot(Mot mot);
 char M_iemeCaractere(Mot mot);
 int M_sontIdentiques(Mot mot1, Mot mot2);
+void M_fixerIemeCaractere(Mot, unsigned int, char);
+void M_fixerLongueur(Mot, unsigned int);
 
 #endif
