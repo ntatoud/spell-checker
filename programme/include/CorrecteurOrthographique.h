@@ -2,8 +2,6 @@
 #define __CORRECTEUR_ORTHOGRAPHIQUE__
 #include "Mot.h"
 
-
-
 Mot CO_remplacerIemeLettre(Mot mot, unsigned int i);
 Mot CO_supprimerIemeLettre(Mot mot, unsigned int i);
 Mot CO_inverserDeuxLettresConsecutives(Mot mot, unsigned int i);
