@@ -4,11 +4,11 @@
 
 
 
-Mot CO_remplacerIemeLettre(Mot mot, unsigned int i);
-Mot CO_supprimerIemeLettre(Mot mot, unsigned int i);
-Mot CO_inverserDeuxLettresConsecutives(Mot mot, unsigned int i);
-Mot CO_insererLettre(Mot mot, unsigned int i, char c);
-Mot CO_decomposerMot(Mot mot, unsigned int i);  //pas sûr
-Mot CO_reduireLaCasse(Mot mot);
+Mot CO_remplacerIemeLettre(Mot, unsigned int, char);
+Mot CO_supprimerIemeLettre(Mot, unsigned int );
+Mot CO_inverserDeuxLettresConsecutives(Mot, unsigned int );
+Mot CO_insererLettre(Mot, unsigned int, char);
+Mot CO_decomposerMot(Mot*, unsigned int); 
+Mot CO_reduireLaCasse(Mot);
 
 #endif
