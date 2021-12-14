@@ -3,8 +3,19 @@
 #include <string.h>
 #include "Mot.h"
 
-int M_estUnMotValide(char c){
-    return 1;
+int M_estUnMotValide(char c[]){
+    int longueurChaine = strlen(c);
+    bool estValide = TRUE;
+    int i = 0;
+    while(estValide && i<longueurChaine){
+        if ((c[i] >= 'a' && c[i] <= 'z') || (c[i] >= 'A' && c[i] <= 'Z')){
+            i=i+1;
+        }
+        else{
+            estValide=FALSE;
+        }
+    }
+    return estValide;
 }
 
 Mot M_creerUnMot(char c){
