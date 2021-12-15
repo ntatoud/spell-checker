@@ -20,7 +20,7 @@ unsigned int M_longueurMot(Mot mot){
 }
 
 char M_iemeCaractere(Mot mot, unsigned int i){
-    char c='a';
+    char c="a";
     return c;
 }
 
