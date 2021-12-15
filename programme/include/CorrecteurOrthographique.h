@@ -4,7 +4,7 @@
 #include "Mot.h"
 #include "EnsembleDeMot.h"
 
-typedef struct{
+typedef struct CorrecteurOrthographique{
     Dictionnaire leDictionnaire ;
     Mot motACorriger ;
     EnsembleDeMot lesCorrections;
