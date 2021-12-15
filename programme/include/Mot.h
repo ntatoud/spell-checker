@@ -6,7 +6,7 @@ typedef struct Mot{
   unsigned int longueur; 
 } Mot;
 
-int M_estUnMotValide(char c[]);
+int M_estUnMotValide(char c);
 Mot M_creerUnMot(char c);
 unsigned int M_longueurMot(Mot mot);
 char M_iemeCaractere(Mot mot, unsigned int i);
