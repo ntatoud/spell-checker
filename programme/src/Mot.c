@@ -6,7 +6,7 @@
 int M_estUnMotValide(char c){
     Mot unMot;
     unMot.longueur=1;
-    return unMot;
+    return 1;
 }
 
 Mot M_creerUnMot(char c){
