@@ -73,15 +73,15 @@
             }
         \Sinon
             {\Si{non estVide(unArbre)}
-                {\Si{iemeCaractere(unMot,1 = obtenirLettre(unArbre)}
+                {\Si{iemeCaractere(unMot,1) = obtenirLettre(unArbre)}
                     {
                     unMot $<$- supprimerIemeLettre(unMot, 1) \\
                     temp $<$- obtenirFilsGauche(unArbre)\\
-                    \Retour{estUnMotDuDictionnaire(unMot, temp}
+                    \Retour{estUnMotDuDictionnaire(unMot, temp)}
                     }
                  \Sinon
                     {
-                    temp $<$- obtenirFilsGauche(unArbre)\\
+                    temp $<$- obtenirFrere(unArbre)\\
                     \Retour{estUnMotDuDictionnaire(unMot, temp)}
                     }
                 }
