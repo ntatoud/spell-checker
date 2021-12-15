@@ -1,13 +1,13 @@
-#ifndef __CORRIGERTEXTE__
-#define __CORRIGERTEXTE__
-#include "TAD_Mot.h"
-#include "TAD_Dictionnaire.h"
+#ifndef __CORRIGER_TEXTE__
+#define __CORRIGER_TEXTE__
+#include "Mot.h"
+#include "Dictionnaire.h"
 /*			TODO
 je ne savais pas comment mettre plusieurs élémnts en sortie, idem pour un ensemble
 
 pour les opérations du bas de l'arbre que je n'ai pas écrites, est ce qu'on fait des fonctions ou des procédures ?
 
-*/
+
 
 
 
@@ -30,3 +30,6 @@ ensemble{CO_Mot} verifierCorrections(CO_Dictionnaire dico,ensemble{CO_Mot} ensem
 ensemble{CO_Mot} trouverCorrections(CO_Mot mot);
 
 //void remplacerLesLettres(
+
+*/
+#endif

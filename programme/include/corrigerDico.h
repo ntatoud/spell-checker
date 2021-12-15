@@ -1,2 +1,4 @@
-#ifndef __TAD_FICHIERTEXTE__
-#define __TAD_FICHIERTEXTE__
+#ifndef __CORRIGER_DICO__
+#define __CORRIGER_DICO__
+
+#endif

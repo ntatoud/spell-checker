@@ -1,2 +1,0 @@
-#ifndef __TAD_DICTIONNAIRE__
-#define __TAD_DICTIONNAIRE__

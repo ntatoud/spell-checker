@@ -1,2 +1,4 @@
-#ifndef __CHARGERDICTIONNAIRE__
-#define __CHARGERDICTIONNAIRE__
+#ifndef __CHARGER_DICTIONNAIRE__
+#define __CHARGER_DICTIONNAIRE__
+
+#endif
