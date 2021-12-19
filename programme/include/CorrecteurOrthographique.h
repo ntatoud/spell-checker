@@ -10,9 +10,14 @@ typedef struct CorrecteurOrthographique{
     EnsembleDeMot lesCorrections;
 } CorrecteurOrthographique;
 
-CorrecteurOrthographique CO_creerCorrecteur(Dictionnaire, Mot);
+CorrecteurOrthographique CO_correcteur(Dictionnaire, Mot);
+Mot CO_obtenirMotACorriger(CorrecteurOrthographique);
+void CO_fixerDico(CorrecteurOrthographique*, Dictionnaire);
+void CO_fixerMotACorriger(CorrecteurOrthographique*, Mot);
+void CO_ajouterNouvellesCorrections (CorrecteurOrthographique*, EnsembleDeMot);
+void CO_trouverCorrectionsPossibles(CorrecteurOrthographique*);
 void CO_strategieRemplacerLettres(CorrecteurOrthographique*);
-void CO_strategieSupprimerIemeLettres(CorrecteurOrthographique*);
+void CO_strategieSupprimerLettres(CorrecteurOrthographique*);
 void CO_strategieInverserDeuxLettresConsecutives(CorrecteurOrthographique*);
 void CO_strategieInsererLettres(CorrecteurOrthographique*);
 void CO_strategieDecomposerMot(CorrecteurOrthographique*); 
