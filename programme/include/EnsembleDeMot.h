@@ -4,10 +4,11 @@
 #include "ListeChaineeDeMot.h"
 
 /* Partie privee */
-typedef struct {
+typedef struct EnsembleDeMot{
   ListeChaineeDeMot lesMots;
   int nbMots;
 } EnsembleDeMot;
+#include "Mot.h"
 
 /* Partie publique */
 #define EDM_ERREUR_MEMOIRE 1
@@ -17,10 +18,13 @@ void EDM_ajouter(EnsembleDeMot*,Mot);  /* errno=EDM_ERREUR_MEMOIRE si pas assez 
 void EDM_retirer(EnsembleDeMot*,Mot);
 int EDM_estPresent(EnsembleDeMot,Mot);
 int EDM_cardinalite(EnsembleDeMot);
+
 EnsembleDeMot EDM_union(EnsembleDeMot,EnsembleDeMot);  /* errno=EDM_ERREUR_MEMOIRE si pas assez de m�moire */
 EnsembleDeMot EDM_intersection(EnsembleDeMot,EnsembleDeMot);  /* errno=EDM_ERREUR_MEMOIRE si pas assez de m�moire */
 EnsembleDeMot EDM_soustraction(EnsembleDeMot,EnsembleDeMot);  /* errno=EDM_ERREUR_MEMOIRE si pas assez de m�moire */
 void EDM_vider(EnsembleDeMot*); 
 EnsembleDeMot EDM_copier(EnsembleDeMot);  /* errno=EDM_ERREUR_MEMOIRE si pas assez de m�moire */
 int EDM_egale(EnsembleDeMot,EnsembleDeMot);
+
+Mot EDM_obtenirElement(EnsembleDeMot, int);
 #endif 

@@ -4,7 +4,7 @@
 #include "Mot.h"
 #include "CorrecteurOrthographique.h"
 #include "EnsembleDeMot.h"
-#include "Ditionnaire.h"
+#include "Dictionnaire.h"
 
 CorrecteurOrthographique CO_correcteur(Dictionnaire unDico, Mot unMotFaux){
     CorrecteurOrthographique unCorrecteur;
@@ -29,36 +29,46 @@ void CO_ajouterNouvellesCorrections (CorrecteurOrthographique* unCorrecteur, Ens
 }
 void CO_trouverCorrectionsPossibles(CorrecteurOrthographique* unCorrecteur){
     CO_strategieRemplacerLettres(unCorrecteur);
-    CO_strategieSupprimerIemeLettres(unCorrecteur);
+    CO_strategieSupprimerLettres(unCorrecteur);
     CO_strategieInsererLettres(unCorrecteur);
     CO_strategieInverserDeuxLettresConsecutives(unCorrecteur);
     CO_strategieDecomposerMot(unCorrecteur);
-    ;
 }
 void CO_strategieRemplacerLettres(CorrecteurOrthographique* unCorrecteur){
-   /* unsigned int i, longueur;
+    unsigned int i, longueur;
     int j;
-    Mot leMotACorriger = CO_obtenirMotACorriger(unCorrecteur);
-    longueur = M_longeurMot(leMotACorriger);
+    Mot uneCorrection;
+
+    Mot leMotACorriger = CO_obtenirMotACorriger(*unCorrecteur);
+    longueur = M_longueurMot(leMotACorriger);
     EnsembleDeMot desCorrections = ensembleDeMot();
+    
     for(i = 1; i < longueur ; i++){
-        desCorrections = CO_remplacerIemeLettre(leMotACorriger);
+        desCorrections = M_remplacerIemeLettre(leMotACorriger, i);
         int nbCorrections = EDM_cardinalite(desCorrections);
+        for(j = 0; j < nbCorrections ; j++){
+            uneCorrection = EDM_obtenirElement(desCorrections, j);
+
+            if(estUnMotDuDictionnaire(unCorrecteur->leDictionnaire, uneCorrection))
+                EDM_ajouter(&desCorrections, uneCorrection);
+        }
+        CO_ajouterNouvellesCorrections(unCorrecteur, desCorrections);
     }
-    */
-    ;
 }
 void CO_strategieSupprimerLettres(CorrecteurOrthographique* unCorrecteur){
     unsigned int i, longueur;
-    EnsembleDeMot desCorrections = ensembleDeMot();
     Mot uneCorrection;
-    longueur = M_longeurMot(leMotACorriger);
+
+    Mot leMotACorriger = CO_obtenirMotACorriger(*unCorrecteur);
+    longueur = M_longueurMot(leMotACorriger);
+    EnsembleDeMot desCorrections = ensembleDeMot();
+    
     for(i = 1; i < longueur; i++){
-        uneCorrection = M_supprimerIemeLettre(leMotACorriger);
-        if(D_estUnMotDuDictionnaire(uneCorrection))
-            EDM_ajouter(desCorrections, uneCorrection);
+        uneCorrection = M_supprimerIemeLettre(leMotACorriger, i);
+        if(estUnMotDuDictionnaire(unCorrecteur->leDictionnaire, uneCorrection))
+            EDM_ajouter(&desCorrections, uneCorrection);
     }
-    CO_ajouterNouvellesCorrections(unCorrecteur, desCorrections)
+    CO_ajouterNouvellesCorrections(unCorrecteur, desCorrections);
 }
 void CO_strategieInverserDeuxLettresConsecutives(CorrecteurOrthographique* unCorrecteur){
     ;
