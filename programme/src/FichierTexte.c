@@ -42,15 +42,11 @@ Mode FichierTexte_mode(Fichier fichier) {
 }
 
 unsigned int finFichier(Fichier fichier) {
-	/* Déclarations */
 	unsigned int resultat;
-	/* Préconditions */
 	assert((fichier.mode == LECTURE) && FichierTexte_estOuvert(fichier));
 
 	resultat = (fgetc(fichier.file)==EOF);  
 	fseek(fichier.file, -1, SEEK_CUR);
-/*	FichierTexte_deplacementCurseurMoinsUn(&fichier);
-*/
 	return (resultat);
 }
 
