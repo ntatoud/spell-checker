@@ -12,6 +12,8 @@ typedef struct CorrecteurOrthographique{
 
 CorrecteurOrthographique CO_correcteur(Dictionnaire, Mot);
 Mot CO_obtenirMotACorriger(CorrecteurOrthographique);
+Dictionnaire CO_obtenirDictionnaire(CorrecteurOrthographique);
+EnsembleDeMot CO_obtenirCorrections(CorrecteurOrthographique);
 void CO_fixerDico(CorrecteurOrthographique*, Dictionnaire);
 void CO_fixerMotACorriger(CorrecteurOrthographique*, Mot);
 void CO_ajouterNouvellesCorrections (CorrecteurOrthographique*, EnsembleDeMot);
