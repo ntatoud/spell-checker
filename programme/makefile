@@ -6,10 +6,10 @@ TESTDIR=tests
 CC = gcc
 AR = ar
 CFLAGS=-Wall -pedantic -g -std=c99 -I$(INCLUDEDIR)
-LDFLAGS=-lMot -lCorrecteurOrthographique -lFichierTexte -lDictionnaire -lm -lcurses
+LDFLAGS=-lMot -lCorrecteurOrthographique -lFichierTexte -lDictionnaire -lListeChaineeDeMot -lm -lcurses
 EXEC=correcteur
-LIBRARY=$(LIBDIR)/libMot.a  $(LIBDIR)/libCorrecteurOrthographique.a $(LIBDIR)/libFichierTexte.a $(LIBDIR)/libDictionnaire.a
-CORRECTEUR=$(SRCDIR)/chargerDico.o $(SRCDIR)/corrigerDico.o $(SRCDIR)/corrigerTexte.o $(SRCDIR)/sauvegarderArbreEnDictionnaire.o
+LIBRARY=$(LIBDIR)/libMot.a  $(LIBDIR)/libCorrecteurOrthographique.a $(LIBDIR)/libFichierTexte.a $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libListeChaineeDeMot.a
+CORRECTEUR=$(SRCDIR)/chargerDico.o $(SRCDIR)/corrigerDico.o $(SRCDIR)/main.o
 
 all :  $(BINDIR)/$(EXEC)
 
@@ -18,18 +18,19 @@ doc : .PHONY
 	
 proper : clean all
 
-tests : $(TESTDIR)/tests
+tests : $(SRCDIR)/testLCDM.o $(SRCDIR)/Mot.o $(SRCDIR)/ListeChaineeDeMot.o
+	$(CC) -o $(TESTDIR)/testLCDM $(SRCDIR)/testLCDM.o $(SRCDIR)/Mot.o $(SRCDIR)/ListeChaineeDeMot.o $(LDFLAGS) -lcunit -L $(LIBDIR)
 
 $(BINDIR)/$(EXEC) : $(SRCDIR)/main.o $(LIBRARY) $(CORRECTEUR)
 	$(CC) -o $@ $^ $(LDFLAGS) -L $(LIBDIR)
-
-$(TESTDIR)/tests : $(SRCDIR)/tests.o $(LIBRARY)
-	$(CC) -o $@ $^ $(LDFLAGS) -L $(LIBDIR) -lcunit
 
 $(SRCDIR)/%.o : $(SRCDIR)/%.c
 	$(CC) -o $@ -c $< $(CFLAGS)
 
 $(LIBDIR)/libMot.a : $(SRCDIR)/Mot.o
+	$(AR) -r $@ $^
+
+$(LIBDIR)/libListeChaineeDeMot.a : $(SRCDIR)/ListeChaineeDeMot.o
 	$(AR) -r $@ $^
 
 $(LIBDIR)/libCorrecteurOrthographique.a : $(SRCDIR)/CorrecteurOrthographique.o

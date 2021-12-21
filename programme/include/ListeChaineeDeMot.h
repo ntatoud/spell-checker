@@ -13,7 +13,7 @@ typedef struct Noeud {
 /* Partie publique */
 #define LCDM_ERREUR_MEMOIRE 1
 
-ListeChaineeDeMot listeChaineeDeMot();
+ListeChaineeDeMot LCDM_listeChaineeDeMot();
 int LCDM_estVide(ListeChaineeDeMot);
 void LCDM_ajouter(ListeChaineeDeMot*,Mot); /* errno=LCDM_ERREUR_MEMOIRE si pas assez de m�moire */
 Mot LCDM_obtenirMot(ListeChaineeDeMot); /* assertion : liste non vide */
