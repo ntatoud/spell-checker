@@ -34,11 +34,17 @@
 
 	\begin{itemize}[label=$\ $, leftmargin=1cm]
 		 
-		 \item \textbf{fonction} correcteur(): CorrecteurOrthographique
+		 \item \textbf{fonction} correcteur(unDico : Dictionnaire, unMotFaux : unMot): CorrecteurOrthographique
+		 \begin{itemize}[label=$| $]
+            \item \textbf{précondition:} non(estUnMotDuDictionnaire(unDico, unMotFaux))
+         \end{itemize}
 		 \item \textbf{fonction} obtenirMotACorriger(unCorrecteur : CorrecteurOrthographique): Mot
 		 \item \textbf{fonction} obtenirDictionnaire(unCorrecteur : CorrecteurOrthographique): Dictionnaire
 		 \item \textbf{procedure} fixerDico(\textbf{E/S} unCorrecteur : CorrecteurOrthographique,\textbf{E})
 		 \item \textbf{procedure} fixerMotACorriger(\textbf{E/S} unCorrecteur: CorrecteurOrthographique,\textbf{E} unMotFaux : Mot)
+		 \begin{itemize}[label=$| $]
+            \item \textbf{précondition:} non(estUnMotDuDictionnaire(obtenirDictionnaire(unCorrecteur), unMotFaux))
+         \end{itemize}
 		 \item \textbf{procedure} fixerDico(\textbf{E/S} unCorrecteur : CorrecteurOrthographique, \textbf{E} unDico : Dictionnaire)
 		 \item \textbf{procedure} ajouterNouvellesCorrections(\textbf{E/S} unCorrecteur : CorrecteurOrthographique, \textbf{E} desCorrections : Ensemble$<$Mot$>$)
 		 \item \textbf{procedure} trouverCorrectionsPossibles(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
@@ -49,10 +55,7 @@
 		 \item \textbf{procedure} strategieDecomposerMot(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
 		 
 		 
-		 \begin{itemize}[label=$| $]
-            \item \textbf{précondition:} longueur(mot)$\ge$1 et i$\le$longueur
-         \end{itemize}
-         
+		 
          
          
         
