@@ -102,6 +102,16 @@ void CO_ajouterNouvellesCorrections (CorrecteurOrthographique* unCorrecteur, Ens
 void CO_trouverCorrectionsPossibles(CorrecteurOrthographique* unCorrecteur);
 
 /**
+ * \fn EnsembleDeMot CO_remplacerIemeLettreEnBoucle(Mot unMot, int i);
+
+ * \brief Fonction de calcul de l'ensemble des corrections valides d'un mot en remplaçant une lettre par toutes celles de l'alphabet, une à la fois
+ *
+ * \param unMot : le mot que l'on va modifier
+ * \param i : l'indice de la lettre à remplacer
+*/
+EnsembleDeMot CO_remplacerIemeLettreEnBoucle(Mot unMot, int i);
+
+/**
  * \fn void CO_strategieRemplacerLettres(CorrecteurOrthographique*);
  * \brief Fonction de calcul de l'ensemble des corrections valides d'un mot en remplaçant les lettres une à une
  *
@@ -124,6 +134,16 @@ void CO_strategieSupprimerLettres(CorrecteurOrthographique* unCorrecteur);
  * \param unCorrecteur : un pointeur sur un CorrecteurOrthographique
 */
 void CO_strategieInverserDeuxLettresConsecutives(CorrecteurOrthographique* unCorrecteur);
+
+/**
+ * \fn EnsembleDeMot CO_insererIemeLettreEnBoucle(Mot unMot, int i);
+
+ * \brief Fonction de calcul de l'ensemble des corrections valides d'un mot en inserant toutes les Lettres de l'alphabet, une à la fois à un emplacement donné
+ *
+ * \param unMot : le mot que l'on va modifier
+ * \param i : l'indice où insérer la lettre
+*/
+EnsembleDeMot CO_insererIemeLettreEnBoucle(Mot unMot, int i);
 
 /**
  * \fn void CO_strategieInsererLettres(CorrecteurOrthographique*);

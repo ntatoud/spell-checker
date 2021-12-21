@@ -45,6 +45,18 @@ void CO_trouverCorrectionsPossibles(CorrecteurOrthographique* unCorrecteur){
     CO_strategieDecomposerMot(unCorrecteur);
 }
 
+EnsembleDeMot CO_remplacerIemeLettreEnBoucle(Mot unMot, int i){
+    EnsembleDeMot desCorrections;
+    Mot uneCorrection;
+    desCorrections = ensembleDeMot();
+    char* lettres;
+    lettres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZàéùûÜÛÂÄêËîïÏÎçôöÖÔ";
+    for(int j = 0; j < sizeof(lettres);j++ ){
+        uneCorrection = M_remplacerIemeLettre(unMot, i, lettres[j]);
+        EDM_ajouter(&desCorrections, uneCorrection);
+    }
+    return desCorrections;
+}
 void CO_strategieRemplacerLettres(CorrecteurOrthographique* unCorrecteur){
     unsigned int i, longueur;
     int j;
@@ -56,7 +68,7 @@ void CO_strategieRemplacerLettres(CorrecteurOrthographique* unCorrecteur){
     EnsembleDeMot desCorrections = ensembleDeMot();
     
     for(i = 1; i < longueur ; i++){
-        desCorrections = M_remplacerIemeLettre(leMotACorriger, i);
+        desCorrections = CO_remplacerIemeLettreEnBoucle(leMotACorriger, i);
         int nbCorrections = EDM_cardinalite(desCorrections);
         for(j = 0; j < nbCorrections ; j++){
             uneCorrection = EDM_obtenirElement(desCorrections, j);
@@ -102,6 +114,18 @@ void CO_strategieInverserDeuxLettresConsecutives(CorrecteurOrthographique* unCor
     CO_ajouterNouvellesCorrections(unCorrecteur, desCorrections);
 }
 
+EnsembleDeMot CO_insererIemeLettreEnBoucle(Mot unMot, int i){
+    EnsembleDeMot desCorrections;
+    Mot uneCorrection;
+    desCorrections = ensembleDeMot();
+    char* lettres;
+    lettres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZàéùûÜÛÂÄêËîïÏÎçôöÖÔ";
+    for(int j = 0; j < sizeof(lettres);j++ ){
+        uneCorrection = M_insererIemeLettre(unMot, i, lettres[j]);
+        EDM_ajouter(&desCorrections, uneCorrection);
+    }
+    return desCorrections;
+}
 void CO_strategieInsererLettres(CorrecteurOrthographique* unCorrecteur){
     unsigned int i, longueur;
     int j;
@@ -113,7 +137,7 @@ void CO_strategieInsererLettres(CorrecteurOrthographique* unCorrecteur){
     EnsembleDeMot desCorrections = ensembleDeMot();
     
     for(i = 1; i < longueur ; i++){
-        desCorrections = M_insererLettre(leMotACorriger, i);
+        desCorrections = CO_insererIemeLettreEnBoucle(leMotACorriger, i);
         int nbCorrections = EDM_cardinalite(desCorrections);
         for(j = 0; j < nbCorrections ; j++){
             uneCorrection = EDM_obtenirElement(desCorrections, j);
