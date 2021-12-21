@@ -7,6 +7,7 @@
 #include "Dictionnaire.h"
 
 CorrecteurOrthographique CO_correcteur(Dictionnaire unDico, Mot unMotFaux){
+    assert(!estUnMotDuDictionnaire(unDico, unMotFaux));
     CorrecteurOrthographique unCorrecteur;
     unCorrecteur.leDictionnaire = unDico;
     unCorrecteur.motACorriger = unMotFaux;
@@ -17,10 +18,10 @@ Mot CO_obtenirMotACorriger(CorrecteurOrthographique unCorrecteur){
     return unCorrecteur.motACorriger;
 }
 
-Dictionnaire CO_obtenirDictionnaire(CorrecteurOrthographique unCorrecteur ){
+Dictionnaire CO_obtenirDictionnaire(CorrecteurOrthographique unCorrecteur){
     return unCorrecteur.leDictionnaire;
 }
-EnsembleDeMot CO_obtenirCorrections(CorrecteurOrthographique unCorrecteur ){
+EnsembleDeMot CO_obtenirCorrections(CorrecteurOrthographique unCorrecteur){
     return unCorrecteur.lesCorrections;
 }
 void CO_fixerDico(CorrecteurOrthographique* unCorrecteur, Dictionnaire unDico){
@@ -28,12 +29,14 @@ void CO_fixerDico(CorrecteurOrthographique* unCorrecteur, Dictionnaire unDico){
 }
 
 void CO_fixerMotACorriger(CorrecteurOrthographique* unCorrecteur, Mot unMotFaux){
+    assert(!estUnMotDuDictionnaire(CO_obtenirDictionnaire(*unCorrecteur), unMotFaux));
     unCorrecteur->motACorriger = unMotFaux;
 }
 
 void CO_ajouterNouvellesCorrections (CorrecteurOrthographique* unCorrecteur, EnsembleDeMot desCorrections){
     EDM_union(unCorrecteur->lesCorrections, desCorrections);
 }
+
 void CO_trouverCorrectionsPossibles(CorrecteurOrthographique* unCorrecteur){
     CO_strategieRemplacerLettres(unCorrecteur);
     CO_strategieSupprimerLettres(unCorrecteur);
@@ -41,6 +44,7 @@ void CO_trouverCorrectionsPossibles(CorrecteurOrthographique* unCorrecteur){
     CO_strategieInverserDeuxLettresConsecutives(unCorrecteur);
     CO_strategieDecomposerMot(unCorrecteur);
 }
+
 void CO_strategieRemplacerLettres(CorrecteurOrthographique* unCorrecteur){
     unsigned int i, longueur;
     int j;
@@ -63,6 +67,7 @@ void CO_strategieRemplacerLettres(CorrecteurOrthographique* unCorrecteur){
         CO_ajouterNouvellesCorrections(unCorrecteur, desCorrections);
     }
 }
+
 void CO_strategieSupprimerLettres(CorrecteurOrthographique* unCorrecteur){
     unsigned int i, longueur;
     Mot uneCorrection;
@@ -79,6 +84,7 @@ void CO_strategieSupprimerLettres(CorrecteurOrthographique* unCorrecteur){
     }
     CO_ajouterNouvellesCorrections(unCorrecteur, desCorrections);
 }
+
 void CO_strategieInverserDeuxLettresConsecutives(CorrecteurOrthographique* unCorrecteur){
     unsigned int i, longueur;
     Mot uneCorrection;
@@ -95,6 +101,7 @@ void CO_strategieInverserDeuxLettresConsecutives(CorrecteurOrthographique* unCor
     }
     CO_ajouterNouvellesCorrections(unCorrecteur, desCorrections);
 }
+
 void CO_strategieInsererLettres(CorrecteurOrthographique* unCorrecteur){
     unsigned int i, longueur;
     int j;
@@ -117,6 +124,7 @@ void CO_strategieInsererLettres(CorrecteurOrthographique* unCorrecteur){
         CO_ajouterNouvellesCorrections(unCorrecteur, desCorrections);
     }
 }
+
 void CO_strategieDecomposerMot(CorrecteurOrthographique* unCorrecteur){
         unsigned int i, longueur;
     Mot uneCorrection;
