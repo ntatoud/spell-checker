@@ -15,7 +15,7 @@ int clean_suite_success(void){
 
 ListeChaineeDeMot creer_liste_avec_un_mot(){
     ListeChaineeDeMot l = LCDM_listeChaineeDeMot();
-    char * chaine1="chaine1";
+    char *chaine1="chaine1";
     Mot unMot = M_creerUnMot(chaine1);
     LCDM_ajouter(&l, unMot);
     return l;
@@ -23,8 +23,8 @@ ListeChaineeDeMot creer_liste_avec_un_mot(){
 
 ListeChaineeDeMot creer_liste_avec_deux_mot(){
     ListeChaineeDeMot l = LCDM_listeChaineeDeMot();
-    char * chaine1="chaine1";
-    char * chaine2="chaine2";
+    char *chaine1="chaine1";
+    char *chaine2="chaine2";
     Mot unMot = M_creerUnMot(chaine1);
     Mot unAutreMot = M_creerUnMot(chaine2);
     LCDM_ajouter(&l, unMot);
@@ -46,7 +46,7 @@ void test_liste_non_vide(void){
 
 void test_mot_ajoute_en_tete(void){
     ListeChaineeDeMot l = LCDM_listeChaineeDeMot();
-    char * chaine1="chaine1";
+    char *chaine1="chaine1";
     Mot unMot = M_creerUnMot(chaine1);
     LCDM_ajouter(&l, unMot);
     CU_ASSERT_EQUAL(M_sontIdentiques(LCDM_obtenirMot(l), unMot),true);
@@ -56,8 +56,8 @@ void test_mot_ajoute_en_tete(void){
 void test_obtenir_liste_suivante(void){
     ListeChaineeDeMot lSuivante;
     ListeChaineeDeMot l = LCDM_listeChaineeDeMot();
-    char * chaine1="chaine1";
-    char * chaine2="chaine2";
+    char *chaine1="chaine1";
+    char *chaine2="chaine2";
     Mot unMot = M_creerUnMot(chaine1);
     Mot unAutreMot = M_creerUnMot(chaine2);
     LCDM_ajouter(&l, unMot);
@@ -71,9 +71,9 @@ void test_fixer_liste_suivante(void){
     ListeChaineeDeMot l1 = LCDM_listeChaineeDeMot();
     ListeChaineeDeMot l2 = LCDM_listeChaineeDeMot();
     ListeChaineeDeMot temp = LCDM_listeChaineeDeMot();
-    char * chaine1="chaine1";
-    char * chaine2="chaine2";
-    char * chaine3="chaine3";
+    char *chaine1="chaine1";
+    char *chaine2="chaine2";
+    char *chaine3="chaine3";
     Mot unMot = M_creerUnMot(chaine1);
     Mot unAutreMot = M_creerUnMot(chaine2);
     Mot toujoursPlusDeMot = M_creerUnMot(chaine3);
