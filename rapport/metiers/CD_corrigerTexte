@@ -109,13 +109,6 @@
     }
     \end{procedure}
     
-    \begin{function}
-    \SetAlgoLined
-    \caption{reduireLaCasse(mot : Mot):Mot}
-    \Declaration{}
-    \Deb{
-        \Retour{}
-    }
-    \end{function}
+    
  
 \end{document}
