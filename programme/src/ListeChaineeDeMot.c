@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
-#include "Mot.h"
 #include "ListeChaineeDeMot.h"
+#include "Mot.h"
 
 ListeChaineeDeMot LCDM_listeChaineeDeMot(){
     errno = 0;
@@ -34,6 +34,7 @@ Mot LCDM_obtenirMot(ListeChaineeDeMot l){
 }
 
 void LCDM_supprimerMot(ListeChaineeDeMot *l, Mot unMot){
+    assert(!LCDM_estVide(l));
     ListeChaineeDeMot temp = LCDM_listeChaineeDeMot();
     if (!LCDM_estVide(*l)){
         if (M_sontIdentiques(LCDM_obtenirMot(*l), unMot)){
