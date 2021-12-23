@@ -13,16 +13,26 @@ typedef struct ADL{
 #define ADL_ERREUR_MEMOIRE 1
 
 ArbreDeLettres ADL_creerADLVide(); 
+
+/*!
+ * Fonction qui permet de savoir si un arbre est vide ou non
+ *\param[in] ListeChaineeDeMot la liste à tester
+ *\param[out] int, 1 si la liste est vide, 0 sinon 
+ */
 int ADL_estVide(ArbreDeLettres);
+
+
 ArbreDeLettres ADL_creerADL(ArbreDeLettres,ArbreDeLettres,char,int);
-void ADL_fixerEstFinDeMot(ArbreDeLettres*,int);//non estVide(adl)
-void ADL_fixerLettre(ArbreDeLettres*,char);//non estVide(adl)
+
+
+void ADL_fixerEstFinDeMot(ArbreDeLettres*,int);
+void ADL_fixerLettre(ArbreDeLettres*,char);
 void ADL_fixerElement(ArbreDeLettres*,char,int);
-void ADL_fixerFrere(ArbreDeLettres*,ArbreDeLettres);//non estVide(adl)
-void ADL_fixerFils(ArbreDeLettres*,ArbreDeLettres);//non estVide(adl)
-ArbreDeLettres ADL_obtenirFils(ArbreDeLettres); //non estVide(adl)
-ArbreDeLettres ADL_obtenirFrere(ArbreDeLettres);//non estVide(adl)
-char ADL_obtenirLettre(ArbreDeLettres);//non estVide(adl)
-int ADL_obtenirEstFinDeMot(ArbreDeLettres);//non estVide(adl)
+void ADL_fixerFrere(ArbreDeLettres*,ArbreDeLettres);
+void ADL_fixerFils(ArbreDeLettres*,ArbreDeLettres);
+ArbreDeLettres ADL_obtenirFils(ArbreDeLettres);
+ArbreDeLettres ADL_obtenirFrere(ArbreDeLettres);
+char ADL_obtenirLettre(ArbreDeLettres);
+int ADL_obtenirEstFinDeMot(ArbreDeLettres);
 
 #endif
