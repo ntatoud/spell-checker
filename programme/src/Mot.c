@@ -32,7 +32,8 @@ void M_decalerVersLaDroite(Mot* unMot,unsigned int i){
 int M_estUnMotValide(char* c){
     assert(strlen(c)>0);
     int longueurChaine = strlen(c);
-    char* chaineTemp="";
+    char* chaineTemp = (char*)malloc(1);
+    chaineTemp="";
     int estValide = 1;
     int i = 0;
     while(estValide && i<longueurChaine){
@@ -43,6 +44,13 @@ int M_estUnMotValide(char* c){
         i=i+1;
     }
     return estValide;
+}
+
+Mot M_copierMot(Mot unMot){
+    Mot copie;
+    copie.chaine=unMot.chaine;
+    copie.longueur=unMot.longueur;
+    return copie;
 }
 
 
@@ -60,7 +68,8 @@ unsigned int M_longueurMot(Mot unMot){
 
 char* M_iemeCaractere(Mot unMot, unsigned int i){
     assert(i<=M_longueurMot(unMot));
-    char* element = "";
+    char* element = (char*)malloc(1);
+    element="";
     element[0]=unMot.chaine[i];
     return element;
 }
@@ -75,9 +84,14 @@ int M_sontIdentiques(Mot mot1, Mot mot2){
 
 void M_fixerIemeCaractere(Mot* unMot, unsigned int i, char* c){
     assert(M_estUnCaractereAlphabetique(c)&&i<=M_longueurMot(*unMot));
-    unMot->chaine[i]=c[0];
-}
 
+    if((strcmp(c,"À")>=0) && (!(strcmp(c,"Û")<=0))){
+            int carEnAscii = c[0]+32;
+            c[0] = carEnAscii;
+
+    unMot->chaine[i]=c[0];
+    }
+}
 
 void M_fixerLongueur(Mot* unMot, unsigned int i){
     unMot->longueur=i;
@@ -93,21 +107,25 @@ void M_supprimerIemeLettre(Mot* unMot, unsigned int i){
 }
 
 void M_inverserDeuxLettresConsecutives(Mot* unMot, unsigned int i){
-    assert(i<M_longueurMot(*unMot));
-    char* temp = M_iemeCaractere(*unMot,i);
+    assert(i<M_longueurMot(*unMot)-1);
+    char* temp = (char*)malloc(1);
+    temp = M_iemeCaractere(*unMot,i);
     M_fixerIemeCaractere(unMot,i,M_iemeCaractere(*unMot,i+1));
     M_fixerIemeCaractere(unMot,i+1,temp);
 }
 
 void M_insererLettre(Mot* unMot, unsigned int i, char* c){
     assert(i<=M_longueurMot(*unMot)+1);
-    M_decalerVersLaDroite(unMot,i);
+    if(i<=M_longueurMot(*unMot)){
+        M_decalerVersLaDroite(unMot,i);
+    }
     M_fixerIemeCaractere(unMot,i,c);
 }
 
 Mot M_decomposerMot(Mot* unMot, unsigned int i){ //on modifie le mot et récupère le mot de sortie
     assert(i<=M_longueurMot(*unMot));
-    char* chaine=(*unMot).chaine;               //https://www.delftstack.com/fr/howto/c/get-c-substring/
+    char* chaine = (char*)malloc(M_longueurMot(*unMot));
+    chaine =(*unMot).chaine;               //https://www.delftstack.com/fr/howto/c/get-c-substring/
     char texteGauche[i];
     char texteDroit[(*unMot).longueur-i+2];
     memcpy(texteGauche,&chaine[0],i-1);
@@ -121,18 +139,21 @@ Mot M_decomposerMot(Mot* unMot, unsigned int i){ //on modifie le mot et récupè
     return motGauche;
 } 
 
-void M_reduireLaCasse(Mot* unMot){
+void M_reduireLaCasse(char** chaine){
+    assert(strlen(*chaine)>0);
     unsigned int j;
-    for(j=1;j<=(*unMot).longueur;j++){
-        char* c = M_iemeCaractere(*unMot,j);
-        if((strcmp(c,"a")>=0) && (!(strcmp(c,"z")<=0))){
-            c[0]=c[0]+32; // ok car pas d'accent
-            M_fixerIemeCaractere(unMot,j,c);
+    for(j=0;j<=strlen((*chaine))-1;j++){
+        char* element = (char*)malloc(1);
+        element="";
+        element[0]=(*chaine)[j];
+        if((strcmp(element,"a")>=0) && (!(strcmp(element,"z")<=0))){
+            element[0]=element[0]+32;
+            (*chaine)[j]=element[0];
         }
-        else if((strcmp(c,"À")>=0) && (!(strcmp(c,"Û")<=0))){
-            int carEnAscii = c[0]+32;
-            c[0] = carEnAscii;
-            M_fixerIemeCaractere(unMot,j,c);
+        else if((strcmp(element,"À")>=0) && (!(strcmp(element,"Û")<=0))){
+            int carEnAscii = element[0]+32;
+            element[0] = carEnAscii;
+            (*chaine)[j]=element[0];
         }
     }
 }
