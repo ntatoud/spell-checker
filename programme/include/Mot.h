@@ -1,26 +1,28 @@
 #ifndef __MOT__
 #define __MOT__
-#include "EnsembleDeMot.h"
-#include <wchar.h>
+#include <stdlib.h>
+#include <assert.h>
+
 
 typedef struct Mot{
-  wchar_t * chaine; 
+  char * chaine;
   unsigned int longueur; 
 } Mot;
-                                    //exemple : wchar_t p = L"Hello" ;
-int M_estUnMotValide(wchar_t *);
-Mot M_creerUnMot(wchar_t *);
-unsigned int M_longueurMot(Mot);
-wchar_t M_iemeCaractere(Mot, unsigned int);
-int M_sontIdentiques(Mot, Mot);
-Mot M_fixerIemeCaractere(Mot, unsigned int, wchar_t);
-Mot M_fixerLongueur(Mot, unsigned int);
 
-Mot M_supprimerIemeLettre(Mot, unsigned int );
-Mot M_inverserDeuxLettresConsecutives(Mot, unsigned int );
-Mot M_insererLettre(Mot, unsigned int, wchar_t);
-Mot M_decomposerMot(Mot*, unsigned int); //on modifie le mot et récupère le mot de sortie
-Mot M_reduireLaCasse(Mot);
+int M_estUnCaractereAlphabetique(char* c);
+void M_decalerVersLaDroite(Mot *unMot,unsigned int i);
 
+int M_estUnMotValide(char* c);
+Mot M_creerUnMot(char* c);
+unsigned int M_longueurMot(Mot mot);
+char* M_iemeCaractere(Mot mot, unsigned int i);
+int M_sontIdentiques(Mot mot1, Mot mot2);
+void M_fixerIemeCaractere(Mot* unMot, unsigned int i, char* c);
+void M_fixerLongueur(Mot* unMot, unsigned int i);
+void M_supprimerIemeLettre(Mot* unMot, unsigned int i);
+void M_inverserDeuxLettresConsecutives(Mot* unMot, unsigned int i);
+void M_insererLettre(Mot* unMot, unsigned int i, char* c);
+Mot M_decomposerMot(Mot* unMot, unsigned int i); //on modifie le mot et récupère le mot de sortie
+void M_reduireLaCasse(Mot* unMot);
 
 #endif
