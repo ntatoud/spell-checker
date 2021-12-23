@@ -59,24 +59,27 @@ EnsembleDeMot CO_remplacerIemeLettreEnBoucle(Mot unMot, int i){
 }
 void CO_strategieRemplacerLettres(CorrecteurOrthographique* unCorrecteur){
     unsigned int i, longueur;
-    int j;
     Mot uneCorrection;
 
     Mot leMotACorriger = CO_obtenirMotACorriger(*unCorrecteur);
     Dictionnaire leDico = CO_obtenirDictionnaire(*unCorrecteur);
     longueur = M_longueurMot(leMotACorriger);
     EnsembleDeMot desCorrections = ensembleDeMot();
-    
+    EnsembleDeMot correctionsCourantes = ensembleDeMot();
+
     for(i = 1; i < longueur ; i++){
         desCorrections = CO_remplacerIemeLettreEnBoucle(leMotACorriger, i);
-        int nbCorrections = EDM_cardinalite(desCorrections);
-        for(j = 0; j < nbCorrections ; j++){
-            uneCorrection = EDM_obtenirElement(desCorrections, j);
+        correctionsCourantes = EDM_copier(desCorrections);
 
-            if(estUnMotDuDictionnaire(leDico, uneCorrection))
-                EDM_ajouter(&desCorrections, uneCorrection);
+        while(EDM_cardinalite(correctionsCourantes)!=0){
+            uneCorrection = EDM_obtenirMot(correctionsCourantes);
+            if(!estUnMotDuDictionnaire(leDico, uneCorrection)){
+                EDM_retirer(&desCorrections, uneCorrection);
+            }
+            EDM_retirer(&correctionsCourantes, uneCorrection);
         }
         CO_ajouterNouvellesCorrections(unCorrecteur, desCorrections);
+        EDM_vider(&desCorrections);
     }
 }
 
@@ -95,6 +98,7 @@ void CO_strategieSupprimerLettres(CorrecteurOrthographique* unCorrecteur){
             EDM_ajouter(&desCorrections, uneCorrection);
     }
     CO_ajouterNouvellesCorrections(unCorrecteur, desCorrections);
+        EDM_vider(&desCorrections);
 }
 
 void CO_strategieInverserDeuxLettresConsecutives(CorrecteurOrthographique* unCorrecteur){
@@ -112,6 +116,7 @@ void CO_strategieInverserDeuxLettresConsecutives(CorrecteurOrthographique* unCor
             EDM_ajouter(&desCorrections, uneCorrection);
     }
     CO_ajouterNouvellesCorrections(unCorrecteur, desCorrections);
+        EDM_vider(&desCorrections);
 }
 
 EnsembleDeMot CO_insererIemeLettreEnBoucle(Mot unMot, int i){
@@ -120,7 +125,7 @@ EnsembleDeMot CO_insererIemeLettreEnBoucle(Mot unMot, int i){
     desCorrections = ensembleDeMot();
     char* lettres;
     lettres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZàéùûÜÛÂÄêËîïÏÎçôöÖÔ";
-    for(int j = 0; j < sizeof(lettres);j++ ){
+    for(int j = 0; j < strlen(lettres);j++ ){
         uneCorrection = M_insererIemeLettre(unMot, i, lettres[j]);
         EDM_ajouter(&desCorrections, uneCorrection);
     }
@@ -128,24 +133,27 @@ EnsembleDeMot CO_insererIemeLettreEnBoucle(Mot unMot, int i){
 }
 void CO_strategieInsererLettres(CorrecteurOrthographique* unCorrecteur){
     unsigned int i, longueur;
-    int j;
     Mot uneCorrection;
 
     Mot leMotACorriger = CO_obtenirMotACorriger(*unCorrecteur);
     Dictionnaire leDico = CO_obtenirDictionnaire(*unCorrecteur);
     longueur = M_longueurMot(leMotACorriger);
     EnsembleDeMot desCorrections = ensembleDeMot();
-    
+    EnsembleDeMot correctionsCourantes = ensembleDeMot();
     for(i = 1; i < longueur ; i++){
         desCorrections = CO_insererIemeLettreEnBoucle(leMotACorriger, i);
-        int nbCorrections = EDM_cardinalite(desCorrections);
-        for(j = 0; j < nbCorrections ; j++){
-            uneCorrection = EDM_obtenirElement(desCorrections, j);
+        correctionsCourantes = EDM_copier(desCorrections);
 
-            if(estUnMotDuDictionnaire(leDico, uneCorrection))
-                EDM_ajouter(&desCorrections, uneCorrection);
+        while(EDM_cardinalite(correctionsCourantes)!=0){
+            uneCorrection = EDM_obtenirMot(correctionsCourantes);
+            if(!estUnMotDuDictionnaire(leDico, uneCorrection)){
+                EDM_retirer(&desCorrections, uneCorrection);
+            }
+            EDM_retirer(&correctionsCourantes, uneCorrection);
         }
+        
         CO_ajouterNouvellesCorrections(unCorrecteur, desCorrections);
+        EDM_vider(&desCorrections);
     }
 }
 
@@ -166,4 +174,5 @@ void CO_strategieDecomposerMot(CorrecteurOrthographique* unCorrecteur){
             EDM_ajouter(&desCorrections, uneCorrection);
     }
     CO_ajouterNouvellesCorrections(unCorrecteur, desCorrections);
+        EDM_vider(&desCorrections);
 }
