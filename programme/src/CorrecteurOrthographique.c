@@ -45,14 +45,15 @@ void CO_trouverCorrectionsPossibles(CorrecteurOrthographique* unCorrecteur){
     CO_strategieDecomposerMot(unCorrecteur);
 }
 
-EnsembleDeMot CO_remplacerIemeLettreEnBoucle(Mot unMot, int i){
+EnsembleDeMot CO_remplacerIemeLettreEnBoucle(Mot motACorriger, int i){
     EnsembleDeMot desCorrections;
     Mot uneCorrection;
     desCorrections = ensembleDeMot();
     char* lettres;
     lettres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZàéùûÜÛÂÄêËîïÏÎçôöÖÔ";
     for(int j = 0; j < sizeof(lettres);j++ ){
-        uneCorrection = M_remplacerIemeLettre(unMot, i, lettres[j]);
+        uneCorrection = M_copierMot(motACorriger);
+        M_fixerIemeCaractere(&uneCorrection, i, &lettres[j]);
         EDM_ajouter(&desCorrections, uneCorrection);
     }
     return desCorrections;
@@ -93,7 +94,8 @@ void CO_strategieSupprimerLettres(CorrecteurOrthographique* unCorrecteur){
     EnsembleDeMot desCorrections = ensembleDeMot();
     
     for(i = 1; i < longueur; i++){
-        uneCorrection = M_supprimerIemeLettre(leMotACorriger, i);
+        uneCorrection = M_copierMot(leMotACorriger);
+        M_supprimerIemeLettre(&uneCorrection, i);
         if(estUnMotDuDictionnaire(leDico, uneCorrection))
             EDM_ajouter(&desCorrections, uneCorrection);
     }
@@ -111,7 +113,8 @@ void CO_strategieInverserDeuxLettresConsecutives(CorrecteurOrthographique* unCor
     EnsembleDeMot desCorrections = ensembleDeMot();
 
     for(i = 1; i < longueur; i++){
-        uneCorrection = M_inverserDeuxLettresConsecutives(leMotACorriger,i);
+        uneCorrection = M_copierMot(leMotACorriger);
+        M_inverserDeuxLettresConsecutives(&uneCorrection,i);
         if(estUnMotDuDictionnaire(leDico, uneCorrection))
             EDM_ajouter(&desCorrections, uneCorrection);
     }
@@ -119,14 +122,15 @@ void CO_strategieInverserDeuxLettresConsecutives(CorrecteurOrthographique* unCor
         EDM_vider(&desCorrections);
 }
 
-EnsembleDeMot CO_insererIemeLettreEnBoucle(Mot unMot, int i){
+EnsembleDeMot CO_insererIemeLettreEnBoucle(Mot motACorriger, int i){
     EnsembleDeMot desCorrections;
     Mot uneCorrection;
     desCorrections = ensembleDeMot();
     char* lettres;
     lettres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZàéùûÜÛÂÄêËîïÏÎçôöÖÔ";
     for(int j = 0; j < strlen(lettres);j++ ){
-        uneCorrection = M_insererIemeLettre(unMot, i, lettres[j]);
+        uneCorrection = M_copierMot(motACorriger);
+        M_insererLettre(&uneCorrection, i, &lettres[j]);
         EDM_ajouter(&desCorrections, uneCorrection);
     }
     return desCorrections;
