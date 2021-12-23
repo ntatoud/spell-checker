@@ -5,6 +5,7 @@
 
 
 int M_estUnCaractereAlphabetique(char* c){
+    assert(strlen(c)==1);
     int result=1;
     if(!((strcmp(c,"a")>=0) && (!(strcmp(c,"z")<=0)))){
         result=0;
@@ -19,15 +20,17 @@ int M_estUnCaractereAlphabetique(char* c){
 }
 
 void M_decalerVersLaDroite(Mot* unMot,unsigned int i){
+    assert(i<=M_longueurMot(*unMot));
     M_fixerLongueur(unMot,M_longueurMot(*unMot)+1);
     unsigned int j;
-    for(j=M_longueurMot(*unMot)-1;j>i-1;j--){
+    for(j=M_longueurMot(*unMot);j>i;j--){
         M_fixerIemeCaractere(unMot,j,M_iemeCaractere(*unMot,j-1));
     }
 }
 
 
 int M_estUnMotValide(char* c){
+    assert(strlen(c)>0);
     int longueurChaine = strlen(c);
     char* chaineTemp="";
     int estValide = 1;
@@ -56,12 +59,13 @@ unsigned int M_longueurMot(Mot unMot){
 }
 
 char* M_iemeCaractere(Mot unMot, unsigned int i){
+    assert(i<=M_longueurMot(unMot));
     char* element = "";
     element[0]=unMot.chaine[i];
     return element;
 }
 
-int M_sontIdentiques(Mot mot1, Mot mot2){  //reprendre la cd
+int M_sontIdentiques(Mot mot1, Mot mot2){ 
     int identique = 0;
     if((mot1.longueur==mot2.longueur)&&(mot1.chaine==mot2.chaine)){
         identique=1;
@@ -70,6 +74,7 @@ int M_sontIdentiques(Mot mot1, Mot mot2){  //reprendre la cd
 }
 
 void M_fixerIemeCaractere(Mot* unMot, unsigned int i, char* c){
+    assert(M_estUnCaractereAlphabetique(c)&&i<=M_longueurMot(*unMot));
     unMot->chaine[i]=c[0];
 }
 
@@ -79,35 +84,39 @@ void M_fixerLongueur(Mot* unMot, unsigned int i){
 }
 
 void M_supprimerIemeLettre(Mot* unMot, unsigned int i){
+    assert(i<=M_longueurMot(*unMot));
     unsigned int j;
-    for(j=i-1;j<M_longueurMot(*unMot)-1;j++){
+    for(j=i;j<M_longueurMot(*unMot);j++){
         M_fixerIemeCaractere(unMot,j,M_iemeCaractere(*unMot,j+1));
     }
     M_fixerLongueur(unMot,M_longueurMot(*unMot)-1);
 }
 
 void M_inverserDeuxLettresConsecutives(Mot* unMot, unsigned int i){
+    assert(i<M_longueurMot(*unMot));
     char* temp = M_iemeCaractere(*unMot,i);
     M_fixerIemeCaractere(unMot,i,M_iemeCaractere(*unMot,i+1));
     M_fixerIemeCaractere(unMot,i+1,temp);
 }
 
 void M_insererLettre(Mot* unMot, unsigned int i, char* c){
+    assert(i<=M_longueurMot(*unMot)+1);
     M_decalerVersLaDroite(unMot,i);
     M_fixerIemeCaractere(unMot,i,c);
 }
 
 Mot M_decomposerMot(Mot* unMot, unsigned int i){ //on modifie le mot et récupère le mot de sortie
-    char* chaine=(*unMot).chaine;
-    char texteGauche[i-1];
-    char texteDroit[(*unMot).longueur-i];
+    assert(i<=M_longueurMot(*unMot));
+    char* chaine=(*unMot).chaine;               //https://www.delftstack.com/fr/howto/c/get-c-substring/
+    char texteGauche[i];
+    char texteDroit[(*unMot).longueur-i+2];
     memcpy(texteGauche,&chaine[0],i-1);
-    texteGauche[i-1] = '\0';
-    memcpy(texteDroit,&chaine[i],(*unMot).longueur-i);
-    texteDroit[(*unMot).longueur-i] = '\0';
+    texteGauche[i] = '\0';
+    memcpy(texteDroit,&chaine[i],(*unMot).longueur-i+1);
+    texteDroit[(*unMot).longueur-i+2] = '\0';
     
     Mot motGauche = M_creerUnMot(texteGauche);
-    unMot->longueur = (*unMot).longueur-i;
+    unMot->longueur = (*unMot).longueur-i+1;
     unMot->chaine = texteDroit;
     return motGauche;
 } 
