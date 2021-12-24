@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage[hmargin=2cm,vmargin=0cm]{geometry}
+\begin{document}
+    \noindent
+    \\
+    \textbf{Nom}: CorrecteurOrthographique \\
+    \textbf{Utilise}: Mot, Dictionnaire, Ensemble$<$Mots$>$ \\
+    \textbf{Opérations}: \begin{itemize}[label=$\ $, leftmargin=2cm, itemsep=0cm]
+        \item correcteur : Dictionnaire $\times$ Mot $\rightarrow$ CorrecteurOrthographique
+        \item obtenirMotACorriger : CorrecteurOrthographique $\rightarrow$ Mot
+        \item obtenirDictionnaire : CorrecteurOrthographique $\rightarrow$ Dictionnaire
+        \item obtenirCorrections : CorrecteurOrthographique $\rightarrow$ Ensemble$<$Mots$>$
+        \item fixerDico : CorrecteurOrthographique $\times$ Dictionnaire $\rightarrow$ CorrecteurOrthographique
+        \item fixerMotACorriger : CorrecteurOrthographique $\times$ Mot $\rightarrow$ CorrecteurOrthographique
+        \item ajouterNouvellesCorrections : CorrecteurOrthographique $\times$ Ensemble$<$Mot$>$ $\rightarrow$ CorrecteurOrthographique
+        \item trouverCorrectionsPossibles : CorrecteurOrthographique $\rightarrow$ CorrecteurOrthographique
+        \item remplacerIemeLettreEnBoucle : Mot $\times$ Naturel $\rightarrow$ Ensemble$<$Mot$>$
+        \item strategieRemplacerLettres : CorrecteurOrthographique $\rightarrow$ CorrecteurOrthographique
+        \item strategieSupprimerLettres : CorrecteurOrthographique $\rightarrow$ CorrecteurOrthographique
+        \item strategieInverserDeuxLettresConsecutives : CorrecteurOrthographique $\rightarrow$ CorrecteurOrthographique
+        \item insererIemeLettreEnBoucle : Mot $\times$ Naturel $\rightarrow$ Ensemble$<$Mot$>$
+        \item strategieInsererLettres : CorrecteurOrthographique $\rightarrow$ CorrecteurOrthographique
+        \item strategieDecomposerMot : CorrecteurOrthographique $\rightarrow$ CorrecteurOrthographique
+    \end{itemize}
+    \textbf{Sémantique}: \begin{itemize}[label=$\- $, leftmargin=2cm, itemsep=0cm]
+        \item obtenirMotACorriger : Permet d'accèder au mot à corriger 
+        \item obtenirDictionnaire : Permet d'accèder au dictionnaire 
+        \item obtenirCorrections : Permet d'accèder aux corrections du mot
+        \item fixerDico : Donne un dictionnaire à utiliser au correcteur.
+        \item fixerMotACorriger : Donne un mot à corriger au correcteur.
+        \item ajouterNouvellesCorrections : Ajoute de nouvelles corrections du mot à corriger au correcteur.
+        \item trouverCorrectionsPossibles : Renvoie l'ensemble des corrections possibles du mot à corriger.
+        \item remplacerIemeLettreEnBoucle : Remplace une lettre du mot par toutes les autres de l'alphabet, une par une
+        \item strategieRemplacerLettres : Remplace toutes les lettres du mot par tous les caractères de l'alphabet tour à tour et ajoute les corrections valides au correcteur
+        \item strategieSupprimerLettres : Supprime les lettres du mot tour à tour et ajoute les corrections valides au correcteur
+        \item strategieInverserDeuxLettresConsecutives : Inverse les lettres du mot deux à deux, les unes après les autres et ajoute les corrections valides au correcteur
+        \item remplacerIemeLettreEnBoucle : Insère toutes les lettres de l'alphabet une par une à un endroit du mot
+        \item strategieInsererLettres : Insère un par un tous les caractères alphabétiques à tous les endroits du mot et ajoute les corrections valides au correcteur
+        \item strategieDecomposerMot : Décompose le mot en deux parties de toutes les façons possibles et ajoute les corrections valides au correcteur
+    \end{itemize}
+        
+    \textbf{Préconditions}: \begin{itemize}[label=$\- $, leftmargin=2cm, itemsep=0cm]
+        \item correcteur(unDico, unMotFaux) : non(estUnMotDuDictionnaire(unDico, unMotFaux)
+        \item fixerMotACorriger(unCorrecteur, unMotFaux) :  non(estUnMotDuDictionnaire(obtenirDictionnaire(unCorrecteur), unMotFaux))
+    \end{itemize}
+        
+\end{document}

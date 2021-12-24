@@ -1,0 +1,133 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{times}
+\usepackage{fancyhdr,graphicx,amsmath,amssymb}
+\usepackage[ruled,vlined, french]{algorithm2e}
+    \SetKwInput{Declaration}{Declaration}
+    \SetKw{KwA}{a}
+    \SetKw{Retour}{retourner}
+    \SetKwBlock{Deb}{debut}{fin}
+    \SetKwIF{Si}{SinonSi}{Sinon}{si}{alors}{sinon si}{sinon}{finsi}
+    \SetKwFor{Tq}{tant que}{faire}{finTantQue}
+    \SetKwFor{Pour}{pour}{faire}{finPour}
+    \SetKwRepeat{Repeter}{repeter}{jusqu’a}
+    \SetKw{Pre}{Precondition(s)}
+\usepackage[hmargin=2cm,vmargin=0cm]{geometry}
+
+\begin{document}
+    \pagestyle{empty}
+    \noindent
+
+    \section*{Correcteur Orthographique}
+    
+    \subsection*{Conception préliminaire}
+    \textbf{Type} CorrecteurOrthographique = Structure
+	\begin{itemize}[label=$\ $, leftmargin=2cm]
+		 \item motACorriger : ChaineDeCaractere
+		 \item leDictionnaire : Naturel
+		 \item lesCorrections : EnsembleDeMot
+	\end{itemize}
+    finStructure
+    \subsubsection*{Signatures}
+
+	\begin{itemize}[label=$\ $, leftmargin=1cm]
+		 
+		 \item \textbf{fonction} correcteur(unDico : Dictionnaire, unMotFaux : unMot): CorrecteurOrthographique
+		 \begin{itemize}[label=$| $]
+            \item \textbf{précondition:} non(estUnMotDuDictionnaire(unDico, unMotFaux))
+         \end{itemize}
+		 \item \textbf{fonction} obtenirMotACorriger(unCorrecteur : CorrecteurOrthographique): Mot
+		 \item \textbf{fonction} obtenirDictionnaire(unCorrecteur : CorrecteurOrthographique): Dictionnaire
+		 \item \textbf{procedure} fixerDico(\textbf{E/S} unCorrecteur : CorrecteurOrthographique,\textbf{E})
+		 \item \textbf{procedure} fixerMotACorriger(\textbf{E/S} unCorrecteur: CorrecteurOrthographique,\textbf{E} unMotFaux : Mot)
+		 \begin{itemize}[label=$| $]
+            \item \textbf{précondition:} non(estUnMotDuDictionnaire(obtenirDictionnaire(unCorrecteur), unMotFaux))
+         \end{itemize}
+		 \item \textbf{procedure} fixerDico(\textbf{E/S} unCorrecteur : CorrecteurOrthographique, \textbf{E} unDico : Dictionnaire)
+		 \item \textbf{procedure} ajouterNouvellesCorrections(\textbf{E/S} unCorrecteur : CorrecteurOrthographique, \textbf{E} desCorrections : Ensemble$<$Mot$>$)
+		 \item \textbf{procedure} trouverCorrectionsPossibles(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
+		 \item \textbf{fonction} remplacerIemeLettreEnBoucle(unMot : Mot, indice : Naturel) : Ensemble$<$Mot$>$
+		 \item \textbf{procedure} strategieRemplacerLettres(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
+		 \item \textbf{procedure} strategieSupprimerLettres(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
+		 \item \textbf{procedure} strategieInverserDeuxLettresConsecutives(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
+		 \item \textbf{fonction} insererIemeLettreEnBoucle(unMot : Mot, indice : Naturel) : Ensemble$<$Mot$>$
+		 \item \textbf{procedure} strategieInsererLettres(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
+		 \item \textbf{procedure} strategieDecomposerMot(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
+		 
+		 
+		 
+         
+         
+        
+	\end{itemize} 
+    
+    \subsection*{Conception détaillée}
+
+    \begin{procedure}
+    \SetAlgoLined
+    \caption{remplacerIemeLettre(\textbf{E/S} mot : Mot,\textbf{E} c : Caractere, \textbf{E} position : naturel)}
+    \Declaration{}
+    \Deb{
+        supprimerIemeLettre(mot,position)\;
+        insererLettre(mot,position,caractere)\;
+    }
+    \end{procedure}
+    
+    \begin{procedure}
+    \SetAlgoLined
+    \caption{supprimerIemeLettre(\textbf{E/S} unMot, \textbf{E} position : Naturel)}
+    \Pre{longueur(mot)$\ge$1 et i$\le$longueur}\\
+    \Declaration{}
+    \Deb{
+       ChaineDeCaractere.supprimerIemeLettre(unMot.chaine,position)\;
+       unMot.longueur $\gets$ unMot.longueur-1 \;
+    }
+    \end{procedure}
+    
+    \begin{procedure}
+    \SetAlgoLined
+    \caption{inverserDeuxLettresConsecutives(\textbf{E/S} unMot : Mot, \textbf{E} i : NaturelNonNul)}
+    \Pre{longueur(mot)$\ge$1 et i$\le$longueur}\\
+    \Declaration{c1,c2 : Caractere}
+    \Deb{
+    	c1 $\gets$ Mot.accederAuIemeCaractere(unMot,i)\;
+    	c2 $\gets$ Mot.accederAuIemeCaractere(unMot,i+1)\;
+    	remplacerIemeLettre(unMot, c2, i)\;
+    	remplacerIemeLettre(unMot, c1, i+1)\;
+    }
+    \end{procedure}
+    
+     \begin{procedure}
+    \SetAlgoLined
+    \caption{insererLettre(\textbf{E/S} unMot : Mot, \textbf{E} position : Naturel, c : Caractere)}
+    \Pre{i$\le$ longueur(mot)}\\
+    \Declaration{}
+    \Deb{
+       ChaineDeCaratere.insererLettre(unMot.chaine,position,c)\;
+       unMot.longueur $\gets$ unMot.longueur + 1\;
+    }
+    \end{procedure}
+    
+    \begin{function}
+    \SetAlgoLined
+    \caption{decomposerMot(unMot : Mot, position : NaturelNonNul) : Mot, Mot}
+    \Pre{i$\le$ longueur(mot)}\\
+    \Declaration{mot1, mot2 : Mot, c : Caractere, chaine1, chaine2 : ChaineDeCaractere}
+    \Deb{
+    	mot1 $\gets$ creerUnMot("")\;
+    	mot2 $\gets$ creerUnMot("")\;
+       \Pour{i $\gets$ 1 à position-1}{
+        	c $\gets$ Mot.accederAuIemeCaractere(unMot,i)\;
+        	insererLettre(mot1, i, c);
+        }
+        \Pour{i $\gets$ position à unMot.longueur}{
+        	c $\gets$ Mot.accederAuIemeCaractere(unMot,i)\;
+        	insererLettre(mot2, i, c);
+        }
+      	\Retour{mot1, mot2}
+    }
+    \end{function}
+ 
+\end{document}
