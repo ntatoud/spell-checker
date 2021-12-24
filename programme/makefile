@@ -3,28 +3,19 @@ LIBDIR=lib
 BINDIR=bin
 INCLUDEDIR=include
 TESTDIR=tests
+TESTS = $(TESTDIR)/testEDM $(TESTDIR)/testLCDM
 CC = gcc
 AR = ar
 CFLAGS=-Wall -pedantic -g -std=c99 -I$(INCLUDEDIR)
-LDFLAGS=-lMot -lCorrecteurOrthographique -lFichierTexte -lDictionnaire -lListeChaineeDeMot -lArbreDeLettres -lm -lcurses
+LDFLAGS=-lMot -lCorrecteurOrthographique -lFichierTexte -lDictionnaire -lListeChaineeDeMot -lEnsembleDeMot -lm -lcurses
 EXEC=correcteur
-LIBRARY=$(LIBDIR)/libMot.a  $(LIBDIR)/libCorrecteurOrthographique.a $(LIBDIR)/libFichierTexte.a $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libListeChaineeDeMot.a $(LIBDIR)/libArbreDeLettres.a
+LIBRARY=$(LIBDIR)/libMot.a  $(LIBDIR)/libCorrecteurOrthographique.a $(LIBDIR)/libFichierTexte.a $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libListeChaineeDeMot.a $(LIBDIR)/libEnsembleDeMot.a $(LIBDIR)/libArbreDeLettres.a
 CORRECTEUR=$(SRCDIR)/chargerDico.o $(SRCDIR)/corrigerDico.o $(SRCDIR)/main.o
 
 all :  $(BINDIR)/$(EXEC)
 
-doc : .PHONY
-	doxygen Doxyfile
-	
-proper : clean all
-
-tests : $(TESTDIR)/testLCDM
-
 $(BINDIR)/$(EXEC) : $(SRCDIR)/main.o $(LIBRARY) $(CORRECTEUR)
 	$(CC) -o $@ $^ $(LDFLAGS) -L $(LIBDIR)
-
-$(TESTDIR)/testLCDM : $(SRCDIR)/testLCDM.o $(LIBDIR)/libMot.a $(LIBDIR)/libListeChaineeDeMot.a
-	$(CC) -o $@ $^ -L $(LIBDIR) -lMot -lListeChaineeDeMot -lcunit
 
 $(SRCDIR)/%.o : $(SRCDIR)/%.c
 	$(CC) -o $@ -c $< $(CFLAGS)
@@ -32,9 +23,12 @@ $(SRCDIR)/%.o : $(SRCDIR)/%.c
 $(LIBDIR)/libMot.a : $(SRCDIR)/Mot.o
 	$(AR) -r $@ $^
 
-$(LIBDIR)/libListeChaineeDeMot.a : $(SRCDIR)/ListeChaineeDeMot.o $(SRCDIR)/Mot.o
+$(LIBDIR)/libListeChaineeDeMot.a : $(SRCDIR)/ListeChaineeDeMot.o
 	$(AR) -r $@ $^
 
+$(LIBDIR)/libEnsembleDeMot.a : $(SRCDIR)/EnsembleDeMot.o
+	$(AR) -r $@ $^
+	
 $(LIBDIR)/libArbreDeLettres.a : $(SRCDIR)/ArbreDeLettres.o
 	$(AR) -r $@ $^
 
@@ -47,6 +41,18 @@ $(LIBDIR)/libFichierTexte.a : $(SRCDIR)/FichierTexte.o
 $(LIBDIR)/libDictionnaire.a : $(SRCDIR)/Dictionnaire.o
 	$(AR) -r $@ $^
 	
+tests : $(TESTS)
+$(TESTDIR)/testEDM : $(SRCDIR)/testEDM.o $(LIBDIR)/libEnsembleDeMot.a $(LIBDIR)/libListeChaineeDeMot.a $(LIBDIR)/libMot.a
+	$(CC)  -o $@ $< -lEnsembleDeMot -lListeChaineeDeMot -lMot -lcunit -L $(LIBDIR)
+
+$(TESTDIR)/testLCDM : $(SRCDIR)/testLCDM.o $(LIBDIR)/libMot.a $(LIBDIR)/libListeChaineeDeMot.a
+	$(CC) -o $@  $< -lListeChaineeDeMot -lMot -lcunit -L $(LIBDIR)
+
+doc : .PHONY
+	doxygen Doxyfile
+	
+proper : clean all
+
 clean clear :
 	rm -rf $(BINDIR)/correcteur
 	

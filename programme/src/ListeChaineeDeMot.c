@@ -15,7 +15,7 @@ int LCDM_estVide(ListeChaineeDeMot l){
 }
 
 void LCDM_ajouter(ListeChaineeDeMot *l, Mot unMot){
-    ListeChaineeDeMot pNoeud = (ListeChaineeDeMot)malloc(sizeof(Noeud));
+   ListeChaineeDeMot pNoeud = malloc(sizeof(Noeud));
     if (pNoeud != NULL){
         errno = 0;
         pNoeud->mot = unMot;
@@ -34,7 +34,7 @@ Mot LCDM_obtenirMot(ListeChaineeDeMot l){
 }
 
 void LCDM_supprimerMot(ListeChaineeDeMot *l, Mot unMot){
-    assert(!LCDM_estVide(l));
+    assert(!LCDM_estVide(*l));
     ListeChaineeDeMot temp = LCDM_listeChaineeDeMot();
     if (!LCDM_estVide(*l)){
         if (M_sontIdentiques(LCDM_obtenirMot(*l), unMot)){
@@ -43,9 +43,10 @@ void LCDM_supprimerMot(ListeChaineeDeMot *l, Mot unMot){
             temp = LCDM_obtenirListeSuivante(*l);
             LCDM_supprimerMot(&temp, unMot);
             LCDM_fixerListeSuivante(l, temp);
+
         }
     }
-    free(temp);
+    //free(temp);
 }
 
 ListeChaineeDeMot LCDM_obtenirListeSuivante(ListeChaineeDeMot l){
@@ -72,7 +73,7 @@ void LCDM_supprimerTete(ListeChaineeDeMot *l){
     errno = 0;
     temp = *l;
     *l = LCDM_obtenirListeSuivante(*l);
-    free(temp);
+    free(temp); 
 }
 
 void LCDM_supprimer(ListeChaineeDeMot *l){
@@ -81,6 +82,7 @@ void LCDM_supprimer(ListeChaineeDeMot *l){
         LCDM_supprimerTete(l);
         LCDM_supprimer(l);
     }
+    free(*l); /**/
 }
 
 ListeChaineeDeMot LCDM_copier(ListeChaineeDeMot l){
@@ -88,6 +90,7 @@ ListeChaineeDeMot LCDM_copier(ListeChaineeDeMot l){
     errno = 0;
     if (LCDM_estVide(l)){
         return LCDM_listeChaineeDeMot();
+        free(temp);
     }else{
         temp = LCDM_copier(LCDM_obtenirListeSuivante(l));
         LCDM_ajouter(&temp, LCDM_obtenirMot(l));
