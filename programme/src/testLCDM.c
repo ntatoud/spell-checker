@@ -53,6 +53,24 @@ void test_mot_ajoute_en_tete(void){
     LCDM_supprimer(&l);
 }
 
+void test_supprimer_mot(void){
+    ListeChaineeDeMot l1 = LCDM_listeChaineeDeMot();
+    ListeChaineeDeMot l2 = LCDM_listeChaineeDeMot();
+    char *chaine1="chaine1";
+    char *chaine2="chaine2";
+    char *chaine3="chaine3";
+    Mot unMot = M_creerUnMot(chaine1);
+    Mot unAutreMot = M_creerUnMot(chaine2);
+    Mot toujoursPlusDeMot = M_creerUnMot(chaine3);
+    LCDM_ajouter(&l1, unMot);
+    LCDM_ajouter(&l1, unAutreMot);
+    LCDM_ajouter(&l1, toujoursPlusDeMot);
+    LCDM_ajouter(&l2, unMot);
+    LCDM_ajouter(&l2, unAutreMot);
+    LCDM_supprimerMot(&l1,toujoursPlusDeMot);
+    CU_ASSERT_TRUE(LCDM_egale(l1, l2));
+}
+
 void test_obtenir_liste_suivante(void){
     ListeChaineeDeMot lSuivante;
     ListeChaineeDeMot l = LCDM_listeChaineeDeMot();
@@ -118,7 +136,14 @@ int main(int argc, char **argv){
     }
 
     /* Ajout des tests � la suite de tests boite noire */
-    if ((NULL == CU_add_test(pSuite, "la creation d'une liste qui doit etre vide", test_liste_vide)) || (NULL == CU_add_test(pSuite, "une liste contenant un element n'est pas vide", test_liste_non_vide)) || (NULL == CU_add_test(pSuite, "un element ajoute est en tete de liste", test_mot_ajoute_en_tete)) || (NULL == CU_add_test(pSuite, "obtenir liste suivante", test_obtenir_liste_suivante)) || (NULL == CU_add_test(pSuite, "fixer liste suivante", test_fixer_liste_suivante)) || (NULL == CU_add_test(pSuite, "une liste et sa copie sont egales", test_copie_egale)) || (NULL == CU_add_test(pSuite, "deux listes differentes ne sont pas egales", test_differente))){
+    if ((NULL == CU_add_test(pSuite, "la creation d'une liste qui doit etre vide", test_liste_vide)) 
+    || (NULL == CU_add_test(pSuite, "une liste contenant un element n'est pas vide", test_liste_non_vide)) 
+    || (NULL == CU_add_test(pSuite, "un element ajoute est en tete de liste", test_mot_ajoute_en_tete)) 
+    || (NULL == CU_add_test(pSuite, "supprimer un mot", test_supprimer_mot))
+    || (NULL == CU_add_test(pSuite, "obtenir liste suivante", test_obtenir_liste_suivante)) 
+    || (NULL == CU_add_test(pSuite, "fixer liste suivante", test_fixer_liste_suivante)) 
+    || (NULL == CU_add_test(pSuite, "une liste et sa copie sont egales", test_copie_egale)) 
+    || (NULL == CU_add_test(pSuite, "deux listes differentes ne sont pas egales", test_differente))){
         CU_cleanup_registry();
         return CU_get_error();
     }
