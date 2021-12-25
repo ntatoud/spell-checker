@@ -3,6 +3,7 @@ LIBDIR=lib
 BINDIR=bin
 INCLUDEDIR=include
 TESTDIR=tests
+DOCDIR=doc
 TESTS = $(TESTDIR)/testEDM $(TESTDIR)/testLCDM
 CC = gcc
 AR = ar
@@ -63,6 +64,8 @@ clean clear :
 	
 	rm -rf $(TESTDIR)/*
 	touch $(TESTDIR)/.gitkeep
+
+	rm -rf $(DOCDIR)/*
 
 cleanO :
 	rm -rf $(SRCDIR)/*.o
