@@ -146,4 +146,13 @@ Mot M_decomposerMot(Mot* unMot, unsigned int i); //on modifie le mot et récupè
 
 void M_reduireLaCasse(char** chaine);
 
+
+Mot CO_remplacerIemeLettre(Mot, unsigned int, char);
+EnsembleDeMot CO_supprimerIemeLettre(Mot, unsigned int );
+Mot CO_inverserDeuxLettresConsecutives(Mot, unsigned int );
+EnsembleDeMot CO_insererLettre(Mot, unsigned int, char);
+Mot CO_decomposerMot(Mot*, unsigned int); 
+Mot CO_reduireLaCasse(Mot);
+
+
 #endif

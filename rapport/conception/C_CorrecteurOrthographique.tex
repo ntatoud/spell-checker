@@ -19,36 +19,47 @@
 \begin{document}
     \pagestyle{empty}
     \noindent
-    Type Mot = Structure \\
-    \textbf{chaine}: ChaineDeCaractere \\
-    \textbf{longueur}: Naturel\\
-    Fin Structure
 
     \section*{Correcteur Orthographique}
+    
     \subsection*{Conception préliminaire}
-   
+    \textbf{Type} CorrecteurOrthographique = Structure
+	\begin{itemize}[label=$\ $, leftmargin=2cm]
+		 \item motACorriger : ChaineDeCaractere
+		 \item leDictionnaire : Naturel
+		 \item lesCorrections : EnsembleDeMot
+	\end{itemize}
+    finStructure
     \subsubsection*{Signatures}
 
 	\begin{itemize}[label=$\ $, leftmargin=1cm]
-		 \item \textbf{procedure} remplacerIemeLettre(\textbf{E/S} mot : Mot, \textbf{E} c : Caractere, \textbf{E} i : Naturel)
-		 \item \textbf{procedure} supprimerIemeLettre(\textbf{E/S} unMot : Mot, \textbf{E} position : Naturel)
-		 \begin{itemize}[label=$| $]
-            \item \textbf{précondition:} longueur(mot)$\ge$1 et i$\le$longueur
-         \end{itemize}
-		 \item \textbf{procedure} inverserDeuxLettresConsecutives(\textbf{E/S} unMot : Mot,  \textbf{E} i : NaturelNonNul)
-		 \begin{itemize}[label=$| $]
-            \item \textbf{précondition:} longueur(mot)$>$1 et i$\le$longueur
-         \end{itemize}
 		 
-		 \item \textbf{procedure} insererLettre(\textbf{E/S} unMot : Mot, \textbf{E} i : Naturel, \textbf{E} c : Caractere)
+		 \item \textbf{fonction} correcteur(unDico : Dictionnaire, unMotFaux : unMot): CorrecteurOrthographique
 		 \begin{itemize}[label=$| $]
-            \item \textbf{précondition:} i$\le$ longueur(mot)
+            \item \textbf{précondition:} non(estUnMotDuDictionnaire(unDico, unMotFaux))
          \end{itemize}
-         \item \textbf{fonction} decomposerMot(unMot : Mot, i : NaturelNonNul) : Mot, Mot
+		 \item \textbf{fonction} obtenirMotACorriger(unCorrecteur : CorrecteurOrthographique): Mot
+		 \item \textbf{fonction} obtenirDictionnaire(unCorrecteur : CorrecteurOrthographique): Dictionnaire
+		 \item \textbf{procedure} fixerDico(\textbf{E/S} unCorrecteur : CorrecteurOrthographique,\textbf{E})
+		 \item \textbf{procedure} fixerMotACorriger(\textbf{E/S} unCorrecteur: CorrecteurOrthographique,\textbf{E} unMotFaux : Mot)
 		 \begin{itemize}[label=$| $]
-            \item \textbf{précondition:} i$\le$ longueur(mot)
+            \item \textbf{précondition:} non(estUnMotDuDictionnaire(obtenirDictionnaire(unCorrecteur), unMotFaux))
          \end{itemize}
-         \item \textbf{procedure} minuscule(\textbf{E/S} mot : Mot)
+		 \item \textbf{procedure} fixerDico(\textbf{E/S} unCorrecteur : CorrecteurOrthographique, \textbf{E} unDico : Dictionnaire)
+		 \item \textbf{procedure} ajouterNouvellesCorrections(\textbf{E/S} unCorrecteur : CorrecteurOrthographique, \textbf{E} desCorrections : Ensemble$<$Mot$>$)
+		 \item \textbf{procedure} trouverCorrectionsPossibles(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
+		 \item \textbf{fonction} remplacerIemeLettreEnBoucle(unMot : Mot, indice : Naturel) : Ensemble$<$Mot$>$
+		 \item \textbf{procedure} strategieRemplacerLettres(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
+		 \item \textbf{procedure} strategieSupprimerLettres(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
+		 \item \textbf{procedure} strategieInverserDeuxLettresConsecutives(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
+		 \item \textbf{fonction} insererIemeLettreEnBoucle(unMot : Mot, indice : Naturel) : Ensemble$<$Mot$>$
+		 \item \textbf{procedure} strategieInsererLettres(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
+		 \item \textbf{procedure} strategieDecomposerMot(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
+		 
+		 
+		 
+         
+         
         
 	\end{itemize} 
     
