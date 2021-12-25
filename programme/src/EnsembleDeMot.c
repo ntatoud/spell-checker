@@ -11,12 +11,11 @@
 void EDM_ajouterElements(EnsembleDeMot motsAAjouter, EnsembleDeMot *edmACompleter){
   errno = 0;
   ListeChaineeDeMot l = LCDM_listeChaineeDeMot();
-  l = LCDM_copier(motsAAjouter.lesMots);
+  l = motsAAjouter.lesMots;
   while(!LCDM_estVide(l)){
     EDM_ajouter(edmACompleter, LCDM_obtenirMot(l));
     l = LCDM_obtenirListeSuivante(l);
   }
-  free(l);
 }
 
 /* Partie publique */
@@ -51,19 +50,16 @@ int EDM_egale(EnsembleDeMot edm_1,EnsembleDeMot edm_2){
   return sontEgales;
 }
 
-void EDM_ajouter(EnsembleDeMot* unEDM , Mot unMot){
-  ListeChaineeDeMot l = LCDM_listeChaineeDeMot();
-  l = LCDM_copier(unEDM->lesMots);
+void EDM_ajouter(EnsembleDeMot *unEDM , Mot unMot){
   if(!EDM_estPresent(*unEDM, unMot)){
-    LCDM_ajouter(&l, unMot);
-    unEDM->nbMots++;
-    unEDM->lesMots = LCDM_copier(l);
+    LCDM_ajouter(&unEDM->lesMots, unMot);
+    unEDM->nbMots = unEDM->nbMots + 1;
   }
-  else
+  else{
     errno = LCDM_ERREUR_MEMOIRE;
-  free(l);
+  }
 } 
-
+  
 void EDM_retirer(EnsembleDeMot* unEDM, Mot unMot){
   errno = 0;
   if(EDM_estPresent(*unEDM, unMot)){
@@ -72,24 +68,26 @@ void EDM_retirer(EnsembleDeMot* unEDM, Mot unMot){
   }
 }
 
-int EDM_estPresent(EnsembleDeMot unEDM, Mot unMot){
+int EDM_estPresentDansListe(ListeChaineeDeMot l, Mot unMot){
   errno=0;
-  ListeChaineeDeMot l = LCDM_listeChaineeDeMot();
-  l = LCDM_copier(unEDM.lesMots);
-  int trouve = 0;
-  while((!LCDM_estVide(l)) && (!trouve)){
+  if(LCDM_estVide(l)){
+    return 0;
+  }
+  else{
     if(M_sontIdentiques(LCDM_obtenirMot(l), unMot)){
-      trouve = 1;
+      return 1;
     }
     else{
-    l = LCDM_obtenirListeSuivante(l);
+      return EDM_estPresentDansListe(LCDM_obtenirListeSuivante(l), unMot);
     }
   }
-  free(l);
-  return trouve;
+}
+
+int EDM_estPresent(EnsembleDeMot unEDM, Mot unMot){
+  return EDM_estPresentDansListe(unEDM.lesMots, unMot);
 }
  
-int EDM_cardinalite(EnsembleDeMot unEDM){
+long int EDM_cardinalite(EnsembleDeMot unEDM){
   errno = 0;
   return unEDM.nbMots;
 }
@@ -104,16 +102,15 @@ EnsembleDeMot EDM_union(EnsembleDeMot edm_1,EnsembleDeMot edm_2){
 EnsembleDeMot EDM_intersection(EnsembleDeMot edm_1,EnsembleDeMot edm_2){
   errno = 0;
   EnsembleDeMot interEDM = ensembleDeMot();
-  Mot unMot;
-  ListeChaineeDeMot l = LCDM_copier(edm_1.lesMots);
+  //Mot unMot;
+  ListeChaineeDeMot l = edm_1.lesMots;
   while(!LCDM_estVide(l)){
-    unMot = LCDM_obtenirMot(l);
-    if(EDM_estPresent(edm_2, unMot)){
-      LCDM_ajouter(&interEDM.lesMots, unMot);
+    //unMot = LCDM_obtenirMot(l);
+    if(EDM_estPresent(edm_2, LCDM_obtenirMot(l))){
+      EDM_ajouter(&interEDM, LCDM_obtenirMot(l));
     }
     l = LCDM_obtenirListeSuivante(l);
   }
-  free(l);
   return interEDM;
 }  
 
@@ -131,7 +128,6 @@ EnsembleDeMot EDM_soustraction(EnsembleDeMot edm_1,EnsembleDeMot edm_2){
     EDM_retirer(&difEDM, unMot);
     l = LCDM_obtenirListeSuivante(l);
   }
-  free(l);
   return difEDM;
 }  
 
@@ -139,9 +135,9 @@ Mot EDM_obtenirMot(EnsembleDeMot unEDM){
   errno = 0;
   Mot leMot;
   ListeChaineeDeMot l = LCDM_listeChaineeDeMot();
-  l = LCDM_copier(unEDM.lesMots);
+  l = unEDM.lesMots;
   leMot = LCDM_obtenirMot(l);
+  //free(l);
   return leMot;
-  free(l);
 }
 

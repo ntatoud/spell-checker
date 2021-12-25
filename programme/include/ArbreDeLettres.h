@@ -6,7 +6,7 @@ typedef struct ADL *ArbreDeLettres;
 
 typedef struct ADL{
 	ArbreDeLettres fils, frere;
-	char lettre;
+	char* lettre;
 	int estFinDeMot;
 } ADL;
 
@@ -22,17 +22,17 @@ ArbreDeLettres ADL_creerADLVide();
 int ADL_estVide(ArbreDeLettres);
 
 
-ArbreDeLettres ADL_creerADL(ArbreDeLettres,ArbreDeLettres,char,int);
+ArbreDeLettres ADL_creerADL(ArbreDeLettres,ArbreDeLettres,char*,int);
 
 
 void ADL_fixerEstFinDeMot(ArbreDeLettres*,int);
-void ADL_fixerLettre(ArbreDeLettres*,char);
-void ADL_fixerElement(ArbreDeLettres*,char,int);
+void ADL_fixerLettre(ArbreDeLettres*,char*);
+void ADL_fixerElement(ArbreDeLettres*,char*,int);
 void ADL_fixerFrere(ArbreDeLettres*,ArbreDeLettres);
 void ADL_fixerFils(ArbreDeLettres*,ArbreDeLettres);
 ArbreDeLettres ADL_obtenirFils(ArbreDeLettres);
 ArbreDeLettres ADL_obtenirFrere(ArbreDeLettres);
-char ADL_obtenirLettre(ArbreDeLettres);
+char* ADL_obtenirLettre(ArbreDeLettres);
 int ADL_obtenirEstFinDeMot(ArbreDeLettres);
 
 #endif
