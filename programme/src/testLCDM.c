@@ -69,6 +69,8 @@ void test_supprimer_mot(void){
     LCDM_ajouter(&l2, unAutreMot);
     LCDM_supprimerMot(&l1,toujoursPlusDeMot);
     CU_ASSERT_TRUE(LCDM_egale(l1, l2));
+    LCDM_supprimer(&l1);
+    LCDM_supprimer(&l2);
 }
 
 void test_obtenir_liste_suivante(void){

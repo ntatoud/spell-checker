@@ -46,7 +46,6 @@ void LCDM_supprimerMot(ListeChaineeDeMot *l, Mot unMot){
 
         }
     }
-    //free(temp);
 }
 
 ListeChaineeDeMot LCDM_obtenirListeSuivante(ListeChaineeDeMot l){
