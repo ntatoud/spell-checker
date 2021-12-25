@@ -75,11 +75,7 @@ char* M_iemeCaractere(Mot unMot, unsigned int i){
 }
 
 int M_sontIdentiques(Mot mot1, Mot mot2){ 
-    int identique = 0;
-    if((mot1.longueur==mot2.longueur)&&(mot1.chaine==mot2.chaine)){
-        identique=1;
-    }
-    return identique;
+    return mot1.longueur==mot2.longueur && strcmp(mot1.chaine,mot2.chaine)==0;
 }
 
 void M_fixerIemeCaractere(Mot* unMot, unsigned int i, char* c){
