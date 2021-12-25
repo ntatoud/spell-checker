@@ -7,7 +7,7 @@
 #include "Dictionnaire.h"
 
 CorrecteurOrthographique CO_correcteur(Dictionnaire unDico, Mot unMotFaux){
-    assert(!estUnMotDuDictionnaire(unDico, unMotFaux));
+    assert(!D_estUnMotDuDictionnaire(unDico, unMotFaux));
     CorrecteurOrthographique unCorrecteur;
     unCorrecteur.leDictionnaire = unDico;
     unCorrecteur.motACorriger = unMotFaux;
@@ -29,7 +29,7 @@ void CO_fixerDico(CorrecteurOrthographique* unCorrecteur, Dictionnaire unDico){
 }
 
 void CO_fixerMotACorriger(CorrecteurOrthographique* unCorrecteur, Mot unMotFaux){
-    assert(!estUnMotDuDictionnaire(CO_obtenirDictionnaire(*unCorrecteur), unMotFaux));
+    assert(!D_estUnMotDuDictionnaire(CO_obtenirDictionnaire(*unCorrecteur), unMotFaux));
     unCorrecteur->motACorriger = unMotFaux;
 }
 
@@ -50,7 +50,7 @@ EnsembleDeMot CO_remplacerIemeLettreEnBoucle(Mot motACorriger, int i){
     Mot uneCorrection;
     desCorrections = ensembleDeMot();
     char* lettres;
-    lettres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZàéùûÜÛÂÄêËîïÏÎçôöÖÔ";
+    lettres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZàéèëÊùûÜÛÂÄêËîïÏÎçôöÖÔ";
     for(int j = 0; j < sizeof(lettres);j++ ){
         uneCorrection = M_copierMot(motACorriger);
         M_fixerIemeCaractere(&uneCorrection, i, &lettres[j]);
@@ -74,7 +74,7 @@ void CO_strategieRemplacerLettres(CorrecteurOrthographique* unCorrecteur){
 
         while(EDM_cardinalite(correctionsCourantes)!=0){
             uneCorrection = EDM_obtenirMot(correctionsCourantes);
-            if(!estUnMotDuDictionnaire(leDico, uneCorrection)){
+            if(!D_estUnMotDuDictionnaire(leDico, uneCorrection)){
                 EDM_retirer(&desCorrections, uneCorrection);
             }
             EDM_retirer(&correctionsCourantes, uneCorrection);
@@ -96,7 +96,7 @@ void CO_strategieSupprimerLettres(CorrecteurOrthographique* unCorrecteur){
     for(i = 1; i < longueur; i++){
         uneCorrection = M_copierMot(leMotACorriger);
         M_supprimerIemeLettre(&uneCorrection, i);
-        if(estUnMotDuDictionnaire(leDico, uneCorrection))
+        if(D_estUnMotDuDictionnaire(leDico, uneCorrection))
             EDM_ajouter(&desCorrections, uneCorrection);
     }
     CO_ajouterNouvellesCorrections(unCorrecteur, desCorrections);
@@ -115,7 +115,7 @@ void CO_strategieInverserDeuxLettresConsecutives(CorrecteurOrthographique* unCor
     for(i = 1; i < longueur; i++){
         uneCorrection = M_copierMot(leMotACorriger);
         M_inverserDeuxLettresConsecutives(&uneCorrection,i);
-        if(estUnMotDuDictionnaire(leDico, uneCorrection))
+        if(D_estUnMotDuDictionnaire(leDico, uneCorrection))
             EDM_ajouter(&desCorrections, uneCorrection);
     }
     CO_ajouterNouvellesCorrections(unCorrecteur, desCorrections);
@@ -127,7 +127,7 @@ EnsembleDeMot CO_insererIemeLettreEnBoucle(Mot motACorriger, int i){
     Mot uneCorrection;
     desCorrections = ensembleDeMot();
     char* lettres;
-    lettres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZàéùûÜÛÂÄêËîïÏÎçôöÖÔ";
+    lettres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZàéèëÊùûÜÛÂÄêËîïÏÎçôöÖÔ";
     for(int j = 0; j < strlen(lettres);j++ ){
         uneCorrection = M_copierMot(motACorriger);
         M_insererLettre(&uneCorrection, i, &lettres[j]);
@@ -150,7 +150,7 @@ void CO_strategieInsererLettres(CorrecteurOrthographique* unCorrecteur){
 
         while(EDM_cardinalite(correctionsCourantes)!=0){
             uneCorrection = EDM_obtenirMot(correctionsCourantes);
-            if(!estUnMotDuDictionnaire(leDico, uneCorrection)){
+            if(!D_estUnMotDuDictionnaire(leDico, uneCorrection)){
                 EDM_retirer(&desCorrections, uneCorrection);
             }
             EDM_retirer(&correctionsCourantes, uneCorrection);
@@ -174,7 +174,7 @@ void CO_strategieDecomposerMot(CorrecteurOrthographique* unCorrecteur){
     for(i = 1; i < longueur; i++){
         unMotModifiable = leMotACorriger;
         uneCorrection = M_decomposerMot(&unMotModifiable, i);
-        if(estUnMotDuDictionnaire(leDico, uneCorrection) && estUnMotDuDictionnaire(leDico, unMotModifiable))
+        if(D_estUnMotDuDictionnaire(leDico, uneCorrection) && D_estUnMotDuDictionnaire(leDico, unMotModifiable))
             EDM_ajouter(&desCorrections, uneCorrection);
     }
     CO_ajouterNouvellesCorrections(unCorrecteur, desCorrections);
