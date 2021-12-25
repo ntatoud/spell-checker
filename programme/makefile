@@ -24,6 +24,9 @@ tests : $(SRCDIR)/testLCDM.o $(SRCDIR)/Mot.o $(SRCDIR)/ListeChaineeDeMot.o
 $(BINDIR)/$(EXEC) : $(SRCDIR)/main.o $(LIBRARY) $(CORRECTEUR)
 	$(CC) -o $@ $^ $(LDFLAGS) -L $(LIBDIR)
 
+$(TESTDIR)/tests : $(SRCDIR)/tests.o $(LIBRARY)
+	$(CC) -o $@ $^ $(LDFLAGS) -L $(LIBDIR) -lcunit
+
 $(SRCDIR)/%.o : $(SRCDIR)/%.c
 	$(CC) -o $@ -c $< $(CFLAGS)
 
