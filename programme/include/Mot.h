@@ -82,14 +82,6 @@ char* M_iemeCaractere(Mot mot, unsigned int i);
 */
 
 int M_sontIdentiques(Mot mot1, Mot mot2);
-void M_fixerIemeCaractere(Mot*, unsigned int, char);
-void M_fixerLongueur(Mot*, unsigned int);
-Mot M_remplacerIemeLettre(Mot, unsigned int, char);
-Mot M_supprimerIemeLettre(Mot, unsigned int );
-Mot M_inverserDeuxLettresConsecutives(Mot, unsigned int);
-Mot M_insererIemeLettre(Mot, unsigned int, char);
-Mot M_decomposerMot(Mot*, unsigned int); 
-Mot M_reduireLaCasse(Mot);
 
 /*!
 *procédure qui permet de changer le caractère de la ieme place dans la chaine d'un mot
@@ -154,13 +146,13 @@ Mot M_decomposerMot(Mot* unMot, unsigned int i); //on modifie le mot et récupè
 
 void M_reduireLaCasse(char** chaine);
 
+/*!
+*procédure qui supprime un mot et libère l'espace mémoire
+*\param[in] unMot mot à supprimer
+*/
 
-Mot CO_remplacerIemeLettre(Mot, unsigned int, char);
-EnsembleDeMot CO_supprimerIemeLettre(Mot, unsigned int );
-Mot CO_inverserDeuxLettresConsecutives(Mot, unsigned int );
-EnsembleDeMot CO_insererLettre(Mot, unsigned int, char);
-Mot CO_decomposerMot(Mot*, unsigned int); 
-Mot CO_reduireLaCasse(Mot);
+void M_supprimerMot(Mot unMot);
+
 
 
 #endif

@@ -57,8 +57,9 @@ Mot M_copierMot(Mot unMot){
 Mot M_creerUnMot(char * c){
     assert(M_estUnMotValide(c));
     Mot unMot;
-    unMot.longueur=strlen(c);
-    unMot.chaine=c;
+    unMot.chaine = malloc(sizeof(c));
+    strcpy(unMot.chaine, c);
+    unMot.longueur=strlen(unMot.chaine);
     return unMot;
 }
 
@@ -152,4 +153,10 @@ void M_reduireLaCasse(char** chaine){
             (*chaine)[j]=element[0];
         }
     }
+}
+
+
+void M_supprimerMot(Mot unMot){
+    free(unMot.chaine);
+    unMot.longueur=0;
 }
