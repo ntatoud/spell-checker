@@ -95,4 +95,11 @@ char* ADL_obtenirLettre(ArbreDeLettres);
  */
 int ADL_obtenirEstFinDeMot(ArbreDeLettres);
 
+
+/*!
+ * Procédure qui permet de supprimer un arbre
+ *\param[in] ArbreDeLettres arbre à supprimer
+ */
+void ADL_supprimer(ArbreDeLettres arbre);
+
 #endif

@@ -4,7 +4,7 @@ BINDIR=bin
 INCLUDEDIR=include
 TESTDIR=tests
 DOCDIR=doc
-TESTS = $(TESTDIR)/testEDM $(TESTDIR)/testLCDM
+TESTS = $(TESTDIR)/testEDM $(TESTDIR)/testLCDM $(TESTDIR)/testArbreDeLettres
 CC = gcc
 AR = ar
 CFLAGS=-Wall -pedantic -g -std=c99 -I$(INCLUDEDIR)
@@ -48,6 +48,9 @@ $(TESTDIR)/testEDM : $(SRCDIR)/testEDM.o $(LIBDIR)/libEnsembleDeMot.a $(LIBDIR)/
 
 $(TESTDIR)/testLCDM : $(SRCDIR)/testLCDM.o $(LIBDIR)/libMot.a $(LIBDIR)/libListeChaineeDeMot.a
 	$(CC) -o $@  $< -lListeChaineeDeMot -lMot -lcunit -L $(LIBDIR)
+
+$(TESTDIR)/testArbreDeLettres : $(SRCDIR)/testArbreDeLettres.o $(LIBDIR)/libMot.a $(LIBDIR)/libArbreDeLettres.a
+	$(CC) -o $@  $< -lArbreDeLettres -lMot -lcunit -L $(LIBDIR)
 
 doc : .PHONY
 	doxygen Doxyfile
