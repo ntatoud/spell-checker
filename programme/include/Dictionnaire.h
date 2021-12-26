@@ -5,11 +5,12 @@
 #include "FichierTexte.h"
 #include "ArbreDeLettres.h"
 
-typedef FichierTexte Dictionnaire;
 
-ArbreDeLettres genererArbreAvecEnsembleDeMots(EnsembleDeMot);
-int estUnMotDuDictionnaire(ArbreDeLettres,Mot);
-ArbreDeLettres chargerDico(Dictionnaire);
-Dictionnaire sauvegarderArbreEnDictionnaire(ArbreDeLettres);
+typedef ArbreDeLettres Dictionnaire;
+
+Dictionnaire genererArbreAvecEnsembleDeMots(EnsembleDeMot);
+int estUnMotDuDictionnaire(Dictionnaire,Mot);
+Dictionnaire chargerDico(FILE*);
+FILE* sauvegarderArbreEnDictionnaire(Dictionnaire);
 
 #endif

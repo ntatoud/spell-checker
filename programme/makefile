@@ -8,15 +8,26 @@ TESTS = $(TESTDIR)/testEDM $(TESTDIR)/testLCDM $(TESTDIR)/testArbreDeLettres
 CC = gcc
 AR = ar
 CFLAGS=-Wall -pedantic -g -std=c99 -I$(INCLUDEDIR)
-LDFLAGS=-lMot -lCorrecteurOrthographique -lFichierTexte -lDictionnaire -lListeChaineeDeMot -lEnsembleDeMot -lm -lcurses
+LDFLAGS=-lMot -lCorrecteurOrthographique -lFichierTexte -lDictionnaire -lListeChaineeDeMot -lEnsembleDeMot -lArbreDeLettres -lm -lcurses
 EXEC=correcteur
 LIBRARY=$(LIBDIR)/libMot.a  $(LIBDIR)/libCorrecteurOrthographique.a $(LIBDIR)/libFichierTexte.a $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libListeChaineeDeMot.a $(LIBDIR)/libEnsembleDeMot.a $(LIBDIR)/libArbreDeLettres.a
 CORRECTEUR=$(SRCDIR)/chargerDico.o $(SRCDIR)/corrigerDico.o $(SRCDIR)/main.o
 
 all :  $(BINDIR)/$(EXEC)
 
+doc : .PHONY
+	doxygen Doxyfile
+	
+proper : clean all
+
+tests : $(SRCDIR)/testLCDM.o $(SRCDIR)/Mot.o $(SRCDIR)/ListeChaineeDeMot.o
+	$(CC) -o $(TESTDIR)/testLCDM $(SRCDIR)/testLCDM.o $(SRCDIR)/Mot.o $(SRCDIR)/ListeChaineeDeMot.o $(LDFLAGS) -lcunit -L $(LIBDIR)
+
 $(BINDIR)/$(EXEC) : $(SRCDIR)/main.o $(LIBRARY) $(CORRECTEUR)
 	$(CC) -o $@ $^ $(LDFLAGS) -L $(LIBDIR)
+
+$(TESTDIR)/tests : $(SRCDIR)/tests.o $(LIBRARY)
+	$(CC) -o $@ $^ $(LDFLAGS) -L $(LIBDIR) -lcunit
 
 $(SRCDIR)/%.o : $(SRCDIR)/%.c
 	$(CC) -o $@ -c $< $(CFLAGS)
