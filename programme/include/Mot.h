@@ -65,6 +65,14 @@ Mot M_creerUnMot(char* c);
 unsigned int M_longueurMot(Mot mot);
 
 /*!
+*fonction qui renvoie la chaine d'un mot
+*\param[in] unMot le mot en entrée
+*\return la chaine de caractère du mot
+*/
+
+char* M_obtenirChaine(Mot unMot);
+
+/*!
 *fonction qui permet récupérer le caractère à la ieme place dans un mot
 *\pre i doit être inférieur à la longueur du mot
 *\param[in] unMot mot d'entrée
@@ -151,7 +159,7 @@ void M_reduireLaCasse(char** chaine);
 *\param[in] unMot mot à supprimer
 */
 
-void M_supprimerMot(Mot unMot);
+void M_supprimerMot(Mot *unMot);
 
 
 
