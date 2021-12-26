@@ -7,7 +7,7 @@
 /* Partie privee */
 typedef struct EnsembleDeMot{
   ListeChaineeDeMot lesMots;
-  int nbMots;
+  long int nbMots;
 } EnsembleDeMot;
 
 
@@ -21,7 +21,7 @@ int EDM_egale(EnsembleDeMot,EnsembleDeMot);
 void EDM_ajouter(EnsembleDeMot*,Mot);  /* errno=EDM_ERREUR_MEMOIRE si pas assez de m�moire */
 void EDM_retirer(EnsembleDeMot*,Mot);
 int EDM_estPresent(EnsembleDeMot,Mot);
-int EDM_cardinalite(EnsembleDeMot);
+long int EDM_cardinalite(EnsembleDeMot);
 
 EnsembleDeMot EDM_union(EnsembleDeMot,EnsembleDeMot);  /* errno=EDM_ERREUR_MEMOIRE si pas assez de m�moire */
 EnsembleDeMot EDM_intersection(EnsembleDeMot,EnsembleDeMot);  /* errno=EDM_ERREUR_MEMOIRE si pas assez de m�moire */

@@ -3,6 +3,8 @@ LIBDIR=lib
 BINDIR=bin
 INCLUDEDIR=include
 TESTDIR=tests
+DOCDIR=doc
+TESTS = $(TESTDIR)/testEDM $(TESTDIR)/testLCDM $(TESTDIR)/testArbreDeLettres
 CC = gcc
 AR = ar
 CFLAGS=-Wall -pedantic -g -std=c99 -I$(INCLUDEDIR)
@@ -51,6 +53,21 @@ $(LIBDIR)/libFichierTexte.a : $(SRCDIR)/FichierTexte.o
 $(LIBDIR)/libDictionnaire.a : $(SRCDIR)/Dictionnaire.o
 	$(AR) -r $@ $^
 	
+tests : $(TESTS)
+$(TESTDIR)/testEDM : $(SRCDIR)/testEDM.o $(LIBDIR)/libEnsembleDeMot.a $(LIBDIR)/libListeChaineeDeMot.a $(LIBDIR)/libMot.a
+	$(CC)  -o $@ $< -lEnsembleDeMot -lListeChaineeDeMot -lMot -lcunit -L $(LIBDIR)
+
+$(TESTDIR)/testLCDM : $(SRCDIR)/testLCDM.o $(LIBDIR)/libMot.a $(LIBDIR)/libListeChaineeDeMot.a
+	$(CC) -o $@  $< -lListeChaineeDeMot -lMot -lcunit -L $(LIBDIR)
+
+$(TESTDIR)/testArbreDeLettres : $(SRCDIR)/testArbreDeLettres.o $(LIBDIR)/libMot.a $(LIBDIR)/libArbreDeLettres.a
+	$(CC) -o $@  $< -lArbreDeLettres -lMot -lcunit -L $(LIBDIR)
+
+doc : .PHONY
+	doxygen Doxyfile
+	
+proper : clean all
+
 clean clear :
 	rm -rf $(BINDIR)/correcteur
 	
@@ -61,6 +78,8 @@ clean clear :
 	
 	rm -rf $(TESTDIR)/*
 	touch $(TESTDIR)/.gitkeep
+
+	rm -rf $(DOCDIR)/*
 
 cleanO :
 	rm -rf $(SRCDIR)/*.o

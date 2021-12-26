@@ -90,6 +90,13 @@ char* M_iemeCaractere(Mot mot, unsigned int i);
 */
 
 int M_sontIdentiques(Mot mot1, Mot mot2);
+void M_fixerIemeCaractere(Mot* unMot, unsigned int i, char c);
+void M_fixerLongueur(Mot* unMot, unsigned int i);
+void M_supprimerIemeLettre(Mot* unMot, unsigned int i);
+void M_inverserDeuxLettresConsecutives(Mot* unMot, unsigned int i);
+void M_insererLettre(Mot* unMot, unsigned int i, char c);
+Mot M_decomposerMot(Mot* unMot, unsigned int i); //on modifie le mot et récupère le mot de sortie
+void M_reduireLaCasse(Mot* unMot);
 
 /*!
 *procédure qui permet de changer le caractère de la ieme place dans la chaine d'un mot
