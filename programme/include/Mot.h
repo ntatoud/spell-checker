@@ -65,6 +65,14 @@ Mot M_creerUnMot(char* c);
 unsigned int M_longueurMot(Mot mot);
 
 /*!
+*fonction qui renvoie la chaine d'un mot
+*\param[in] unMot le mot en entrée
+*\return la chaine de caractère du mot
+*/
+
+char* M_obtenirChaine(Mot unMot);
+
+/*!
 *fonction qui permet récupérer le caractère à la ieme place dans un mot
 *\pre i doit être inférieur à la longueur du mot
 *\param[in] unMot mot d'entrée
@@ -81,6 +89,7 @@ char* M_iemeCaractere(Mot mot, unsigned int i);
 *\return l'entier 1 ou 0 selon la réponse positive ou négative
 */
 
+int M_sontIdentiques(Mot mot1, Mot mot2);
 
 /*!
 *procédure qui permet de changer le caractère de la ieme place dans la chaine d'un mot
@@ -144,5 +153,14 @@ Mot M_decomposerMot(Mot* unMot, unsigned int i); //on modifie le mot et récupè
 */
 
 void M_reduireLaCasse(char** chaine);
+
+/*!
+*procédure qui supprime un mot et libère l'espace mémoire
+*\param[in] unMot mot à supprimer
+*/
+
+void M_supprimerMot(Mot *unMot);
+
+
 
 #endif

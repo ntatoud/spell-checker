@@ -48,8 +48,7 @@ int M_estUnMotValide(char* c){
 
 Mot M_copierMot(Mot unMot){
     Mot copie;
-    copie.chaine=unMot.chaine;
-    copie.longueur=unMot.longueur;
+    copie = M_creerUnMot(unMot.chaine);
     return copie;
 }
 
@@ -57,13 +56,18 @@ Mot M_copierMot(Mot unMot){
 Mot M_creerUnMot(char * c){
     assert(M_estUnMotValide(c));
     Mot unMot;
-    unMot.longueur=strlen(c);
-    unMot.chaine=c;
+    unMot.chaine = malloc(strlen(c)+1);
+    strcpy(unMot.chaine, c);
+    unMot.longueur=strlen(unMot.chaine);
     return unMot;
 }
 
 unsigned int M_longueurMot(Mot unMot){
     return unMot.longueur;
+}
+
+char* M_obtenirChaine(Mot unMot){
+    return unMot.chaine;
 }
 
 char* M_iemeCaractere(Mot unMot, unsigned int i){
@@ -152,4 +156,10 @@ void M_reduireLaCasse(char** chaine){
             (*chaine)[j]=element[0];
         }
     }
+}
+
+
+void M_supprimerMot(Mot *unMot){
+    free((*unMot).chaine);
+    (*unMot).longueur=0;
 }
