@@ -163,5 +163,4 @@ void M_reduireLaCasse(char** chaine);
 void M_supprimerMot(Mot *unMot);
 
 
-
 #endif
