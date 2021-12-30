@@ -24,6 +24,14 @@ typedef struct CorrecteurOrthographique{
     EnsembleDeMot lesCorrections; /** < l'ensemble des corrections possiblespour le mot à corriger> */
 } CorrecteurOrthographique;
 
+/**
+ * \fn CorrecteurOrthographique CO_supprimerCorrecteur(CorrecteurOrthographique*);
+ * \brief Fonction de suppression d'un correcteur
+ *
+ * \param unCorrecteur : un correcteur orthographique
+*/
+void CO_supprimerCorrecteur(CorrecteurOrthographique*);
+
 
 /**
  * \fn CorrecteurOrthographique CO_correcteur(Dictionnaire, Mot);
