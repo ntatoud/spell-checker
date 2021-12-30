@@ -1,20 +1,30 @@
 #ifndef _FICHIER_TEXTE__
 #define _FICHIER_TEXTE__
 #include <stdio.h>
-#include "Mot.h"
+typedef enum {LECTURE, ECRITURE} Mode;
 
-typedef enum {lecture=0, ecriture=1} F_Mode;
 
-typedef struct {
-	FILE* fb;
+/* Partie privée */
+typedef struct FichierTexte {
+	FILE* fichier;
 	char* nom;
-	unsigned int longueur;
+	Mode mode;
 } FichierTexte;
 
-FichierTexte F_InitFichier(char *nom, F_Mode mode, int *status);
-Mot F_LireMot(FichierTexte fichier, int *status);
-void F_EcrireMot(FichierTexte fichier,Mot unMot, int *status);
-FILE *F_OuvrirFichier(char *nom, F_Mode mode, int *status);
-void F_FermerFichier(FichierTexte fichier, int *status);
+void supprimerRetourChariot(char *);
+
+/* Partie publique */
+FichierTexte FT_fichierTexte(char *nomDuFichier);
+void FT_ouvrir(FichierTexte *fichier, Mode mode);
+void FT_fermer(FichierTexte *fichier);
+unsigned int FT_estOuvert(FichierTexte fichier);
+Mode FT_obtenirMode(FichierTexte fichier);
+unsigned int FT_estEnFinDeFichier(FichierTexte fichier);
+void FT_ecrireChaine(FichierTexte *fichier, char* chaine);
+char* FT_lireChaineSansLeRetourChariot(FichierTexte fichier);
+char* FT_lireChaine(FichierTexte fichier);
+
+void FT_ecrireCaractere(FichierTexte *fichier, char caractere);
+char FT_lireCaractere(FichierTexte fichier);
 
 #endif
