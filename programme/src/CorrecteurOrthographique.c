@@ -55,7 +55,7 @@ EnsembleDeMot CO_remplacerIemeLettreEnBoucle(Mot motACorriger, int i){
     Mot uneCorrection;
     desCorrections = ensembleDeMot();
     char* lettres;
-    lettres = "öabcdefghijklmnopqrstuvwxyzàéèëùûêîïçô";
+    lettres = "abcdefghijklmnopqrstuvwxyzàéèëùûêîïçôö-";
     for(int j = 0; j < strlen(lettres);j++ ){
         uneCorrection = M_copierMot(motACorriger);
         M_fixerIemeCaractere(&uneCorrection, i, lettres[j]);
@@ -141,7 +141,7 @@ EnsembleDeMot CO_insererIemeLettreEnBoucle(Mot motACorriger, int i){
     Mot uneCorrection;
     desCorrections = ensembleDeMot();
     char* lettres;
-    lettres = "abcdefghijklmnopqrstuvwxyzàéèëùûêîïçôö";
+    lettres = "abcdefghijklmnopqrstuvwxyzàéèëùûêîïçôö-";
     for(int j = 0; j < strlen(lettres);j++ ){
         uneCorrection = M_copierMot(motACorriger);
         M_insererLettre(&uneCorrection, i, lettres[j]);
