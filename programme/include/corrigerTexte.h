@@ -1,35 +1,24 @@
 #ifndef __CORRIGER_TEXTE__
 #define __CORRIGER_TEXTE__
-#include "Mot.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <string.h>
 #include "Dictionnaire.h"
-/*			TODO
-je ne savais pas comment mettre plusieurs élémnts en sortie, idem pour un ensemble
+#include "CorrecteurOrthographique.h"
+#include "Mot.h"
+#include "EnsembleDeMot.h"
 
-pour les opérations du bas de l'arbre que je n'ai pas écrites, est ce qu'on fait des fonctions ou des procédures ?
+void CT_corrigerTexte(char*, Dictionnaire);
 
+int CT_estUnSeparateur(char);
 
+char* CT_creerSousChaine(char*,unsigned int,unsigned int);
 
+CorrecteurOrthographique CT_trouverCorrections(Dictionnaire dico,Mot unMot);
 
+void CT_afficherCorrection(int indiceDebutMot,CorrecteurOrthographique correcteur);
 
-(ensemble{CO_Mot},CO_Mot) corrigerTexte(char c[]);  //pas sûr
+void CT_trouverEtAfficherCorrection(char* chaine, int indiceDebutMot,int position, Dictionnaire dico);
 
-ensemble(CO_Mot) reconnaitreLesMots(char c[]);
-
-char[] creerSousChaine(char c[]);
-
-CO_Mot reconnaitreUnMot(char c[]);
-
-
-
-bool estUnmotDuDictionnaire(CO_Dictionnaire dico,CO_Mot mot);
-
-(ensemble{CO_Mot}, CO_Mot) trouverCorrectionsValides(CO_Mot mot);
-
-ensemble{CO_Mot} verifierCorrections(CO_Dictionnaire dico,ensemble{CO_Mot} ensembleMots);
-
-ensemble{CO_Mot} trouverCorrections(CO_Mot mot);
-
-//void remplacerLesLettres(
-
-*/
 #endif
