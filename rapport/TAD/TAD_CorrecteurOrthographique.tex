@@ -15,7 +15,7 @@
         \item obtenirCorrections : CorrecteurOrthographique $\rightarrow$ Ensemble$<$Mots$>$
         \item fixerDico : CorrecteurOrthographique $\times$ Dictionnaire $\rightarrow$ CorrecteurOrthographique
         \item fixerMotACorriger : CorrecteurOrthographique $\times$ Mot $\rightarrow$ CorrecteurOrthographique
-        \item ajouterNouvellesCorrections : CorrecteurOrthographique $\times$ Ensemble$<$Mot$>$ $\rightarrow$ CorrecteurOrthographique
+        \item ajouterNouvellesCorrections : \\ CorrecteurOrthographique $\times$ Ensemble$<$Mot$>$ $\rightarrow$ CorrecteurOrthographique
         \item trouverCorrectionsPossibles : CorrecteurOrthographique $\rightarrow$ CorrecteurOrthographique
         \item remplacerIemeLettreEnBoucle : Mot $\times$ Naturel $\rightarrow$ Ensemble$<$Mot$>$
         \item strategieRemplacerLettres : CorrecteurOrthographique $\rightarrow$ CorrecteurOrthographique
@@ -44,7 +44,7 @@
         
     \textbf{Préconditions}: \begin{itemize}[label=$\- $, leftmargin=2cm, itemsep=0cm]
         \item correcteur(unDico, unMotFaux) : non(estUnMotDuDictionnaire(unDico, unMotFaux)
-        \item fixerMotACorriger(unCorrecteur, unMotFaux) :  non(estUnMotDuDictionnaire(obtenirDictionnaire(unCorrecteur), unMotFaux))
+        \item fixerMotACorriger(unCorrecteur, unMotFaux) : \\non(estUnMotDuDictionnaire(obtenirDictionnaire(unCorrecteur), unMotFaux))
     \end{itemize}
         
 \end{document}
