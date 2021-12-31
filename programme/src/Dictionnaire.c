@@ -6,11 +6,11 @@
 #include "ArbreDeLettres.h"
 #include "Mot.h"
 #include "FichierTexte.h"
-
 #define NB_MOTS_DICTIONNAIRE 350000
 #define LONGUEUR_MAX_MOT 27
 
 /* Partie privée */
+
 void D_insererMot(Dictionnaire* unDico, Mot unMot){
     Dictionnaire temp;
     int enFinDeMot = 0;
@@ -106,7 +106,7 @@ Mot* D_genererTableauDeMotAvecFichierTexte(FichierTexte ficDico, int *nbMots){
     return lesMots;
 }
 
-Dictionnaire D_genererArbreAvecTableauDeMots(Mot* lesMots, int nbMots){
+Dictionnaire D_genererDicoAvecTableauDeMots(Mot* lesMots, int nbMots){
     Dictionnaire unDico = ADL_creerADLVide();
     int i;
     Mot unMot;
@@ -118,12 +118,68 @@ Dictionnaire D_genererArbreAvecTableauDeMots(Mot* lesMots, int nbMots){
     return unDico;
 }
 
+int charEnInt(char c){
+    return c - '0';
+}
+
+void D_chargerDicoR(Dictionnaire* unDico, FichierTexte sauvegardeDico){
+    Dictionnaire temp;
+    char lettre, estFinDeMot, aUnFils, aUnFrere;
+    char* element = FT_lireElement(sauvegardeDico);
+    lettre = element[0];
+    estFinDeMot = element[1];
+    aUnFils = element[2];
+    aUnFrere = element[3];
+    *unDico = ADL_creerADL(NULL, NULL, lettre, charEnInt(estFinDeMot));
+    if(charEnInt(aUnFils) == 1){
+        D_chargerDicoR(&temp, sauvegardeDico);
+        ADL_fixerFils(unDico, temp);
+    }
+    if(charEnInt(aUnFrere) == 1){
+        D_chargerDicoR(&temp, sauvegardeDico);
+        ADL_fixerFrere(unDico, temp);
+    }
+    /*
+    if(!charEnInt(element[3]) && !charEnInt(element[2])){
+        *unDico = ADL_creerADL(NULL, NULL, element[0], charEnInt(element[1]));
+    }
+    */
+    free(element);
+
+}
+
+void D_sauvegarderDicoR(Dictionnaire* unDico, FichierTexte fic){
+    
+    Dictionnaire tempFils, tempFrere;
+    if(!ADL_estVide(*unDico)){
+        FT_ecrireCaractere(&fic ,ADL_obtenirLettre(*unDico));
+        if(ADL_obtenirEstFinDeMot(*unDico))
+            FT_ecrireCaractere(&fic , '1');
+        else FT_ecrireCaractere(&fic , '0');
+
+        tempFils = ADL_obtenirFils(*unDico);
+        tempFrere = ADL_obtenirFrere(*unDico);
+        if(!ADL_estVide(tempFils)){
+            FT_ecrireCaractere(&fic ,'1');   
+        }
+        else FT_ecrireCaractere(&fic ,'0');  
+        if(!ADL_estVide(tempFrere)){
+            FT_ecrireCaractere(&fic ,'1');   
+        }
+        else FT_ecrireCaractere(&fic ,'0');  
+        
+        D_sauvegarderDicoR(&tempFils, fic);
+        D_sauvegarderDicoR(&tempFrere, fic);
+    }
+
+}
+
 /* Partie publique */
 
-Dictionnaire D_genererArbreAvecFichierTexte(FichierTexte ficDico){
+Dictionnaire D_genererDicoAvecFichierTexte(FichierTexte ficDico){
     int nbMots;
     Mot *lesMots = D_genererTableauDeMotAvecFichierTexte(ficDico, &nbMots);
-    Dictionnaire leDico = D_genererArbreAvecTableauDeMots(lesMots, nbMots);
+    Dictionnaire leDico = D_genererDicoAvecTableauDeMots(lesMots, nbMots);
     supprimerTabMots(&lesMots, nbMots);
     return leDico;
 }
@@ -166,12 +222,15 @@ int D_estUnMotDuDictionnaire(Dictionnaire unDico, Mot unMot){
 }
 
 Dictionnaire D_chargerDico(FichierTexte sauvegardeDico){
-    Dictionnaire unDico = ADL_creerADLVide();
+    Dictionnaire unDico;
+    FT_ouvrir(&sauvegardeDico, LECTURE);
+    D_chargerDicoR(&unDico, sauvegardeDico);
+    FT_fermer(&sauvegardeDico);
     return unDico;
 }
-FichierTexte D_sauvegarderArbreEnFichierTexte(Dictionnaire unDico){
-    FichierTexte sauvegardeDico;
-    sauvegardeDico.fichier = NULL;
 
-    return sauvegardeDico;
+void D_sauvegarderDico(Dictionnaire* unDico, FichierTexte *sauvegardeDico){
+    FT_ouvrir(sauvegardeDico, ECRITURE);
+    D_sauvegarderDicoR(unDico, *sauvegardeDico);
+    FT_fermer(sauvegardeDico);
 }
