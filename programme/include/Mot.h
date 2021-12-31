@@ -141,7 +141,7 @@ void M_insererLettre(Mot* unMot, unsigned int i, char c);
 
 /*!
 *fonction qui permet de couper un mot en deux à l'emplacement i (la lettre à la place i appartiendra au second mot)
-*\pre i est inférieur à la longueur de la chaine+1
+*\pre i est inférieur à la longueur de la chaine
 *\param[in] unMot mot d'entrée/sortie (en sortie il sera la partie droite)
 *\param[in] i place de la coupure
 *\return renvoie le mot de la parie gauche
