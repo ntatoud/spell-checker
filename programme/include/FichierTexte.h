@@ -1,6 +1,6 @@
 /**
- * \file EnsembleDeMot.h
- * \brief Implantation du type EnsembleDeMot pour le Projet Algo de correcteur orthographique
+ * \file FichierTexte.h
+ * \brief Implantation du type FichierTexte pour le Projet Algo de correcteur orthographique
  * \authors N. Tatoud
  * \version 1.0
  * \date 31/12/2021
@@ -9,7 +9,7 @@
 
 #ifndef _FICHIER_TEXTE__
 #define _FICHIER_TEXTE__
-#include <stdio.h>
+#include<stdio.h>
 
 typedef enum {LECTURE, ECRITURE} Mode;
 
