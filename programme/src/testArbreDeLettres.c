@@ -19,102 +19,102 @@ int clean_suite_success(void){
 void test_arbre_vide(void){
     ArbreDeLettres a = ADL_creerADLVide();
     CU_ASSERT_TRUE(ADL_estVide(a));
-    free(a);
+    ADL_supprimer(&a);
 }
 
 void test_arbre_non_vide(void){
-    ArbreDeLettres a = ADL_creerADL(NULL,NULL,"a",0);
+    ArbreDeLettres a = ADL_creerADL(NULL,NULL,'a',0);
     CU_ASSERT_TRUE(!ADL_estVide(a));
-    ADL_supprimer(a);
+    ADL_supprimer(&a);
 }
 
 void test_presence_fils_et_frere(void){
-    ArbreDeLettres a = ADL_creerADL(NULL,NULL,"a",0);
-    ArbreDeLettres b = ADL_creerADL(NULL,NULL,"b",0);
-    ArbreDeLettres c = ADL_creerADL(NULL,NULL,"c",0);
-    ADL_fixerElement(&a,"A",0);
+    ArbreDeLettres a = ADL_creerADL(NULL,NULL,'a',0);
+    ArbreDeLettres b = ADL_creerADL(NULL,NULL,'b',0);
+    ArbreDeLettres c = ADL_creerADL(NULL,NULL,'c',0);
+    ADL_fixerElement(&a,'a',0);
     ADL_fixerFrere(&a,b);
     ADL_fixerFils(&a,c);
     CU_ASSERT_TRUE(!ADL_estVide(ADL_obtenirFils(a)) && !ADL_estVide(ADL_obtenirFrere(a)));
-    ADL_supprimer(a);
+    ADL_supprimer(&a);
 }
 
 void test_fixerElement(void){
-    ArbreDeLettres a = ADL_creerADL(NULL,NULL,"a",0);
-    ADL_fixerElement(&a,"A",0);
-    CU_ASSERT_TRUE(strcmp("A",ADL_obtenirLettre(a))==0 && ADL_obtenirEstFinDeMot(a)==0);
-    ADL_supprimer(a);
+    ArbreDeLettres a = ADL_creerADL(NULL,NULL,'a',0);
+    ADL_fixerElement(&a,'a',0);
+    CU_ASSERT_TRUE('a'==ADL_obtenirLettre(a) && ADL_obtenirEstFinDeMot(a)==0);
+    ADL_supprimer(&a);
 }
 
 
 void test_fixerEstFinDeMot(void){
-    ArbreDeLettres a = ADL_creerADL(NULL,NULL,"a",0);
-    ADL_fixerElement(&a,"A",0);
+    ArbreDeLettres a = ADL_creerADL(NULL,NULL,'a',0);
+    ADL_fixerElement(&a,'a',0);
     ADL_fixerEstFinDeMot(&a,1);
     CU_ASSERT_TRUE(a->estFinDeMot==1);
-    ADL_supprimer(a);
+    ADL_supprimer(&a);
 }
 
 void test_fixerLettre(void){
-    ArbreDeLettres a = ADL_creerADL(NULL,NULL,"a",0);
-    ADL_fixerLettre(&a,"A");
-    CU_ASSERT_TRUE(strcmp((a->lettre),"A")==0);
-    ADL_supprimer(a);
+    ArbreDeLettres a = ADL_creerADL(NULL,NULL,'a',0);
+    ADL_fixerLettre(&a,'a');
+    CU_ASSERT_TRUE(a->lettre=='a');
+    ADL_supprimer(&a);
 }
 
 void test_fixerFrere(void){
-    ArbreDeLettres a = ADL_creerADL(NULL,NULL,"a",0);
-    ArbreDeLettres b = ADL_creerADL(NULL,NULL,"b",0);
-    ADL_fixerElement(&a,"A",0);
-    ADL_fixerElement(&b,"B",1);
+    ArbreDeLettres a = ADL_creerADL(NULL,NULL,'a',0);
+    ArbreDeLettres b = ADL_creerADL(NULL,NULL,'b',0);
+    ADL_fixerElement(&a,'a',0);
+    ADL_fixerElement(&b,'b',1);
     ADL_fixerFrere(&a,b);
-    CU_ASSERT_TRUE(strcmp(ADL_obtenirLettre(a->frere),"B")==0);
-    ADL_supprimer(a);
+    CU_ASSERT_TRUE(ADL_obtenirLettre(a->frere)=='b');
+    ADL_supprimer(&a);
 }
 
 
 void test_fixerFils(void){
-    ArbreDeLettres a = ADL_creerADL(NULL,NULL,"a",0);
-    ArbreDeLettres b = ADL_creerADL(NULL,NULL,"b",0);
-    ADL_fixerElement(&a,"A",0);
-    ADL_fixerElement(&b,"B",1);
+    ArbreDeLettres a = ADL_creerADL(NULL,NULL,'a',0);
+    ArbreDeLettres b = ADL_creerADL(NULL,NULL,'b',0);
+    ADL_fixerElement(&a,'a',0);
+    ADL_fixerElement(&b,'b',1);
     ADL_fixerFils(&a,b);
-    CU_ASSERT_TRUE(strcmp(ADL_obtenirLettre((a->fils)),"B")==0);
-    ADL_supprimer(a);
+    CU_ASSERT_TRUE(ADL_obtenirLettre(a->fils)=='b');
+    ADL_supprimer(&a);
 }
 
 void test_obtenirLettre(void){    
-    ArbreDeLettres a = ADL_creerADL(NULL,NULL,"a",0);
-    ADL_fixerLettre(&a,"A");
-    CU_ASSERT_TRUE(strcmp(ADL_obtenirLettre(a),"A")==0);
-    ADL_supprimer(a);
+    ArbreDeLettres a = ADL_creerADL(NULL,NULL,'a',0);
+    ADL_fixerLettre(&a,'a');
+    CU_ASSERT_TRUE(ADL_obtenirLettre(a)=='a');
+    ADL_supprimer(&a);
 }
 
 void test_obtenirFrere(void){
-    ArbreDeLettres a = ADL_creerADL(NULL,NULL,"a",0);
-    ArbreDeLettres b = ADL_creerADL(NULL,NULL,"b",0);
-    ADL_fixerLettre(&b,"A");
+    ArbreDeLettres a = ADL_creerADL(NULL,NULL,'a',0);
+    ArbreDeLettres b = ADL_creerADL(NULL,NULL,'b',0);
+    ADL_fixerLettre(&b,'a');
     ADL_fixerFrere(&a,b);
-    CU_ASSERT_TRUE(strcmp(ADL_obtenirLettre(ADL_obtenirFrere(a)),"A")==0);
-    ADL_supprimer(a);
+    CU_ASSERT_TRUE(ADL_obtenirFrere(a)==b);
+    ADL_supprimer(&a);
 }
 
 void test_obtenirFils(void){
-    ArbreDeLettres a = ADL_creerADL(NULL,NULL,"a",0);
-    ArbreDeLettres b = ADL_creerADL(NULL,NULL,"b",0);
-    ADL_fixerElement(&a,"A",0);
-    ADL_fixerElement(&b,"B",1);
+    ArbreDeLettres a = ADL_creerADL(NULL,NULL,'a',0);
+    ArbreDeLettres b = ADL_creerADL(NULL,NULL,'b',0);
+    ADL_fixerElement(&a,'a',0);
+    ADL_fixerElement(&b,'b',1);
     ADL_fixerFils(&a,b);
-    CU_ASSERT_TRUE(strcmp(ADL_obtenirLettre(ADL_obtenirFils(a)),"B")==0);
-    ADL_supprimer(a);
+    CU_ASSERT_TRUE(ADL_obtenirLettre(ADL_obtenirFils(a))=='b');
+    ADL_supprimer(&a);
 }
 
 void test_estFinDeMot(void){
-    ArbreDeLettres a = ADL_creerADL(NULL,NULL,"a",0);
-    ADL_fixerElement(&a,"a",0);
+    ArbreDeLettres a = ADL_creerADL(NULL,NULL,'a',0);
+    ADL_fixerElement(&a,'a',0);
     ADL_fixerEstFinDeMot(&a,1);
     CU_ASSERT_TRUE(ADL_obtenirEstFinDeMot(a)==1);
-    ADL_supprimer(a);
+    ADL_supprimer(&a);
 }
 
 
