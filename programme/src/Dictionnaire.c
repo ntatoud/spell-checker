@@ -131,7 +131,20 @@ Dictionnaire D_genererArbreAvecFichierTexte(FichierTexte ficDico){
 int D_estUnMotDuDictionnaire(Dictionnaire unDico, Mot unMot){
     Dictionnaire temp;
     if(M_longueurMot(unMot) == 1){
-        return !(ADL_estVide(unDico) || !ADL_obtenirEstFinDeMot(unDico));
+        if(!ADL_estVide(unDico)){
+            if(M_iemeCaractere(unMot, 1) == ADL_obtenirLettre(unDico)){
+                M_supprimerMot(&unMot);
+                return ADL_obtenirEstFinDeMot(unDico);
+            }
+            else{
+                temp = ADL_obtenirFrere(unDico);
+                return D_estUnMotDuDictionnaire(temp, unMot);
+            }
+        }
+        else{
+            M_supprimerMot(&unMot);
+            return 0;
+        }
     }
     else{
         if(!ADL_estVide(unDico)){
@@ -146,6 +159,7 @@ int D_estUnMotDuDictionnaire(Dictionnaire unDico, Mot unMot){
             }
         }
         else{
+            M_supprimerMot(&unMot);
             return 0;
         }
     }
