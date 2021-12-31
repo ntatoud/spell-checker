@@ -4,14 +4,14 @@ BINDIR=bin
 INCLUDEDIR=include
 TESTDIR=tests
 DOCDIR=doc
-TESTS = $(TESTDIR)/testEDM $(TESTDIR)/testLCDM $(TESTDIR)/testArbreDeLettres
+TESTS = $(TESTDIR)/testEDM $(TESTDIR)/testLCDM $(TESTDIR)/testArbreDeLettres $(TESTDIR)/testMot $(TESTDIR)/testDictionnaire $(TESTDIR)/testCO
 CC = gcc
 AR = ar
-CFLAGS=-Wall -pedantic -g -std=c99 -I$(INCLUDEDIR)
-LDFLAGS=-lMot -lCorrecteurOrthographique -lFichierTexte -lDictionnaire -lListeChaineeDeMot -lEnsembleDeMot -lArbreDeLettres -lm -lcurses
-EXEC=correcteur
-LIBRARY=$(LIBDIR)/libMot.a  $(LIBDIR)/libCorrecteurOrthographique.a $(LIBDIR)/libFichierTexte.a $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libListeChaineeDeMot.a $(LIBDIR)/libEnsembleDeMot.a $(LIBDIR)/libArbreDeLettres.a
-CORRECTEUR=$(SRCDIR)/chargerDico.o $(SRCDIR)/corrigerDico.o $(SRCDIR)/main.o
+CFLAGS=-Wall -pedantic -g -std=c99 -I$(INCLUDEDIR) -fexec-charset=ISO8859-1
+LDFLAGS= -lMot -lCorrecteurOrthographique -lFichierTexte -lDictionnaire -lListeChaineeDeMot -lEnsembleDeMot -lArbreDeLettres -lm -lcurses
+EXEC= correcteur
+LIBRARY=$(LIBDIR)/libMot.a  $(LIBDIR)/libCorrecteurOrthographique.a $(LIBDIR)/libFichierTexte.a $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libListeChaineeDeMot.a $(LIBDIR)/libEnsembleDeMot.a $(LIBDIR)/libArbreDeLettres.a 
+CORRECTEUR= $(SRCDIR)/main.o
 
 all :  $(BINDIR)/$(EXEC)
 
@@ -20,8 +20,25 @@ doc : .PHONY
 	
 proper : clean all
 
-tests : $(SRCDIR)/testLCDM.o $(SRCDIR)/Mot.o $(SRCDIR)/ListeChaineeDeMot.o
-	$(CC) -o $(TESTDIR)/testLCDM $(SRCDIR)/testLCDM.o $(SRCDIR)/Mot.o $(SRCDIR)/ListeChaineeDeMot.o $(LDFLAGS) -lcunit -L $(LIBDIR)
+tests : $(TESTS)
+
+$(TESTDIR)/testEDM : $(SRCDIR)/testEDM.o $(LIBDIR)/libEnsembleDeMot.a $(LIBDIR)/libListeChaineeDeMot.a $(LIBDIR)/libMot.a
+	$(CC)  -o $@ $< -lEnsembleDeMot -lListeChaineeDeMot -lMot -lcunit -L $(LIBDIR)
+
+$(TESTDIR)/testLCDM : $(SRCDIR)/testLCDM.o $(LIBDIR)/libMot.a $(LIBDIR)/libListeChaineeDeMot.a
+	$(CC) -o $@  $< -lListeChaineeDeMot -lMot -lcunit -L $(LIBDIR)
+
+$(TESTDIR)/testArbreDeLettres : $(SRCDIR)/testArbreDeLettres.o $(LIBDIR)/libMot.a $(LIBDIR)/libArbreDeLettres.a
+	$(CC) -o $@  $< -lArbreDeLettres -lMot -lcunit -L $(LIBDIR)
+
+$(TESTDIR)/testMot : $(SRCDIR)/testMot.o $(LIBDIR)/libMot.a
+	$(CC) -o $@  $< -lMot -lcunit -L $(LIBDIR)
+
+$(TESTDIR)/testDictionnaire : $(SRCDIR)/testDictionnaire.o $(LIBDIR)/libMot.a $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libFichierTexte.a
+	$(CC) -o $@  $< -lDictionnaire -lArbreDeLettres -lFichierTexte -lMot  -lcunit -L $(LIBDIR)
+
+$(TESTDIR)/testCO: $(SRCDIR)/testCO.o $(LIBDIR)/libMot.a $(LIBDIR)/libCorrecteurOrthographique.a
+	$(CC) -o $@  $< -lCorrecteurOrthographique -lDictionnaire -lArbreDeLettres -lFichierTexte -lEnsembleDeMot -lListeChaineeDeMot -lMot  -lcunit -L $(LIBDIR)
 
 $(BINDIR)/$(EXEC) : $(SRCDIR)/main.o $(LIBRARY) $(CORRECTEUR)
 	$(CC) -o $@ $^ $(LDFLAGS) -L $(LIBDIR)
@@ -52,21 +69,6 @@ $(LIBDIR)/libFichierTexte.a : $(SRCDIR)/FichierTexte.o
 
 $(LIBDIR)/libDictionnaire.a : $(SRCDIR)/Dictionnaire.o
 	$(AR) -r $@ $^
-	
-tests : $(TESTS)
-$(TESTDIR)/testEDM : $(SRCDIR)/testEDM.o $(LIBDIR)/libEnsembleDeMot.a $(LIBDIR)/libListeChaineeDeMot.a $(LIBDIR)/libMot.a
-	$(CC)  -o $@ $< -lEnsembleDeMot -lListeChaineeDeMot -lMot -lcunit -L $(LIBDIR)
-
-$(TESTDIR)/testLCDM : $(SRCDIR)/testLCDM.o $(LIBDIR)/libMot.a $(LIBDIR)/libListeChaineeDeMot.a
-	$(CC) -o $@  $< -lListeChaineeDeMot -lMot -lcunit -L $(LIBDIR)
-
-$(TESTDIR)/testArbreDeLettres : $(SRCDIR)/testArbreDeLettres.o $(LIBDIR)/libMot.a $(LIBDIR)/libArbreDeLettres.a
-	$(CC) -o $@  $< -lArbreDeLettres -lMot -lcunit -L $(LIBDIR)
-
-doc : .PHONY
-	doxygen Doxyfile
-	
-proper : clean all
 
 clean clear :
 	rm -rf $(BINDIR)/correcteur
