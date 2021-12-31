@@ -81,7 +81,6 @@ void LCDM_supprimer(ListeChaineeDeMot *l){
         LCDM_supprimerTete(l);
         LCDM_supprimer(l);
     }
-    free(*l); /**/
 }
 
 ListeChaineeDeMot LCDM_copier(ListeChaineeDeMot l){

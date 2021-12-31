@@ -13,7 +13,7 @@ int ADL_estVide(ArbreDeLettres arbre){
     return (arbre == NULL);
 }
 
-ArbreDeLettres ADL_creerADL(ArbreDeLettres fils, ArbreDeLettres frere, char* lettre, int estUneFin){
+ArbreDeLettres ADL_creerADL(ArbreDeLettres fils, ArbreDeLettres frere, char lettre, int estUneFin){
     ArbreDeLettres arbre = (ArbreDeLettres)malloc(sizeof(ADL));
     arbre->fils = fils;
     arbre->frere = frere;
@@ -22,11 +22,9 @@ ArbreDeLettres ADL_creerADL(ArbreDeLettres fils, ArbreDeLettres frere, char* let
     return arbre;
 }
 
-void ADL_fixerElement(ArbreDeLettres *arbre, char* c, int estUneFin){
+void ADL_fixerElement(ArbreDeLettres *arbre, char c, int estUneFin){
     (*arbre)->estFinDeMot=estUneFin;
     (*arbre)->lettre=c;
-    (*arbre)->fils=NULL;
-    (*arbre)->frere=NULL;
 }
 
 void ADL_fixerEstFinDeMot(ArbreDeLettres *arbre, int estUneFin){
@@ -35,7 +33,7 @@ void ADL_fixerEstFinDeMot(ArbreDeLettres *arbre, int estUneFin){
     (*arbre)->estFinDeMot = estUneFin;
 }
 
-void ADL_fixerLettre(ArbreDeLettres *arbre, char* lettre){
+void ADL_fixerLettre(ArbreDeLettres *arbre, char lettre){
     assert(!ADL_estVide(*arbre));
     errno = 0;
     (*arbre)->lettre = lettre;
@@ -65,7 +63,7 @@ ArbreDeLettres ADL_obtenirFrere(ArbreDeLettres arbre){
     return arbre->frere;
 }
 
-char* ADL_obtenirLettre(ArbreDeLettres arbre){
+char ADL_obtenirLettre(ArbreDeLettres arbre){
     assert(!ADL_estVide(arbre));
     errno = 0;
     return arbre->lettre;
@@ -77,13 +75,15 @@ int ADL_obtenirEstFinDeMot(ArbreDeLettres arbre){
     return arbre->estFinDeMot;
 }
 
-void ADL_supprimer(ArbreDeLettres arbre){
+
+void ADL_supprimer(ArbreDeLettres *arbre){
     ArbreDeLettres tmp = ADL_creerADLVide();
-    if (!ADL_estVide(arbre)){
-        tmp=ADL_obtenirFils(arbre);
-        ADL_supprimer(tmp);
-        tmp=ADL_obtenirFrere(arbre);
-        ADL_supprimer(tmp);
+    if (!ADL_estVide(*arbre)){
+        tmp=ADL_obtenirFils(*arbre);
+        ADL_supprimer(&tmp);
+        tmp=ADL_obtenirFrere(*arbre);
+        ADL_supprimer(&tmp);
     }
-    free(arbre);
+    free(*arbre);
+    
 }
