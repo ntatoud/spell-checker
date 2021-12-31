@@ -159,7 +159,7 @@ void CO_strategieInsererLettres(CorrecteurOrthographique* unCorrecteur){
     longueur = M_longueurMot(leMotACorriger);
     EnsembleDeMot desCorrections = ensembleDeMot();
     EnsembleDeMot correctionsCourantes = ensembleDeMot();
-    for(i = 1; i < longueur +1; i++){
+    for(i = 1; i <= longueur+1; i++){
         correctionsCourantes = CO_insererIemeLettreEnBoucle(leMotACorriger, i);
 
         while(EDM_cardinalite(correctionsCourantes)!=0){
@@ -212,7 +212,6 @@ void CO_supprimerCorrecteur(CorrecteurOrthographique *unCorrecteur){
         EDM_retirer(&unCorrecteur->lesCorrections, unMot);
         M_supprimerMot(&unMot);
     }
-    
     
     ADL_supprimer(&unCorrecteur->leDictionnaire);
 
