@@ -15,7 +15,7 @@ int clean_suite_success(void){
 
 ListeChaineeDeMot creer_liste_avec_un_mot(){
     ListeChaineeDeMot l = LCDM_listeChaineeDeMot();
-    char *chaine1="chaine1";
+    char chaine1[] = "test";
     Mot unMot = M_creerUnMot(chaine1);
     LCDM_ajouter(&l, unMot);
     return l;
@@ -23,8 +23,8 @@ ListeChaineeDeMot creer_liste_avec_un_mot(){
 
 ListeChaineeDeMot creer_liste_avec_deux_mot(){
     ListeChaineeDeMot l = LCDM_listeChaineeDeMot();
-    char *chaine1="chaine1";
-    char *chaine2="chaine2";
+    char *chaine1="chaineun";
+    char *chaine2="chainedeux";
     Mot unMot = M_creerUnMot(chaine1);
     Mot unAutreMot = M_creerUnMot(chaine2);
     LCDM_ajouter(&l, unMot);
@@ -41,24 +41,27 @@ void test_liste_vide(void){
 void test_liste_non_vide(void){
     ListeChaineeDeMot l = creer_liste_avec_un_mot();
     CU_ASSERT_TRUE(!LCDM_estVide(l));
+    Mot mot = LCDM_obtenirMot(l);
+    M_supprimerMot(&mot);
     LCDM_supprimer(&l);
 }
 
 void test_mot_ajoute_en_tete(void){
     ListeChaineeDeMot l = LCDM_listeChaineeDeMot();
-    char *chaine1="chaine1";
+    char *chaine1="chaine";
     Mot unMot = M_creerUnMot(chaine1);
     LCDM_ajouter(&l, unMot);
     CU_ASSERT_EQUAL(M_sontIdentiques(LCDM_obtenirMot(l), unMot),true);
     LCDM_supprimer(&l);
+    M_supprimerMot(&unMot);
 }
 
 void test_supprimer_mot(void){
     ListeChaineeDeMot l1 = LCDM_listeChaineeDeMot();
     ListeChaineeDeMot l2 = LCDM_listeChaineeDeMot();
-    char *chaine1="chaine1";
-    char *chaine2="chaine2";
-    char *chaine3="chaine3";
+    char *chaine1="chaineun";
+    char *chaine2="chainedeux";
+    char *chaine3="chainetrois";
     Mot unMot = M_creerUnMot(chaine1);
     Mot unAutreMot = M_creerUnMot(chaine2);
     Mot toujoursPlusDeMot = M_creerUnMot(chaine3);
@@ -71,13 +74,16 @@ void test_supprimer_mot(void){
     CU_ASSERT_TRUE(LCDM_egale(l1, l2));
     LCDM_supprimer(&l1);
     LCDM_supprimer(&l2);
+    M_supprimerMot(&unMot);
+    M_supprimerMot(&unAutreMot);
+    M_supprimerMot(&toujoursPlusDeMot);
 }
 
 void test_obtenir_liste_suivante(void){
     ListeChaineeDeMot lSuivante;
     ListeChaineeDeMot l = LCDM_listeChaineeDeMot();
-    char *chaine1="chaine1";
-    char *chaine2="chaine2";
+    char *chaine1="chaineun";
+    char *chaine2="chainedeux";
     Mot unMot = M_creerUnMot(chaine1);
     Mot unAutreMot = M_creerUnMot(chaine2);
     LCDM_ajouter(&l, unMot);
@@ -85,15 +91,17 @@ void test_obtenir_liste_suivante(void){
     LCDM_ajouter(&l, unAutreMot);
     CU_ASSERT_PTR_EQUAL(LCDM_obtenirListeSuivante(l), lSuivante);
     LCDM_supprimer(&l);
+    M_supprimerMot(&unMot);
+    M_supprimerMot(&unAutreMot);
 }
 
 void test_fixer_liste_suivante(void){
     ListeChaineeDeMot l1 = LCDM_listeChaineeDeMot();
     ListeChaineeDeMot l2 = LCDM_listeChaineeDeMot();
     ListeChaineeDeMot temp = LCDM_listeChaineeDeMot();
-    char *chaine1="chaine1";
-    char *chaine2="chaine2";
-    char *chaine3="chaine3";
+    char *chaine1="chaineun";
+    char *chaine2="chainedeux";
+    char *chaine3="chainetrois";
     Mot unMot = M_creerUnMot(chaine1);
     Mot unAutreMot = M_creerUnMot(chaine2);
     Mot toujoursPlusDeMot = M_creerUnMot(chaine3);
@@ -105,12 +113,19 @@ void test_fixer_liste_suivante(void){
     CU_ASSERT_PTR_EQUAL(LCDM_obtenirListeSuivante(l1), l2);
     LCDM_supprimer(&l1);
     LCDM_supprimer(&temp);
+    M_supprimerMot(&unMot);
+    M_supprimerMot(&unAutreMot);
+    M_supprimerMot(&toujoursPlusDeMot);
 }
 
 void test_copie_egale(void){
     ListeChaineeDeMot l1 = creer_liste_avec_deux_mot();
     ListeChaineeDeMot l2 = LCDM_copier(l1);
     CU_ASSERT_TRUE(LCDM_egale(l1, l2));
+    Mot mot1 = LCDM_obtenirMot(LCDM_obtenirListeSuivante(l1));
+    Mot mot3 = LCDM_obtenirMot(l1);
+    M_supprimerMot(&mot1);
+    M_supprimerMot(&mot3);
     LCDM_supprimer(&l1);
     LCDM_supprimer(&l2);
 }
@@ -119,6 +134,12 @@ void test_differente(void){
     ListeChaineeDeMot l1 = creer_liste_avec_deux_mot();
     ListeChaineeDeMot l2 = creer_liste_avec_un_mot();
     CU_ASSERT_FALSE(LCDM_egale(l1, l2));
+    Mot mot = LCDM_obtenirMot(l1);
+    Mot mot2 = LCDM_obtenirMot(LCDM_obtenirListeSuivante(l1));
+    Mot mot4 = LCDM_obtenirMot(l2);
+    M_supprimerMot(&mot);
+    M_supprimerMot(&mot2);
+    M_supprimerMot(&mot4);
     LCDM_supprimer(&l1);
     LCDM_supprimer(&l2);
 }

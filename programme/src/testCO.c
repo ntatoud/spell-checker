@@ -35,7 +35,7 @@ Dictionnaire creer_dictionnaire(){
     for(int i=0;i<6;i++){
         lesMots[i]=M_creerUnMot(lesChaines[i]);
     }
-    Dictionnaire dico = D_genererArbreAvecTableauDeMots(lesMots,6);
+    Dictionnaire dico = D_genererDicoAvecTableauDeMots(lesMots,6);
     free(lesChaines);
     supprimerTabMots(&lesMots, 6);
     return dico;
