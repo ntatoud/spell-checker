@@ -37,6 +37,7 @@ Dictionnaire creer_dictionnaire(){
     }
     Dictionnaire dico = D_genererArbreAvecTableauDeMots(lesMots,6);
     free(lesChaines);
+    supprimerTabMots(&lesMots, 6);
     return dico;
 }
 
@@ -175,13 +176,13 @@ void test_strategie_remplacer_lettre(){
     char* chaine1 = "avec";
     Mot motACorriger = M_creerUnMot(chaine);
     Mot solution = M_creerUnMot(chaine1);
-    CorrecteurOrthographique correcteur = CO_correcteur(dico,motACorriger);
+    CorrecteurOrthographique correcteur = CO_correcteur(dico, motACorriger);
     CO_strategieRemplacerLettres(&correcteur);
-    CU_ASSERT_TRUE(EDM_estPresent(correcteur.lesCorrections,solution));
-    //ADL_supprimer(&dico);
-    //M_supprimerMot(&motACorriger);
+    CU_ASSERT_TRUE(EDM_estPresent(correcteur.lesCorrections, solution));
+
+    M_supprimerMot(&motACorriger);
     M_supprimerMot(&solution);
-    CO_supprimerCO(&correcteur);
+    CO_supprimerCorrecteur(&correcteur);
 }
 
 void test_strategie_supprimer_lettre(){
@@ -193,14 +194,8 @@ void test_strategie_supprimer_lettre(){
     CorrecteurOrthographique correcteur = CO_correcteur(dico,motACorriger);
     CO_strategieSupprimerLettres(&correcteur);
     CU_ASSERT_TRUE(EDM_estPresent(correcteur.lesCorrections,solution));
-    //ADL_supprimer(&dico);
-    //M_supprimerMot(&motACorriger);
     M_supprimerMot(&solution);
-    while(!EDM_cardinalite(correcteur.lesCorrections)==0){
-        Mot tmp = EDM_obtenirMot(correcteur.lesCorrections);
-        EDM_retirer(&correcteur.lesCorrections,tmp);
-        M_supprimerMot(&tmp);
-    }
+    M_supprimerMot(&motACorriger);
     CO_supprimerCO(&correcteur);
 }
 
@@ -213,8 +208,7 @@ void test_strategie_inverser_lettre(){
     CorrecteurOrthographique correcteur = CO_correcteur(dico,motACorriger);
     CO_strategieInverserDeuxLettresConsecutives(&correcteur);
     CU_ASSERT_TRUE(EDM_estPresent(correcteur.lesCorrections,solution));
-    //ADL_supprimer(&dico);
-    //M_supprimerMot(&motACorriger);
+    M_supprimerMot(&motACorriger);
     M_supprimerMot(&solution);
     CO_supprimerCO(&correcteur);
 }
@@ -228,8 +222,7 @@ void test_strategie_inserer_lettre(){
     CorrecteurOrthographique correcteur = CO_correcteur(dico,motACorriger);
     CO_strategieInsererLettres(&correcteur);
     CU_ASSERT_TRUE(EDM_estPresent(correcteur.lesCorrections,solution));
-    //ADL_supprimer(&dico);
-    //M_supprimerMot(&motACorriger);
+    M_supprimerMot(&motACorriger);
     M_supprimerMot(&solution);
     CO_supprimerCO(&correcteur);
 }
@@ -238,15 +231,18 @@ void test_strategie_decomposer_mot(){
     Dictionnaire dico = creer_dictionnaire();
     char* chaine = "avecarride";
     char* chaine1 = "avec";
+    char* chaine2 = "arride";
     Mot motACorriger = M_creerUnMot(chaine);
-    Mot solution = M_creerUnMot(chaine1);
+    Mot solution1 = M_creerUnMot(chaine1);
+    Mot solution2 = M_creerUnMot(chaine2);
     CorrecteurOrthographique correcteur = CO_correcteur(dico,motACorriger);
     CO_strategieDecomposerMot(&correcteur);
-    CU_ASSERT_TRUE(EDM_estPresent(correcteur.lesCorrections,solution));
-    //ADL_supprimer(&dico);
-    //M_supprimerMot(&motACorriger);
-    M_supprimerMot(&solution);
-    CO_supprimerCO(&correcteur);
+    CU_ASSERT_TRUE(EDM_estPresent(correcteur.lesCorrections, solution1) && EDM_estPresent(correcteur.lesCorrections, solution2));
+
+    M_supprimerMot(&motACorriger);
+    M_supprimerMot(&solution1);
+    M_supprimerMot(&solution2);
+    CO_supprimerCorrecteur(&correcteur);
 }
 
 
