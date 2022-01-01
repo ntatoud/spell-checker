@@ -10,6 +10,7 @@
 #define F_AIDE "-h"
 #define F_DICO "-d"
 #define F_FICHIER "-f"
+#define F_AIDE_ISO "-i"
 
 char* lireChaineEntreeStandard(){
     char *buffer =(char*)malloc(sizeof(char)*LONGUEUR_MAX_ENTREE);
@@ -20,19 +21,29 @@ char* lireChaineEntreeStandard(){
 }
 
 void afficherAide(){
-    printf("Aide de asispell\n");
-    printf("asispell -h : cette aide\n");
-    printf("asispell -d [dico] : correction de l'entree standard a l'aide du dictionnaire dico\n");
-    printf("asispell -d [dico] -f [fichier] : completer le dictionnaire dico a l'aide des mots du fichier fic (un mot par ligne)\n");
-    printf("Si le programme ne fonctionne pas, vérifiez que l'encodage du terminal est bien : ISO8859-1\n");
-    printf("(Pour Ubuntu 18, onglet Terminal > Définir le codage des caractères > Western ISO8859-1)\n");
+    printf("\n---Aide de asispell---\n\n");
+    printf("asispell -h : cette aide\n\n");
+    printf("asispell -d [nouveau dictionnaire] -f [fichier contenant les mots] : créer le dictionnaire dico a l'aide des mots du fichier (un mot par ligne)\n\n");
+    printf("asispell -d [dico] : correction de l'entrée standard a l'aide du dictionnaire dico\n\n");
+    printf("Si le programme ne fonctionne pas, vérifiez que l'encodage du terminal est bien : ISO8859-1\n\nasispell -i : aide pour configurer l'encodage du terminal\n\n");
+}
+
+void afficherAideISO(){
+    printf("Pour Ubuntu 18 :\nonglet Terminal > Définir le codage des caractères > Western ISO8859-1)\n\n");
+    printf("Pour Ubuntu 20 :\nonglet Préférences > Profils > Compatibilité > Codage > Codages obsolètes > Occidental-ISO-8859-1\n\n");
+    printf("Ne pas oublier de sélectionner le nouveau profil une fois de retour dans le terminal\n");
 }
 
 void gererCommandeAide(char *commande){
-    if(strcmp(commande, F_AIDE) != 0){
+    if((strcmp(commande, F_AIDE) != 0)&&(strcmp(commande, F_AIDE_ISO) != 0)){
         printf("invalide : commande non reconnue\n");     
     }
-    afficherAide();
+    else if(strcmp(commande, F_AIDE) == 0){
+        afficherAide();
+    }
+    else if(strcmp(commande, F_AIDE_ISO) == 0){
+        afficherAideISO();
+    }
 }
 
 void gererCommandeCreerDico(char *commande1, char *fichier1, char *commande2, char *fichier2){
