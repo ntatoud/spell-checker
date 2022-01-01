@@ -196,7 +196,7 @@ void test_strategie_supprimer_lettre(){
     CU_ASSERT_TRUE(EDM_estPresent(correcteur.lesCorrections,solution));
     M_supprimerMot(&solution);
     M_supprimerMot(&motACorriger);
-    CO_supprimerCO(&correcteur);
+    CO_supprimerCorrecteur(&correcteur);
 }
 
 void test_strategie_inverser_lettre(){
@@ -210,7 +210,7 @@ void test_strategie_inverser_lettre(){
     CU_ASSERT_TRUE(EDM_estPresent(correcteur.lesCorrections,solution));
     M_supprimerMot(&motACorriger);
     M_supprimerMot(&solution);
-    CO_supprimerCO(&correcteur);
+    CO_supprimerCorrecteur(&correcteur);
 }
 
 void test_strategie_inserer_lettre(){
@@ -224,7 +224,7 @@ void test_strategie_inserer_lettre(){
     CU_ASSERT_TRUE(EDM_estPresent(correcteur.lesCorrections,solution));
     M_supprimerMot(&motACorriger);
     M_supprimerMot(&solution);
-    CO_supprimerCO(&correcteur);
+    CO_supprimerCorrecteur(&correcteur);
 }
 
 void test_strategie_decomposer_mot(){
@@ -270,11 +270,11 @@ int main(int argc, char **argv){
     /* Ajout des tests � la suite de tests boite noire */
     if ((NULL == CU_add_test(pSuite, "remplacer la bonne lettre", test_remplacer_ieme_lettre))
     ||  (NULL == CU_add_test(pSuite, "inserer a la bonne place", test_inserer_lettre))
-    //||  (NULL == CU_add_test(pSuite, "test strategie remplacer", test_strategie_remplacer_lettre))
-    //||  (NULL == CU_add_test(pSuite, "test strategie supprimer", test_strategie_supprimer_lettre))
-    //||  (NULL == CU_add_test(pSuite, "test strategie inverser", test_strategie_inverser_lettre))
-    //||  (NULL == CU_add_test(pSuite, "test strategie inserer", test_strategie_inserer_lettre))
-    //||  (NULL == CU_add_test(pSuite, "test strategie decomposer", test_strategie_decomposer_mot))
+    ||  (NULL == CU_add_test(pSuite, "test strategie remplacer", test_strategie_remplacer_lettre))
+    ||  (NULL == CU_add_test(pSuite, "test strategie supprimer", test_strategie_supprimer_lettre))
+    ||  (NULL == CU_add_test(pSuite, "test strategie inverser", test_strategie_inverser_lettre))
+    ||  (NULL == CU_add_test(pSuite, "test strategie inserer", test_strategie_inserer_lettre))
+    ||  (NULL == CU_add_test(pSuite, "test strategie decomposer", test_strategie_decomposer_mot))
 
     ){
         CU_cleanup_registry();
