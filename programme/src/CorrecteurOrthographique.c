@@ -186,7 +186,7 @@ void CO_strategieDecomposerMot(CorrecteurOrthographique* unCorrecteur){
     longueur = M_longueurMot(leMotACorriger);
     EnsembleDeMot desCorrections = ensembleDeMot();
 
-    for(i = 2; i < longueur-1; i++){
+    for(i = 2; i < longueur+1; i++){
         unMotModifiable = M_copierMot(leMotACorriger);
         uneCorrection = M_decomposerMot(&unMotModifiable, i);
         if(D_estUnMotDuDictionnaire(leDico, M_copierMot(uneCorrection)) && D_estUnMotDuDictionnaire(leDico, M_copierMot(unMotModifiable))
