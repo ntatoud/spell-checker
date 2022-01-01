@@ -31,7 +31,7 @@ void afficherAide(){
 void afficherAideISO(){
     printf("Pour Ubuntu 18 :\nonglet Terminal > Définir le codage des caractères > Western ISO8859-1)\n\n");
     printf("Pour Ubuntu 20 :\nonglet Préférences > Profils > Compatibilité > Codage > Codages obsolètes > Occidental-ISO-8859-1\n\n");
-    printf("Ne pas oublier de sélectionner le nouveau profil une foisde retour dans le terminal\n");
+    printf("Ne pas oublier de sélectionner le nouveau profil une fois de retour dans le terminal\n");
 }
 
 void gererCommandeAide(char *commande){
