@@ -224,13 +224,17 @@ int D_estUnMotDuDictionnaire(Dictionnaire unDico, Mot unMot){
 Dictionnaire D_chargerDico(FichierTexte sauvegardeDico){
     Dictionnaire unDico;
     FT_ouvrir(&sauvegardeDico, LECTURE);
-    D_chargerDicoR(&unDico, sauvegardeDico);
+    if(FT_verifierIdDico(sauvegardeDico))
+        D_chargerDicoR(&unDico, sauvegardeDico);
+    else 
+        printf("Le fichier que vous essayez d'utiliser n'est pas compatible");
     FT_fermer(&sauvegardeDico);
     return unDico;
 }
 
 void D_sauvegarderDico(Dictionnaire* unDico, FichierTexte *sauvegardeDico){
     FT_ouvrir(sauvegardeDico, ECRITURE);
+    FT_ecrireID(sauvegardeDico);
     D_sauvegarderDicoR(unDico, *sauvegardeDico);
     FT_fermer(sauvegardeDico);
 }
