@@ -9,7 +9,7 @@ CC = gcc
 AR = ar
 CFLAGS=-Wall -pedantic -g -std=c99 -I$(INCLUDEDIR) -fexec-charset=ISO8859-1
 LDFLAGS=  -lCorrecteurOrthographique -lFichierTexte -lDictionnaire -lEnsembleDeMot -lListeChaineeDeMot  -lArbreDeLettres -lIHM -lCorrigerTexte -lMot  -lm -lcurses
-EXEC= correcteur
+EXEC= asispell
 LIBRARY= $(LIBDIR)/libDictionnaire.a $(LIBDIR)/libCorrecteurOrthographique.a $(LIBDIR)/libFichierTexte.a  $(LIBDIR)/libListeChaineeDeMot.a $(LIBDIR)/libEnsembleDeMot.a $(LIBDIR)/libArbreDeLettres.a $(LIBDIR)/libIHM.a $(LIBDIR)/libCorrigerTexte.a $(LIBDIR)/libMot.a 
 CORRECTEUR= $(SRCDIR)/main.o
 
