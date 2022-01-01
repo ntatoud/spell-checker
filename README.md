@@ -1,2 +1,3 @@
-# ITI_ALGO_2021_2022_2_2
+# ITI3 Algo Correcteur Orthographique
 
+L’objectif de ce projet est de developper un correcteur orthographique
