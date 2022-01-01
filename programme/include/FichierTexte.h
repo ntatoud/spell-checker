@@ -2,8 +2,8 @@
  * \file FichierTexte.h
  * \brief Implantation du type FichierTexte pour le Projet Algo de correcteur orthographique
  * \authors N. Tatoud
- * \version 1.0
- * \date 31/12/2021
+ * \version 1.1
+ * \date 01/01/2022
  *
  */
 
@@ -131,6 +131,32 @@ char FT_lireCaractere(FichierTexte fichier);
 */
 char* FT_lireElement(FichierTexte fichier);
 
+/**
+ * \fn int FT_verifierIdDico(FichierTexte)
+ * \brief Fonction de vérification de l'identité d'un dictionnaire, pour s'assurer de sa compatibilité avec le programme
+ * \attention : assertion sur fichier.mode et la position du curseur dans fichier
+ * 
+ * \param fichier : un fichier texte
+ * \return 1 si l'identifiant est le bon, 0 sinon
+*/
+int FT_verifierIdDico(FichierTexte fichier);
 
+/**
+ * \fn void FT_ecrireChaine(FichierTexte*)
+ * \brief Fonction d' écriture d'une chaine de caractères dans un fichier
+ * \attention : assertion sur fichier.mode et la position du curseur dans fichier
+ * 
+ * \param fichier : un pointeur sur un fichier texte
+*/
+void FT_ecrireChaine(FichierTexte *fichier, char *chaine);
+
+/**
+ * \fn void FT_ecrireID(FichierTexte*)
+ * \brief Fonction d' écriture de l'identité d'un fichier pour assurer sa compatibilité avec le programme
+ * \attention : assertion sur fichier.mode et la position du curseur dans fichier
+ * 
+ * \param fichier : un pointeur sur un fichier texte
+*/
+void FT_ecrireID(FichierTexte *fichier);
 
 #endif

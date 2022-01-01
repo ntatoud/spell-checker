@@ -3,6 +3,8 @@
 #include <string.h>
 #include "FichierTexte.h"
 #define LONGUEUR_MAX_CHAINE 100
+#define ID_DICO "DICO GROUPE DD" 
+
 
 FichierTexte FT_fichierTexte(char *nomDuFichier){
     FichierTexte unFichier;
@@ -117,3 +119,18 @@ char* FT_lireElement(FichierTexte unFichier){
     return element;
 }
 
+int FT_verifierIdDico(FichierTexte unFichier){
+    assert(FT_estOuvert(unFichier) && (FT_obtenirMode(unFichier) == LECTURE));
+    char* id = FT_lireChaineSansLeRetourChariot(unFichier);
+    return(strcmp(id, ID_DICO) == 0);
+}
+void FT_ecrireChaine(FichierTexte *unFichier, char *chaine){
+    assert(FT_estOuvert(*unFichier) && (FT_obtenirMode(*unFichier) == ECRITURE));
+    fputs(chaine, unFichier->fichier);
+
+}
+
+void FT_ecrireID(FichierTexte* unFichier){
+    FT_ecrireChaine(unFichier, ID_DICO);
+    FT_ecrireCaractere(unFichier, '\n');
+}
