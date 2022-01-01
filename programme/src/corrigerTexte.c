@@ -6,7 +6,7 @@
 #include "CorrecteurOrthographique.h"
 #include "Mot.h"
 #include "EnsembleDeMot.h"
-#include "CorrigerTexte.h"
+#include "corrigerTexte.h"
 
 
 void CT_corrigerTexte(char* chaine,Dictionnaire dico){ 

@@ -73,7 +73,7 @@ $(LIBDIR)/libDictionnaire.a : $(SRCDIR)/Dictionnaire.o
 $(LIBDIR)/libIHM.a : $(SRCDIR)/IHM.o
 	$(AR) -r $@ $^
 
-$(LIBDIR)/libCorrigerTexte.a : $(SRCDIR)/CorrigerTexte.o
+$(LIBDIR)/libCorrigerTexte.a : $(SRCDIR)/corrigerTexte.o
 	$(AR) -r $@ $^
 
 clean clear :

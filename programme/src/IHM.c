@@ -5,7 +5,7 @@
 #include "FichierTexte.h"
 #include "Dictionnaire.h"
 #include "Mot.h"
-#include "CorrigerTexte.h"
+#include "corrigerTexte.h"
 #define LONGUEUR_MAX_ENTREE 100
 #define F_AIDE "-h"
 #define F_DICO "-d"
