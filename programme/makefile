@@ -77,7 +77,7 @@ $(LIBDIR)/libCorrigerTexte.a : $(SRCDIR)/corrigerTexte.o
 	$(AR) -r $@ $^
 
 clean clear :
-	rm -rf $(BINDIR)/correcteur
+	rm -rf $(BINDIR)/asispell
 	
 	rm -rf $(LIBDIR)/*
 	touch $(LIBDIR)/.gitkeep
