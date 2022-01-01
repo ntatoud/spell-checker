@@ -65,7 +65,7 @@ void CT_afficherCorrection(int indiceDebutMot,CorrecteurOrthographique correcteu
 }
 
 void CT_trouverEtAfficherCorrection(char* chaine, int indiceDebutMot,int position,Dictionnaire dico){
-    char *sousChaine = CT_creerSousChaine(chaine,indiceDebutMot,position-1); //tester souschaine avec un seul car
+    char *sousChaine = CT_creerSousChaine(chaine,indiceDebutMot,position-1);
     Mot unMot = M_creerUnMot(sousChaine);
     
     if(!D_estUnMotDuDictionnaire(dico, M_copierMot(unMot))){
@@ -80,17 +80,3 @@ void CT_trouverEtAfficherCorrection(char* chaine, int indiceDebutMot,int positio
     free(sousChaine);
     M_supprimerMot(&unMot);
 }
-/*
-int main(){
-
-
-    //FichierTexte ficDico = FT_fichierTexte("dicoTest");
-    FichierTexte ficDico = FT_fichierTexte("dico-ref-ascii.txt");
-    Dictionnaire unDico = D_genererDicoAvecFichierTexte(ficDico);
-    char* chaine = "j'ai vraimentt sommeiil";
-    corrigerTexte(chaine,unDico);
-    
-    ADL_supprimer(&unDico);
-    return 0;
-
-}*/
