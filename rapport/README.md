@@ -5,8 +5,10 @@
 - **PDF :** PDF finaux
 
 ## Instructions make:
-- **all :** rapport avec la table de contenu (2 passes)
-- **fast :** rapport sans la table de contenu (1 seule passe, **+ rapide**)
+- **all :** rapport avec la table de contenu
+- **fast :** rapport sans la table de contenu
 - **tad :** tad seulement
+- **conception :** conception seulement
 - **clean :** supprime tout
-- **smallClean :** supprime tout SAUF les PDF
+- **cleanTex :** supprime tout SAUF les PDF
+-**cleanPDF :** supprime tous les PDF
