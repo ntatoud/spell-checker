@@ -54,7 +54,7 @@
 		 \item \textbf{fonction} insererIemeLettreEnBoucle(unMot : Mot, indice : Naturel) : EnsembleDeMot
 		 \item \textbf{procedure} strategieInsererLettres(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
 		 \item \textbf{procedure} strategieDecomposerMot(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
-		 
+		 \item \textbf{procedure} supprimerCorrecteur(\textbf{E} unCorrecteur : CorrecteurOrthographique)
 		 
 		 
          
@@ -64,15 +64,24 @@
     
     \subsection*{Conception détaillée}
 
-    \begin{procedure}
+    \begin{function}
     \SetAlgoLined
-    \caption{remplacerIemeLettre(\textbf{E/S} mot : Mot,\textbf{E} c : Caractere, \textbf{E} position : naturel)}
-    \Declaration{}
+    \caption{remplacerIemeLettreEnBoucle(\textbf{E/S} mot : Mot, \textbf{E} position : naturel)}
+    \Declaration{desCorrections : EnsembleDeMot, uneCorrection : Mot, lettres : chaine de caracteres}
     \Deb{
-        supprimerIemeLettre(mot,position)\;
-        insererLettre(mot,position,caractere)\;
+        desCorrections=EnsembleDeMot.ensembleDeMot()
+        lettres = "abcdefghijklmnopqrstuvwxyzàéèëùûêîïçôö-"
+        \Pour{j $\gets$ 0 à longueur(lettres)}{
+        	uneCorrection $\gets$ Mot.copierMot(mot)
+            Mot.fixierIemeCaractere(uneCorrection,i,lettres[j])
+            EnsembleDeMot.ajouter(desCorrections,uneCorrection)
+        	insererLettre(mot2, i, c);
+        }
+        \Retour{desCorrections}
     }
-    \end{procedure}
+    \end{function}
+
+    
     
     \begin{procedure}
     \SetAlgoLined
