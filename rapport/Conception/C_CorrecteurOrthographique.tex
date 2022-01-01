@@ -4,7 +4,7 @@
     \subsection*{Conception préliminaire}
     \textbf{Type} CorrecteurOrthographique = Structure
 	\begin{itemize}[label=$\ $, leftmargin=2cm]
-		 \item motACorriger : ChaineDeCaractere
+		 \item motACorriger : Mot
 		 \item leDictionnaire : Naturel
 		 \item lesCorrections : EnsembleDeMot
 	\end{itemize}
@@ -13,29 +13,27 @@
 
 	\begin{itemize}[label=$\ $, leftmargin=1cm]
 		 
-		 \item \textbf{fonction} correcteur(unDico : Dictionnaire, unMotFaux : unMot): CorrecteurOrthographique
+		 \item \textbf{fonction} correcteur(unDico : Dictionnaire, unMotFaux : Mot): CorrecteurOrthographique
 		 \begin{itemize}[label=$| $]
-            \item \textbf{précondition:} non(estUnMotDuDictionnaire(unDico, unMotFaux))
+            \item \textbf{précondition:} non(Dictionnaire.estUnMotDuDictionnaire(unDico, unMotFaux))
          \end{itemize}
-		 \item \textbf{fonction} obtenirMotACorriger(unCorrecteur : CorrecteurOrthographique): Mot
-		 \item \textbf{fonction} obtenirDictionnaire(unCorrecteur : CorrecteurOrthographique): Dictionnaire
-		 \item \textbf{procedure} fixerDico(\textbf{E/S} unCorrecteur : CorrecteurOrthographique,\textbf{E})
-		 \item \textbf{procedure} fixerMotACorriger(\textbf{E/S} unCorrecteur: CorrecteurOrthographique,\textbf{E} unMotFaux : Mot)
+		 \item \textbf{fonction} obtenirMotACorriger(unCorrecteur : CorrecteurOrthographique) : Mot
+		 \item \textbf{fonction} obtenirDictionnaire(unCorrecteur : CorrecteurOrthographique) : Dictionnaire
+		 \item \textbf{procedure} fixerDico(\textbf{E/S} unCorrecteur : CorrecteurOrthographique,\textbf{E} unDico : Dictionnaire) 
+		 \item \textbf{procedure} fixerMotACorriger(\textbf{E/S} unCorrecteur : CorrecteurOrthographique,\textbf{E} unMotFaux : Mot)
 		 \begin{itemize}[label=$| $]
-            \item \textbf{précondition:} non(estUnMotDuDictionnaire(obtenirDictionnaire(unCorrecteur), unMotFaux))
+            \item \textbf{précondition:} non(Dictionnaire.estUnMotDuDictionnaire(obtenirDictionnaire(unCorrecteur), unMotFaux))
          \end{itemize}
-		 \item \textbf{procedure} fixerDico(\textbf{E/S} unCorrecteur : CorrecteurOrthographique, \textbf{E} unDico : Dictionnaire)
-		 \item \textbf{procedure} ajouterNouvellesCorrections(\textbf{E/S} cor : CorrecteurOrthographique, 
-		 \textbf{E} corrections : Ensemble$<$Mot$>$)
+		 \item \textbf{procedure} ajouterNouvellesCorrections(\textbf{E/S} unCorrecteur : CorrecteurOrthographique,\textbf{E} desCorrections : EnsembleDeMot)
 		 \item \textbf{procedure} trouverCorrectionsPossibles(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
-		 \item \textbf{fonction} remplacerIemeLettreEnBoucle(unMot : Mot, indice : Naturel) : Ensemble$<$Mot$>$
+		 \item \textbf{fonction} remplacerIemeLettreEnBoucle(unMot : Mot, indice : Naturel) : EnsembleDeMot
 		 \item \textbf{procedure} strategieRemplacerLettres(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
 		 \item \textbf{procedure} strategieSupprimerLettres(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
 		 \item \textbf{procedure} strategieInverserDeuxLettresConsecutives(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
-		 \item \textbf{fonction} insererIemeLettreEnBoucle(unMot : Mot, indice : Naturel) : Ensemble$<$Mot$>$
+		 \item \textbf{fonction} insererIemeLettreEnBoucle(unMot : Mot, indice : Naturel) : EnsembleDeMot
 		 \item \textbf{procedure} strategieInsererLettres(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
 		 \item \textbf{procedure} strategieDecomposerMot(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
-		 
+		 \item \textbf{procedure} supprimerCorrecteur(\textbf{E} unCorrecteur : CorrecteurOrthographique)
 		 
 		 
          
@@ -45,15 +43,24 @@
     
     \subsection*{Conception détaillée}
 
-    \begin{procedure}
+    \begin{function}
     \SetAlgoLined
-    \caption{remplacerIemeLettre(\textbf{E/S} mot : Mot,\textbf{E} c : Caractere, \textbf{E} position : naturel)}
-    \Declaration{}
+    \caption{remplacerIemeLettreEnBoucle(\textbf{E/S} mot : Mot, \textbf{E} position : naturel)}
+    \Declaration{desCorrections : EnsembleDeMot, uneCorrection : Mot, lettres : chaine de caracteres}
     \Deb{
-        supprimerIemeLettre(mot,position)\;
-        insererLettre(mot,position,caractere)\;
+        desCorrections=EnsembleDeMot.ensembleDeMot()
+        lettres = "abcdefghijklmnopqrstuvwxyzàéèëùûêîïçôö-"
+        \Pour{j $\gets$ 0 à longueur(lettres)}{
+        	uneCorrection $\gets$ Mot.copierMot(mot)
+            Mot.fixierIemeCaractere(uneCorrection,i,lettres[j])
+            EnsembleDeMot.ajouter(desCorrections,uneCorrection)
+        	insererLettre(mot2, i, c);
+        }
+        \Retour{desCorrections}
     }
-    \end{procedure}
+    \end{function}
+
+    
     
     \begin{procedure}
     \SetAlgoLined
@@ -110,3 +117,7 @@
     }
     \end{function}
  
+<<<<<<< HEAD
+=======
+\end{document}
+>>>>>>> 2f736bb8c6940cb047a51d3eb5e33c1304e1dcfa
