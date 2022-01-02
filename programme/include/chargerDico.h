@@ -1,4 +1,0 @@
-#ifndef __CHARGER_DICTIONNAIRE__
-#define __CHARGER_DICTIONNAIRE__
-
-#endif
