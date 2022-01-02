@@ -1,27 +1,27 @@
+	    
+	\section*{Mot}
+	\subsection*{Conception préliminaire}
 
-    \section*{Mot}
-    \subsection*{Conception préliminaire}
-
-    \textbf{Type} Mot = Structure
+	\textbf{Type} Mot = Structure
 	\begin{itemize}[label=$\ $, leftmargin=2cm]
 		 \item chaine : ChaineDeCaractere
 		 \item longueur : Naturel
 	\end{itemize}
-    finStructure
-    
-    \subsubsection*{Signatures}
+	finStructure
+
+	\subsubsection*{Signatures}
 
 	\begin{itemize}[label=$\ $, leftmargin=1cm]
 		 \item \textbf{fonction} estUnMotValide(uneChaine : Chaine de Caractère) : Booleen
 		 \begin{itemize}[label=$| $]
-            \item \textbf{précondition:} 0 $<$ longueur(chaine)
-         \end{itemize}
+		\item \textbf{précondition:} 0 $<$ longueur(chaine)
+	     \end{itemize}
 		 \item \textbf{fonction} estUnCaractereAlphabetique(unCaractere : Caractere) : Booleen
 		 \item \textbf{fonction} copierMot(unMot : Mot) : Mot
 		 \item \textbf{fonction} creerUnMot(uneChaine : Chaine de Caractère) : Mot
 		 \begin{itemize}[label=$| $]
-            \item \textbf{précondition:} estUnMotValide(uneChaine)
-         \end{itemize}
+		\item \textbf{précondition:} estUnMotValide(uneChaine)
+	     \end{itemize}
 		 \item \textbf{fonction} longueurMot(unMot : Mot) : Naturel
 		 \item \textbf{fonction} obtenirChaine(unMot : Mot) : Chaine de Caractère
 		 \item \textbf{fonction} iemeCaractere(unMot : Mot, position : NaturelNonNul) : Caractere
@@ -54,135 +54,133 @@
          \item \textbf{procedure} supprimerMot(\textbf{E/S} unMot : Mot)
 	\end{itemize} 
 
-    \subsection*{Conception détaillée}
+	\subsection*{Conception détaillée}
 
-    \begin{function}
-        \SetAlgoLined
-        \caption{estUnMotValide(chaine : Chaine de Caractere):Booleen}
-        \Pre{0 $<$ longueur(chaine)}
-        \Declaration{valide : Booleen}
-        \Deb{
-            estValide $\gets$ VRAI 
-            i $\gets$ 1 
-            \Tq {(i $\le$ longueur(chaine)) et (valide)}{
-                c $\gets$ accederAuIemeCaractere(chaine,i) 
-                valide $\gets$ estUnCaractèreAlphabétique(c) 
-                i $\gets$ i+1 
-            }
-            \Retour{valide}
-        }
-    \end{function}
-        
-    \begin{function}
-        \SetAlgoLined
-        \caption{creerUnMot(chaine : Chaine de Caractere):Mot}
-        \Pre{estUnMotValide(chaine)}
-        \Declaration{mot : Mot}
-        \Deb{
-            mot.chaine $ \gets $ chaine  
-            mot.longueur $ \gets $ ChaineDeCaractere.longueur(chaine) 
-            \Retour{mot}
-        }
-   	\end{function}
-    
-    \begin{function}
-        \SetAlgoLined
-        \caption{longueurMot(unMot : Mot):Naturel}
-        \Declaration{}
-        \Deb{
-            \Retour{unMot.longueur}
-        }
-    \end{function}
-        
-    \begin{function}
-        \SetAlgoLined
-        \caption{iemeCaractere(unMot : Mot, position :NaturelNonNul):Caractere}
-        \Pre{1 $\le$ position $\le$ longueur(unMot)}
-        \Declaration{}
-        \Deb{
-            \Retour{ChaineDeCaractere.iemeCaractere(unMot.chaine,position)}
-        }
-    \end{function}
-    
-    \begin{function}
-        \SetAlgoLined
-        \caption{sontIdentiques(unMot,unAutreMot : Mot):Booleen}
-        \Declaration{
-            i : Naturel 
-            egaux : Booleen }
-        \Deb{
-            \Si {longueur(unMot) $\ne$ longueur(unAutreMot)}{
-                \Retour{FAUX}
-            }
-            \Sinon{
-                egaux $\gets$ VRAI 
-                i $\gets$ 1 
-                \Tq {(i $\le$ longueur(unMot)) et (egaux)}{
-                    egaux $\gets$ accederAuIemeCaractere(unMot,i) = accederAuIemeCaractere(unAutreMot,i) 
-                    i $\gets$ i+1 
-                }
-                \Retour{egaux}
-            }
-        }
-        
-    \end{function} 
+	\begin{function}
+	    \SetAlgoLined
+	    \caption{estUnMotValide(chaine : Chaine de Caractere):Booleen}
+	    \Pre{0 $<$ longueur(chaine)}\;
+	    \Declaration{valide : Booleen}
+	    \Deb{
+		estValide $\gets$ VRAI \;
+		i $\gets$ 1 
+		\Tq {(i $\le$ longueur(chaine)) et (valide)}{
+		    c $\gets$ accederAuIemeCaractere(chaine,i) \;
+		    valide $\gets$ estUnCaractèreAlphabétique(c) \;
+		    i $\gets$ i+1 \;
+		}
+		\Retour{valide}
+	    }
+	\end{function}
+	    
+	\begin{function}
+	    \SetAlgoLined
+	    \caption{creerUnMot(chaine : Chaine de Caractere):Mot}
+	    \Pre{estUnMotValide(chaine)}\;
+	    \Declaration{mot : Mot}
+	    \Deb{
+		mot.chaine $ \gets $ chaine \;
+		mot.longueur $ \gets $\; ChaineDeCaractere.longueur(chaine) \;
+		\Retour{mot}\;
+	    }
+	   \end{function}
 
-    \begin{procedure}
-        \SetAlgoLined
-        \caption{supprimerIemeLettre(\textbf{E/S} unMot : Mot, \textbf{E} position : NaturelNonNul)}
-        \Pre {position $\leq$ longueur(mot)}
-        \Declaration{
-            indice : Naturel}
-        \Deb{
-            \Tq {indice $<$ longueurMot(unMot)}{
-                fixerIemeCaractere(unMot,indice,iemeCaractère(unMot,position+1))
-                indice $\gets$ indice + 1
-            }
-            fixerLongueur(unMot,longueurMot(unMot)-1)
-        }
-        
-    \end{procedure} 
+	\begin{function}
+	    \SetAlgoLined
+	    \caption{longueurMot(unMot : Mot):Naturel}
+	    \Deb{
+		\Retour{unMot.longueur}\;
+	    }
+	\end{function}
+	    
+	\begin{function}
+	    \SetAlgoLined
+	    \caption{iemeCaractere(unMot : Mot, position :NaturelNonNul):Caractere}
+	    \Pre{1 $\le$ position $\le$ longueur(unMot)}\;
+	    \Declaration{}
+	    \Deb{
+		\Retour{ChaineDeCaractere.iemeCaractere(unMot.chaine,position)}\;
+	    }
+	\end{function}
 
-    \begin{procedure}
-        \SetAlgoLined
-        \caption{inverserDeuxLettresConsecutives(\textbf{E/S} unMot : Mot, \textbf{E} position : NaturelNonNul)}
-        \Pre{1 $\leq$ position $\leq$ longueur(mot)-1}
-        \Declaration{
-            temp : Caractere}
-        \Deb{
-            c $\gets$ iemeCaractère(unMot,position)
-            fixerIemeCaractere(unMot,position,iemeCaractere(unMot,position+1))
-            fixerIemeCaractere(unMot,position+1,temp);
-        }
-        
-    \end{procedure} 
+	\begin{function}
+	    \SetAlgoLined
+	    \caption{sontIdentiques(unMot,unAutreMot : Mot):Booleen}
+	    \Declaration{
+		i : Naturel, 
+		egaux : Booleen }
+	    \Deb{
+		\Si {longueur(unMot) $\ne$ longueur(unAutreMot)}{
+		    \Retour{FAUX}
+		}
+		\Sinon{
+		    egaux $\gets$ VRAI \;
+		    i $\gets$ 1 \;
+		    \Tq {(i $\le$ longueur(unMot)) et (egaux)}{
+		        egaux $\gets$  accederAuIemeCaractere(unAutreMot,i)\;
+		        i $\gets$ i+1 \;
+		    }
+		    \Retour{egaux}\;
+		}
+	    }
+	    
+	\end{function} 
 
-    \begin{procedure}
-        \SetAlgoLined
-        \caption{insererLettre(\textbf{E/S} unMot : Mot, \textbf{E} position : NaturelNonNul, c : Caractere)}
-        \Pre{1 $\leq$ position $\leq$ longueur(mot)+1}
-        \Declaration{
-            i : Naturel }
-        \Pour{i $\gets$ longueur(unMot.chaine) à position}{
-            fixerIemeCaractere(unMot,i+1,iemeCaractere(unMot,i))
-        }
-        fixerLongueur(unMot,longueurMot(unMot)+1)
-        fixerIemeCaractere(unMot,position,c)
-    \end{procedure} 
+	\begin{procedure}
+	    \SetAlgoLined
+	    \caption{supprimerIemeLettre(\textbf{E/S} unMot : Mot, \textbf{E} position : NaturelNonNul)}
+	    \Pre {position $\leq$ longueur(mot)}\;
+	    \Declaration{
+		indice : Naturel}
+	    \Deb{
+		\Tq {indice $<$ longueurMot(unMot)}{
+		    fixerIemeCaractere(unMot,indice,iemeCaractère(unMot,position+1))\;
+		    indice $\gets$ indice + 1
+		}
+		fixerLongueur(unMot,longueurMot(unMot)-1)\;
+	    }
+	    
+	\end{procedure} 
 
-    \begin{procedure}
-        \SetAlgoLined
-        \caption{decomposerMot(\textbf{E/S} unMot : Mot, \textbf{E} position : NaturelNonNul \textbf{S} motGauche : Mot)}
-        \Pre{2 $\leq$ position $\leq$ longueur(mot)}
-        \Declaration{
-            chaineGauche : Chaine De Caractere
-            i : Naturel }
-        \Pour{i $\gets$ 1 à position}{
-            ChaineDeCaractere.fixerIemeCaractere(chaineGauche,i,iemeCaractere(unMot,1))
-            supprimerIemeLettre(unMot,1)
-        }
-        motGauche $\gets$ creerUnMot(chaineGauche)
-    \end{procedure} 
+	\begin{procedure}
+	    \SetAlgoLined
+	    \caption{inverserDeuxLettresConsecutives(\textbf{E/S} unMot : Mot, \textbf{E} position : NaturelNonNul)}
+	    \Pre{1 $\leq$ position $\leq$ longueur(mot)-1}\;
+	    \Declaration{
+		temp : Caractere}
+	    \Deb{
+		c $\gets$ iemeCaractère(unMot,position)\;
+		fixerIemeCaractere(unMot,position,iemeCaractere(unMot,position+1))\;
+		fixerIemeCaractere(unMot,position+1,temp);
+	    }
+	    
+	\end{procedure} 
 
-    
-    
+	\begin{procedure}
+	    \SetAlgoLined
+	    \caption{insererLettre(\textbf{E/S} unMot : Mot, \textbf{E} position : NaturelNonNul, c : Caractere)}
+	    \Pre{1 $\leq$ position $\leq$ longueur(mot)+1}\;
+	    \Declaration{
+		i : Naturel }
+	    \Deb{
+	    \Pour{i $\gets$ longueur(unMot.chaine) à position}{
+		fixerIemeCaractere(unMot,i+1,iemeCaractere(unMot,i))\;
+	    }
+	    fixerLongueur(unMot,longueurMot(unMot)+1)\;
+	    fixerIemeCaractere(unMot,position,c)\;
+	    }
+	\end{procedure} 
+
+	\begin{procedure}
+	    \SetAlgoLined
+	    \caption{decomposerMot(\textbf{E/S} unMot : Mot, \textbf{E} position : NaturelNonNul \textbf{S} motGauche : Mot)}
+	    \Pre{2 $\leq$ position $\leq$ longueur(mot)}\;
+	    \Declaration{
+		chaineGauche : Chaine De Caractere,
+		i : Naturel }
+	    \Pour{i $\gets$ 1 à position}{
+		ChaineDeCaractere.fixerIemeCaractere(chaineGauche,i,iemeCaractere(unMot,1))\;
+		supprimerIemeLettre(unMot,1)\;
+	    }
+	    motGauche $\gets$ creerUnMot(chaineGauche)
+	\end{procedure} 
