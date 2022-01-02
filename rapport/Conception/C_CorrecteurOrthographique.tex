@@ -111,7 +111,7 @@ finStructure
             \Tq{ EnsembleDeMot.cardinalité(correctionsCourantes) $\neq $ 0}{
                 uneCorrection $\gets$ EnsembleDeMot.obtenirMot(correctionsCourantes)\;
                 EnsembleDeMot.retirer(correctionsCourantes,uneCorrection)\;
-                \si{ Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et non(EnsembleDeMot.estPresent(desCorrections,uneCorrection))}{
+                \Si{ Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et non(EnsembleDeMot.estPresent(desCorrections,uneCorrection))}{
                     EnsembleDeMot.ajouter(desCorrections,uneCorrection)\;
                 }
             }
@@ -132,7 +132,7 @@ finStructure
         \Pour{i $\gets$ 1 à longueur-1}{
             uneCorrection $\gets$ Mot.copierMot(mot)\;
             Mot.supprimerIemeLettre(uneCorrection,i)\;
-            \si{Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et non(EnsembleDeMot.estPresent(desCorrections,uneCorrection))}{
+            \Si{Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et non(EnsembleDeMot.estPresent(desCorrections,uneCorrection))}{
                 EnsembleDeMot.ajouter(desCorrections,uneCorrection)\;
             }
         }
@@ -153,7 +153,7 @@ finStructure
         \Pour{i $\gets$ 1 à longueur}{
             uneCorrection $\gets$ Mot.copierMot(mot)\;
             Mot.inverserDeuxLettresConsecutives(uneCorrection,i)\;
-            \si{Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et non(EnsembleDeMot.estPresent(desCorrections,uneCorrection))}{
+            \Si{Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et non(EnsembleDeMot.estPresent(desCorrections,uneCorrection))}{
                 EnsembleDeMot.ajouter(desCorrections,uneCorrection)\;
             }
         }
@@ -176,7 +176,7 @@ finStructure
             \Tq{EnsembleDeMot.cardinalité(correctionsCourantes)$\neq$ 0}{
                 uneCorrection $\gets$  EnsembleDeMot.obtenirMot(correctionsCourantes)\;
                 EnsembleDeMot.retirer(correctionsCourantes,uneCorrection)\;
-                \si {Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et non(EnsembleDeMot.estPresent(desCorrections,uneCorrection))}{
+                \Si {Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et non(EnsembleDeMot.estPresent(desCorrections,uneCorrection))}{
                     EnsembleDeMot.ajouter(desCorrections,uneCorrection)\;
                 }
             }
@@ -197,7 +197,7 @@ finStructure
         \Pour{i $\gets$ 2 à longueur-2}{
             unMotModifiable = Mot.copierMot(leMotACorriger)\;
             uneCorrection $\gets$ Mot.decomposerMot(unMotModifiable,i)\;
-            \si {Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(unMotModifiable))}{
+            \Si {Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(unMotModifiable))}{
                 EnsembleDeMot.ajouter(desCorrections,uneCorrection)\;
                 EnsembleDeMot.ajouter(desCorrections,unMotModifiable)\;
             }
