@@ -1,18 +1,23 @@
 #ifndef __ARBRE_DE_LETTRES__
 #define __ARBRE_DE_LETTRES__
 #include <errno.h>
+/**
+ * \brief Le type arbre binaire permet de stocker des mots sous forme de lettres
+ *
+*/
 
 typedef struct ADL *ArbreDeLettres;
 
-typedef struct ADL{
-	ArbreDeLettres fils, frere;
-	char lettre;
-	int estFinDeMot;
+typedef struct ADL
+{
+	ArbreDeLettres fils, frere; /**< le fils et le frere de l'ADL>*/
+	char lettre; /**<la lettre de l'ADL>*/
+	int estFinDeMot; /**<le booléen qui indique si c'es une fin de mot >*/
 } ADL;
 
 #define ADL_ERREUR_MEMOIRE 1
 
-ArbreDeLettres ADL_creerADLVide(); 
+ArbreDeLettres ADL_creerADLVide();
 
 /*!
  * Fonction qui permet de savoir si un arbre est vide ou non
@@ -29,21 +34,21 @@ int ADL_estVide(ArbreDeLettres);
  *\param[in] int qui permet de savoir si c'est une fin de mot
  *\return ArbreDeLettres, l'arbre créé
  */
-ArbreDeLettres ADL_creerADL(ArbreDeLettres,ArbreDeLettres,char,int);
+ArbreDeLettres ADL_creerADL(ArbreDeLettres, ArbreDeLettres, char, int);
 
 /*!
  * Fonction qui permet de fixer si la lettre est une fin de mot
  *\param[in] ArbreDeLettres l'arbre à fixer
  *\param[in] int, 1 si la lettre est une fin de mot, 0 sinon 
  */
-void ADL_fixerEstFinDeMot(ArbreDeLettres*,int);
+void ADL_fixerEstFinDeMot(ArbreDeLettres *, int);
 
 /*!
  * Fonction qui permet de fixer la lettre d'un arbre
  *\param[in] ArbreDeLettres l'arbre à fixer
  *\param[in] char, la lettre à fixer
  */
-void ADL_fixerLettre(ArbreDeLettres*,char);
+void ADL_fixerLettre(ArbreDeLettres *, char);
 
 /*!
  * Fonction qui permet de fixer la lettre et le booléen d'un arbre
@@ -51,21 +56,21 @@ void ADL_fixerLettre(ArbreDeLettres*,char);
  *\param[in] char, la lettre à fixer
  *\param[in] int le booléen qui indique une fin de mot
  */
-void ADL_fixerElement(ArbreDeLettres*,char,int);
+void ADL_fixerElement(ArbreDeLettres *, char, int);
 
 /*!
  * Fonction qui permet de fixer le frère d'un arbre
  *\param[in] ArbreDeLettres* l'arbre
  *\param[in] ArbreDeLettres, le frère
  */
-void ADL_fixerFrere(ArbreDeLettres*,ArbreDeLettres);
+void ADL_fixerFrere(ArbreDeLettres *, ArbreDeLettres);
 
 /*!
  * Fonction qui permet de fixer le fils d'un arbre
  *\param[in] ArbreDeLettres* l'arbre
  *\param[in] ArbreDeLettres, le fils
  */
-void ADL_fixerFils(ArbreDeLettres*,ArbreDeLettres);
+void ADL_fixerFils(ArbreDeLettres *, ArbreDeLettres);
 
 /*!
  * Fonction qui permet d'obtenir le fils d'un arbre
@@ -94,7 +99,6 @@ char ADL_obtenirLettre(ArbreDeLettres);
  *\return int, le booléen
  */
 int ADL_obtenirEstFinDeMot(ArbreDeLettres);
-
 
 /*!
  * Procédure qui permet de supprimer un arbre
