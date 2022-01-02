@@ -85,7 +85,7 @@ finStructure
     \Deb{
     desCorrections=EnsembleDeMot.ensembleDeMot()
     lettres = "abcdefghijklmnopqrstuvwxyzàéèëùûêîïçôö-"\;
-    \Pour{j $\gets$ 0 à longueur(lettres)}{
+    \Pour{j $\gets$ 0 à longueur(lettres)-1}{
     uneCorrection $\gets$ Mot.copierMot(mot)
     Mot.fixierIemeCaractere(uneCorrection,i,lettres[j])\;
     EnsembleDeMot.ajouter(desCorrections,uneCorrection)\;
@@ -129,7 +129,7 @@ finStructure
         leDico $\gets$ CorrecteurOrthographique.obtenirDictionnaire(unCorrecteur)\;
         longueur $\gets$ Mot.longueur(leMotACorriger)\;
         desCorrections $\gets$ EnsembleDeMot.ensembleDeMot()\;
-        \Pour{i $\gets$ 1 à longueur}{
+        \Pour{i $\gets$ 1 à longueur-1}{
             uneCorrection $\gets$ Mot.copierMot(mot)\;
             Mot.supprimerIemeLettre(uneCorrection,i)\;
             \si{Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et non(EnsembleDeMot.estPresent(desCorrections,uneCorrection))}{
@@ -150,7 +150,7 @@ finStructure
         leDico $\gets$ CorrecteurOrthographique.obtenirDictionnaire(unCorrecteur)\;
         longueur $\gets$ Mot.longueur(leMotACorriger)\;
         desCorrections $\gets$ EnsembleDeMot.ensembleDeMot()\;
-        \Pour{i $\gets$ 1 à longueur-1}{
+        \Pour{i $\gets$ 1 à longueur}{
             uneCorrection $\gets$ Mot.copierMot(mot)\;
             Mot.inverserDeuxLettresConsecutives(uneCorrection,i)\;
             \si{Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et non(EnsembleDeMot.estPresent(desCorrections,uneCorrection))}{
@@ -194,7 +194,7 @@ finStructure
         leDico $\gets$ CorrecteurOrthographique.obtenirDictionnaire(unCorrecteur)\;
         longueur $\gets$ Mot.longueur(leMotACorriger)\;
         desCorrections $\gets$ EnsembleDeMot.ensembleDeMot()\;
-        \Pour{i $\gets$ 2 à longueur-1}{
+        \Pour{i $\gets$ 2 à longueur-2}{
             unMotModifiable = Mot.copierMot(leMotACorriger)\;
             uneCorrection $\gets$ Mot.decomposerMot(unMotModifiable,i)\;
             \si {Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(unMotModifiable))}{
