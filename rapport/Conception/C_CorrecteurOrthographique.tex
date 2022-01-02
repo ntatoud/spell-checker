@@ -108,7 +108,7 @@ finStructure
         correctionsCourantes $\gets$ EnsembleDeMot.ensembleDeMot()\;
         \Pour{i $\gets$ 1 à longueur}{
             correctionsCourantes = CorrecteurOrthographique.remplacerIemeLettreEnBoucle(leMotACorriger,i)\;
-            \tantQue{ EnsembleDeMot.cardinalité(correctionsCourantes) \neq 0}{
+            \Tq{ EnsembleDeMot.cardinalité(correctionsCourantes) $\neq $ 0}{
                 uneCorrection $\gets$ EnsembleDeMot.obtenirMot(correctionsCourantes)\;
                 EnsembleDeMot.retirer(correctionsCourantes,uneCorrection)\;
                 \si{ Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et non(EnsembleDeMot.estPresent(desCorrections,uneCorrection))}{
@@ -173,7 +173,7 @@ finStructure
         correctionsCourantes $\gets$ EnsembleDeMot.ensembleDeMot()\;
         \Pour{i $\gets$ 1 à longueur)}{
             correctionsCourantes $\gets$ CorrecteurOrthographique.insererIemeLettreEnBoucle(leMotACorriger,i)\;
-            \tantQue{EnsembleDeMot.cardinalité(correctionsCourantes)\neq 0}{
+            \Tq{EnsembleDeMot.cardinalité(correctionsCourantes)$\neq$ 0}{
                 uneCorrection $\gets$  EnsembleDeMot.obtenirMot(correctionsCourantes)\;
                 EnsembleDeMot.retirer(correctionsCourantes,uneCorrection)\;
                 \si {Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et non(EnsembleDeMot.estPresent(desCorrections,uneCorrection))}{
@@ -194,10 +194,10 @@ finStructure
         leDico $\gets$ CorrecteurOrthographique.obtenirDictionnaire(unCorrecteur)\;
         longueur $\gets$ Mot.longueur(leMotACorriger)\;
         desCorrections $\gets$ EnsembleDeMot.ensembleDeMot()\;
-        \Pour{i $\gets$ 2 à longueur-1)}{
+        \Pour{i $\gets$ 2 à longueur-1}{
             unMotModifiable = Mot.copierMot(leMotACorriger)\;
-            uneCorrection $\gets$ M_decomposerMot(unMotModifiable,i)\;
-            \si {Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et Dictionnaire.estUnMotDuDictionnaire(leDico,M_copierMot(unMotModifiable))}{
+            uneCorrection $\gets$ Mot.decomposerMot(unMotModifiable,i)\;
+            \si {Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(unMotModifiable))}{
                 EnsembleDeMot.ajouter(desCorrections,uneCorrection)\;
                 EnsembleDeMot.ajouter(desCorrections,unMotModifiable)\;
             }
