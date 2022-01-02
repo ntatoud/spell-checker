@@ -3,18 +3,17 @@ TEX=pdflatex
 PDF_DIR=PDF
 TAD_DIR=TAD
 CON_DIR=Conception
+TEX_CONCEPTION=$(CON_DIR)/C_Mot.tex $(CON_DIR)/C_Dictionnaire.tex $(CON_DIR)/C_FichierTexte.tex $(CON_DIR)/C_CorrecteurOrthographique.tex
+TEX_TAD=$(TAD_DIR)/TAD_Mot.tex $(TAD_DIR)/TAD_Dictionnaire.tex $(TAD_DIR)/TAD_FichierTexte.tex $(TAD_DIR)/TAD_CorrecteurOrthographique.tex
 
-#.PHONY : all proper tad conception clean cleanPDF cleanTEX #Pour ne pas confondre commandes & fichiers
+.PHONY : all proper tad clean cleanPDF cleanTEX conception
 
 #Faire le rapport & supprime les residus de compilation
-all : cleanPDF $(PDF_DIR)/tad.pdf cleanTEX $(PDF_DIR)/conception.pdf cleanTEX $(PDF_DIR)/rapport.pdf cleanTEX
+all : rapport.tex cleanPDF $(PDF_DIR)/rapport.pdf proprer cleaanTEX
 
 #2e passe sur le rapport, pour faire le sommaire
-proper :
+proper : rapport.tex $(TEX_TAD) $(TEX_CONCEPTION)
 	$(TEX) -output-directory=$(PDF_DIR) rapport.tex
-
-#Rapport rapide : sans 2e passe
-fast : $(PDF_DIR)/rapport.pdf cleanTEX
 
 #Seulement les TAD & supprime les residus de compilation
 tad : $(PDF_DIR)/tad.pdf cleanTEX
@@ -31,15 +30,15 @@ $(TAD_DIR)/%.pdf : $(TAD_DIR)/%.tex
 	$(TEX) -output-directory=$(TAD_DIR) $<
 
 #Commande pour les TAD
-$(PDF_DIR)/tad.pdf : $(TAD_DIR)/TAD_Mot.pdf $(TAD_DIR)/TAD_FichierTexte.pdf $(TAD_DIR)/TAD_CorrecteurOrthographique.pdf $(TAD_DIR)/TAD_Dictionnaire.pdf 
+$(PDF_DIR)/tad.pdf : tad.tex $(TEX_TAD)
 	$(TEX) -output-directory=$(PDF_DIR) tad.tex
 
 #Commande pour la conception
-$(PDF_DIR)/conception.pdf : $(CON_DIR)/C_Mot.pdf $(CON_DIR)/C_FichierTexte.pdf $(CON_DIR)/C_CorrecteurOrthographique.pdf $(CON_DIR)/C_Dictionnaire.pdf 
+$(PDF_DIR)/conception.pdf : conception.tex $(TEX_CONCEPTION)
 	$(TEX) -output-directory=$(PDF_DIR) conception.tex
 
 #Commande pour le rapport
-$(PDF_DIR)/rapport.pdf : $(TAD_DIR)/TAD_Mot.pdf $(TAD_DIR)/TAD_FichierTexte.pdf $(TAD_DIR)/TAD_CorrecteurOrthographique.pdf $(TAD_DIR)/TAD_Dictionnaire.pdf
+$(PDF_DIR)/rapport.pdf : rapport.tex $(TEX_TAD) $(TEX_CONCEPTION)
 	$(TEX) -output-directory=$(PDF_DIR) rapport.tex
 
 #Supprime les résidus latex
