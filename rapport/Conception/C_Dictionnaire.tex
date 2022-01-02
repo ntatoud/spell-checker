@@ -1,6 +1,4 @@
-
-
-    \section*{Dictionnaire}
+\section*{Dictionnaire}
     \subsection*{Conception préliminaire}
     \subsubsection*{Signatures}
 
@@ -25,7 +23,7 @@
         i : Entier
         }
     \Deb{
-        \Pour{i $<$- 1 \textbf{allant à} longueur(lesMots)}
+        \Pour{i $\gets$ 1 \textbf{allant à} longueur(lesMots)}
         {insererMotALaBonnePlace(unArbre, obtenirElement(lesMots, i))}
         \Retour{unArbre}
     }
@@ -55,13 +53,13 @@
             {\Si{non estVide(unArbre)}
                 {\Si{iemeCaractere(unMot,1) = obtenirLettre(unArbre)}
                     {
-                    unMot $<$- supprimerIemeLettre(unMot, 1) \\
-                    temp $<$- obtenirFilsGauche(unArbre)\\
+                    unMot $\gets$ supprimerIemeLettre(unMot, 1) \\
+                    temp $\gets$ obtenirFilsGauche(unArbre)\\
                     \Retour{estUnMotDuDictionnaire(unMot, temp)}
                     }
                  \Sinon
                     {
-                    temp $<$- obtenirFrere(unArbre)\\
+                    temp $\gets$ obtenirFrere(unArbre)\\
                     \Retour{estUnMotDuDictionnaire(unMot, temp)}
                     }
                 }
@@ -80,5 +78,3 @@
         \Retour{}
     }
     \end{function}
-    
- 
