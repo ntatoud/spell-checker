@@ -50,7 +50,6 @@ cleanTEX :
 
 #Supprime les PDF
 cleanPDF :
-	rm -rf PDF/*.pdf
 	rm -rf TAD/*.pdf
 	rm -rf Conception/*.pdf
 	rm -rf AD/*.pdf
