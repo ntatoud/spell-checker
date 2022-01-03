@@ -148,7 +148,10 @@ Nous présentons donc dans ce rapport le résultat de notre travail, en commenç
 	
 	\input{Conception/C_Mot.tex}
 	\clearpage
-
+	
+    \input{Conception/C_ArbreDeLettres.tex}
+    \clearpage
+    
 	\input{Conception/C_Dictionnaire.tex}
 	\clearpage
 
@@ -156,6 +159,7 @@ Nous présentons donc dans ce rapport le résultat de notre travail, en commenç
 	\clearpage
 
 	\input{Conception/C_FichierTexte.tex}
+	
 
 \clearpage
 \section{Code C}
@@ -198,11 +202,11 @@ Voici le tableau de répartition globale du travail :
       \hline
       CP & Dictionnaire & Mot & Fichier Texte & Correcteur Orthographique\tabularnewline
       \hline
-      CD & Correcteur Orthographique & Dictionnaire & Mot & Rapport\tabularnewline
+      CD & Correcteur Orthographique & Dictionnaire & Mot et Dictionnaire & Rapport\tabularnewline
       \hline
-      Implémentation & Rapport & Correcteur Orthographique & Dictionnaire & Mot \tabularnewline
+      Implémentation & Rapport et FichierTexte & CorrecteurOrthographique, Dictionnaire, EnsembleDeMot et IHM & Dictionnaire, ArbreDeLettres et ListeChaineeDeMot & Mot et CorrigerTexte\tabularnewline
       \hline
-      Tests & Mot & Dictionnaire et Rapport  & Correcteur Orthographique & Dictionnaire \tabularnewline
+      Tests & Mot & Dictionnaire et EnsembleDeMot  & CorrecteurOrthographique et ListeChaineeDeMot & Dictionnaire et ArbreDeLettres \tabularnewline
       \hline
     \end{tabular}
     \caption{Répartition des tâches liées aux TAD}
