@@ -53,6 +53,12 @@ cleanPDF :
 	rm -rf PDF/*.pdf
 	rm -rf TAD/*.pdf
 	rm -rf Conception/*.pdf
+	rm -rf AD/*.pdf
+	rm -rf images/Volutes1-eps-converted-to.pdf
+	rm -rf images/Volutes1Top-eps-converted-to.pdf
+	rm -rf images/Volutes3Bottom-eps-converted-to.pdf
+	rm -rf images/bandeau_cyan_top-eps-converted-to.pdf
+
 
 #Supprime tout
 clean : cleanTEX cleanPDF
