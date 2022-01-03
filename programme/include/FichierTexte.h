@@ -9,22 +9,25 @@
 
 #ifndef _FICHIER_TEXTE__
 #define _FICHIER_TEXTE__
-#include<stdio.h>
+#include <stdio.h>
 
-typedef enum {LECTURE, ECRITURE} Mode;
-
+typedef enum
+{
+	LECTURE,
+	ECRITURE
+} Mode;
 
 /**
  * \brief Le type FichierTexte permet d'effectuer des opérations sur un fichier texte de façon simplifiée
  *
 */
 /* Partie privée */
-typedef struct FichierTexte {
-	FILE* fichier; /**< le fichier >*/
-	char* nom; /**< le nom du fichier >*/
-	Mode mode; /**< le mode fu fichier : lecture ou ecriture >*/
+typedef struct FichierTexte
+{
+	FILE *fichier; /**< le fichier >*/
+	char *nom;	   /**< le nom du fichier >*/
+	Mode mode;	   /**< le mode fu fichier : lecture ou ecriture >*/
 } FichierTexte;
-
 
 /**
  * \fn void supprimerRetourChariot(char *);
@@ -89,7 +92,7 @@ unsigned int FT_estEnFinDeFichier(FichierTexte fichier);
  * \param fichier : un fichier texte
  * \return char* : la chaine lue sans le retour chariot
 */
-char* FT_lireChaineSansLeRetourChariot(FichierTexte fichier);
+char *FT_lireChaineSansLeRetourChariot(FichierTexte fichier);
 
 /**
  * \fn char* FT_lireChaine(FichierTexte);
@@ -99,7 +102,7 @@ char* FT_lireChaineSansLeRetourChariot(FichierTexte fichier);
  * \param fichier : un fichier texte
  * \return char* : la chaine lue
 */
-char* FT_lireChaine(FichierTexte fichier);
+char *FT_lireChaine(FichierTexte fichier);
 
 /**
  * \fn void FT_ecrireCaractere(FichierTexte*, char);
@@ -129,7 +132,7 @@ char FT_lireCaractere(FichierTexte fichier);
  * \param fichier : un fichier texte
  * \return char* : l'élèment lu
 */
-char* FT_lireElement(FichierTexte fichier);
+char *FT_lireElement(FichierTexte fichier);
 
 /**
  * \fn int FT_verifierIdDico(FichierTexte)
