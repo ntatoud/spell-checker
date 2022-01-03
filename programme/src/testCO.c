@@ -7,17 +7,19 @@
 #include "EnsembleDeMot.h"
 #include "Dictionnaire.h"
 
-
-int init_suite_success(void){
+int init_suite_success(void)
+{
     return 0;
 }
 
-int clean_suite_success(void){
+int clean_suite_success(void)
+{
     return 0;
 }
 
-char** creer_tableau_mot(){
-    char** lesMots=(char**)malloc((sizeof(char)*5)*50);
+char **creer_tableau_mot()
+{
+    char **lesMots = (char **)malloc((sizeof(char) * 5) * 50);
     lesMots[0] = "bvec";
     lesMots[1] = "avec";
     lesMots[2] = "avac";
@@ -27,23 +29,23 @@ char** creer_tableau_mot(){
     return lesMots;
 }
 
-
-
-Dictionnaire creer_dictionnaire(){
-    char** lesChaines = creer_tableau_mot();
-    Mot* lesMots = (Mot*)malloc(((sizeof(char)*7)+sizeof(int))*54);
-    for(int i=0;i<6;i++){
-        lesMots[i]=M_creerUnMot(lesChaines[i]);
+Dictionnaire creer_dictionnaire()
+{
+    char **lesChaines = creer_tableau_mot();
+    Mot *lesMots = (Mot *)malloc(((sizeof(char) * 7) + sizeof(int)) * 54);
+    for (int i = 0; i < 6; i++)
+    {
+        lesMots[i] = M_creerUnMot(lesChaines[i]);
     }
-    Dictionnaire dico = D_genererDicoAvecTableauDeMots(lesMots,6);
+    Dictionnaire dico = D_genererDicoAvecTableauDeMots(lesMots, 6);
     free(lesChaines);
     supprimerTabMots(&lesMots, 6);
     return dico;
 }
 
-
-char** creer_ensemble_solution(){
-    char** lesMots=(char**)malloc((sizeof(char)*5)*61);
+char **creer_ensemble_solution()
+{
+    char **lesMots = (char **)malloc((sizeof(char) * 5) * 61);
     lesMots[0] = "aveö";
     lesMots[1] = "avea";
     lesMots[2] = "aveb";
@@ -85,8 +87,9 @@ char** creer_ensemble_solution(){
     return lesMots;
 }
 
-char** creer_ensemble_solution_inserer(){
-    char** lesMots=(char**)malloc((sizeof(char)*6)*100);
+char **creer_ensemble_solution_inserer()
+{
+    char **lesMots = (char **)malloc((sizeof(char) * 6) * 100);
     lesMots[0] = "aveöc";
     lesMots[1] = "aveac";
     lesMots[2] = "avebc";
@@ -127,53 +130,59 @@ char** creer_ensemble_solution_inserer(){
     lesMots[37] = "aveôc";
 
     return lesMots;
-
 }
 
-void test_remplacer_ieme_lettre(){
-    char* chaine = "avek";
+void test_remplacer_ieme_lettre()
+{
+    char *chaine = "avek";
     Mot motACorriger = M_creerUnMot(chaine);
-    EnsembleDeMot ensemble = CO_remplacerIemeLettreEnBoucle(motACorriger,4);
-    char** solution = creer_ensemble_solution();
-    for(int i=0;i<38;i++){
+    EnsembleDeMot ensemble = CO_remplacerIemeLettreEnBoucle(motACorriger, 4);
+    char **solution = creer_ensemble_solution();
+    for (int i = 0; i < 38; i++)
+    {
         Mot mot = M_creerUnMot(solution[i]);
-        CU_ASSERT_TRUE(EDM_estPresent(ensemble,mot));
+        CU_ASSERT_TRUE(EDM_estPresent(ensemble, mot));
         M_supprimerMot(&mot);
     }
     M_supprimerMot(&motACorriger);
-    while(!EDM_cardinalite(ensemble)==0){
+    while (!EDM_cardinalite(ensemble) == 0)
+    {
         Mot tmp = EDM_obtenirMot(ensemble);
-        EDM_retirer(&ensemble,tmp);
+        EDM_retirer(&ensemble, tmp);
         M_supprimerMot(&tmp);
     }
     EDM_vider(&ensemble);
     free(solution);
 }
 
-void test_inserer_lettre(){
-    char* chaine = "avec";
+void test_inserer_lettre()
+{
+    char *chaine = "avec";
     Mot motACorriger = M_creerUnMot(chaine);
-    EnsembleDeMot ensemble = CO_insererIemeLettreEnBoucle(motACorriger,4);
+    EnsembleDeMot ensemble = CO_insererIemeLettreEnBoucle(motACorriger, 4);
     char **solution = creer_ensemble_solution_inserer();
-    for(int i=0;i<38;i++){
+    for (int i = 0; i < 38; i++)
+    {
         Mot mot = M_creerUnMot(solution[i]);
-        CU_ASSERT_TRUE(EDM_estPresent(ensemble,mot));
+        CU_ASSERT_TRUE(EDM_estPresent(ensemble, mot));
         M_supprimerMot(&mot);
     }
     M_supprimerMot(&motACorriger);
-    while(!EDM_cardinalite(ensemble)==0){
+    while (!EDM_cardinalite(ensemble) == 0)
+    {
         Mot tmp = EDM_obtenirMot(ensemble);
-        EDM_retirer(&ensemble,tmp);
+        EDM_retirer(&ensemble, tmp);
         M_supprimerMot(&tmp);
     }
     EDM_vider(&ensemble);
     free(solution);
 }
 
-void test_strategie_remplacer_lettre(){
+void test_strategie_remplacer_lettre()
+{
     Dictionnaire dico = creer_dictionnaire();
-    char* chaine = "abec";
-    char* chaine1 = "avec";
+    char *chaine = "abec";
+    char *chaine1 = "avec";
     Mot motACorriger = M_creerUnMot(chaine);
     Mot solution = M_creerUnMot(chaine1);
     CorrecteurOrthographique correcteur = CO_correcteur(dico, motACorriger);
@@ -185,57 +194,61 @@ void test_strategie_remplacer_lettre(){
     CO_supprimerCorrecteur(&correcteur);
 }
 
-void test_strategie_supprimer_lettre(){
+void test_strategie_supprimer_lettre()
+{
     Dictionnaire dico = creer_dictionnaire();
-    char* chaine = "avvec";
-    char* chaine1 = "avec";
+    char *chaine = "avvec";
+    char *chaine1 = "avec";
     Mot motACorriger = M_creerUnMot(chaine);
     Mot solution = M_creerUnMot(chaine1);
-    CorrecteurOrthographique correcteur = CO_correcteur(dico,motACorriger);
+    CorrecteurOrthographique correcteur = CO_correcteur(dico, motACorriger);
     CO_strategieSupprimerLettres(&correcteur);
-    CU_ASSERT_TRUE(EDM_estPresent(correcteur.lesCorrections,solution));
+    CU_ASSERT_TRUE(EDM_estPresent(correcteur.lesCorrections, solution));
     M_supprimerMot(&solution);
     M_supprimerMot(&motACorriger);
     CO_supprimerCorrecteur(&correcteur);
 }
 
-void test_strategie_inverser_lettre(){
+void test_strategie_inverser_lettre()
+{
     Dictionnaire dico = creer_dictionnaire();
-    char* chaine = "aevc";
-    char* chaine1 = "avec";
+    char *chaine = "aevc";
+    char *chaine1 = "avec";
     Mot motACorriger = M_creerUnMot(chaine);
     Mot solution = M_creerUnMot(chaine1);
-    CorrecteurOrthographique correcteur = CO_correcteur(dico,motACorriger);
+    CorrecteurOrthographique correcteur = CO_correcteur(dico, motACorriger);
     CO_strategieInverserDeuxLettresConsecutives(&correcteur);
-    CU_ASSERT_TRUE(EDM_estPresent(correcteur.lesCorrections,solution));
+    CU_ASSERT_TRUE(EDM_estPresent(correcteur.lesCorrections, solution));
     M_supprimerMot(&motACorriger);
     M_supprimerMot(&solution);
     CO_supprimerCorrecteur(&correcteur);
 }
 
-void test_strategie_inserer_lettre(){
+void test_strategie_inserer_lettre()
+{
     Dictionnaire dico = creer_dictionnaire();
-    char* chaine = "avc";
-    char* chaine1 = "avec";
+    char *chaine = "avc";
+    char *chaine1 = "avec";
     Mot motACorriger = M_creerUnMot(chaine);
     Mot solution = M_creerUnMot(chaine1);
-    CorrecteurOrthographique correcteur = CO_correcteur(dico,motACorriger);
+    CorrecteurOrthographique correcteur = CO_correcteur(dico, motACorriger);
     CO_strategieInsererLettres(&correcteur);
-    CU_ASSERT_TRUE(EDM_estPresent(correcteur.lesCorrections,solution));
+    CU_ASSERT_TRUE(EDM_estPresent(correcteur.lesCorrections, solution));
     M_supprimerMot(&motACorriger);
     M_supprimerMot(&solution);
     CO_supprimerCorrecteur(&correcteur);
 }
 
-void test_strategie_decomposer_mot(){
+void test_strategie_decomposer_mot()
+{
     Dictionnaire dico = creer_dictionnaire();
-    char* chaine = "avecarride";
-    char* chaine1 = "avec";
-    char* chaine2 = "arride";
+    char *chaine = "avecarride";
+    char *chaine1 = "avec";
+    char *chaine2 = "arride";
     Mot motACorriger = M_creerUnMot(chaine);
     Mot solution1 = M_creerUnMot(chaine1);
     Mot solution2 = M_creerUnMot(chaine2);
-    CorrecteurOrthographique correcteur = CO_correcteur(dico,motACorriger);
+    CorrecteurOrthographique correcteur = CO_correcteur(dico, motACorriger);
     CO_strategieDecomposerMot(&correcteur);
     CU_ASSERT_TRUE(EDM_estPresent(correcteur.lesCorrections, solution1) && EDM_estPresent(correcteur.lesCorrections, solution2));
 
@@ -245,38 +258,28 @@ void test_strategie_decomposer_mot(){
     CO_supprimerCorrecteur(&correcteur);
 }
 
-
-
-
-
-
-
-
-
-int main(int argc, char **argv){
+int main(int argc, char **argv)
+{
     CU_pSuite pSuite = NULL;
 
     /* initialisation du registre de tests */
-    if (CUE_SUCCESS != CU_initialize_registry()){
+    if (CUE_SUCCESS != CU_initialize_registry())
+    {
         return CU_get_error();
     }
     /* ajout d'une suite de test */
     pSuite = CU_add_suite("Tests boite noire", init_suite_success, clean_suite_success);
-    if (NULL == pSuite){
+    if (NULL == pSuite)
+    {
         CU_cleanup_registry();
         return CU_get_error();
     }
 
     /* Ajout des tests � la suite de tests boite noire */
-    if ((NULL == CU_add_test(pSuite, "remplacer la bonne lettre", test_remplacer_ieme_lettre))
-    ||  (NULL == CU_add_test(pSuite, "inserer a la bonne place", test_inserer_lettre))
-    ||  (NULL == CU_add_test(pSuite, "test strategie remplacer", test_strategie_remplacer_lettre))
-    ||  (NULL == CU_add_test(pSuite, "test strategie supprimer", test_strategie_supprimer_lettre))
-    ||  (NULL == CU_add_test(pSuite, "test strategie inverser", test_strategie_inverser_lettre))
-    ||  (NULL == CU_add_test(pSuite, "test strategie inserer", test_strategie_inserer_lettre))
-    ||  (NULL == CU_add_test(pSuite, "test strategie decomposer", test_strategie_decomposer_mot))
+    if ((NULL == CU_add_test(pSuite, "remplacer la bonne lettre", test_remplacer_ieme_lettre)) || (NULL == CU_add_test(pSuite, "inserer a la bonne place", test_inserer_lettre)) || (NULL == CU_add_test(pSuite, "test strategie remplacer", test_strategie_remplacer_lettre)) || (NULL == CU_add_test(pSuite, "test strategie supprimer", test_strategie_supprimer_lettre)) || (NULL == CU_add_test(pSuite, "test strategie inverser", test_strategie_inverser_lettre)) || (NULL == CU_add_test(pSuite, "test strategie inserer", test_strategie_inserer_lettre)) || (NULL == CU_add_test(pSuite, "test strategie decomposer", test_strategie_decomposer_mot))
 
-    ){
+    )
+    {
         CU_cleanup_registry();
         return CU_get_error();
     }

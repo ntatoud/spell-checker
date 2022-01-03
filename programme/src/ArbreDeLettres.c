@@ -3,17 +3,20 @@
 #include <string.h>
 #include "ArbreDeLettres.h"
 
-ArbreDeLettres ADL_creerADLVide(){
+ArbreDeLettres ADL_creerADLVide()
+{
     errno = 0;
     return NULL;
-} 
+}
 
-int ADL_estVide(ArbreDeLettres arbre){
+int ADL_estVide(ArbreDeLettres arbre)
+{
     errno = 0;
     return (arbre == NULL);
 }
 
-ArbreDeLettres ADL_creerADL(ArbreDeLettres fils, ArbreDeLettres frere, char lettre, int estUneFin){
+ArbreDeLettres ADL_creerADL(ArbreDeLettres fils, ArbreDeLettres frere, char lettre, int estUneFin)
+{
     ArbreDeLettres arbre = (ArbreDeLettres)malloc(sizeof(ADL));
     arbre->fils = fils;
     arbre->frere = frere;
@@ -22,68 +25,77 @@ ArbreDeLettres ADL_creerADL(ArbreDeLettres fils, ArbreDeLettres frere, char lett
     return arbre;
 }
 
-void ADL_fixerElement(ArbreDeLettres *arbre, char c, int estUneFin){
-    (*arbre)->estFinDeMot=estUneFin;
-    (*arbre)->lettre=c;
+void ADL_fixerElement(ArbreDeLettres *arbre, char c, int estUneFin)
+{
+    (*arbre)->estFinDeMot = estUneFin;
+    (*arbre)->lettre = c;
 }
 
-void ADL_fixerEstFinDeMot(ArbreDeLettres *arbre, int estUneFin){
+void ADL_fixerEstFinDeMot(ArbreDeLettres *arbre, int estUneFin)
+{
     assert(!ADL_estVide(*arbre));
     errno = 0;
     (*arbre)->estFinDeMot = estUneFin;
 }
 
-void ADL_fixerLettre(ArbreDeLettres *arbre, char lettre){
+void ADL_fixerLettre(ArbreDeLettres *arbre, char lettre)
+{
     assert(!ADL_estVide(*arbre));
     errno = 0;
     (*arbre)->lettre = lettre;
 }
 
-void ADL_fixerFrere(ArbreDeLettres *arbre, ArbreDeLettres frere){
+void ADL_fixerFrere(ArbreDeLettres *arbre, ArbreDeLettres frere)
+{
     assert(!ADL_estVide(*arbre));
     errno = 0;
     (*arbre)->frere = frere;
 }
 
-void ADL_fixerFils(ArbreDeLettres *arbre, ArbreDeLettres fils){
+void ADL_fixerFils(ArbreDeLettres *arbre, ArbreDeLettres fils)
+{
     assert(!ADL_estVide(*arbre));
     errno = 0;
     (*arbre)->fils = fils;
 }
 
-ArbreDeLettres ADL_obtenirFils(ArbreDeLettres arbre){
+ArbreDeLettres ADL_obtenirFils(ArbreDeLettres arbre)
+{
     assert(!ADL_estVide(arbre));
     errno = 0;
     return arbre->fils;
 }
 
-ArbreDeLettres ADL_obtenirFrere(ArbreDeLettres arbre){
+ArbreDeLettres ADL_obtenirFrere(ArbreDeLettres arbre)
+{
     assert(!ADL_estVide(arbre));
     errno = 0;
     return arbre->frere;
 }
 
-char ADL_obtenirLettre(ArbreDeLettres arbre){
+char ADL_obtenirLettre(ArbreDeLettres arbre)
+{
     assert(!ADL_estVide(arbre));
     errno = 0;
     return arbre->lettre;
 }
 
-int ADL_obtenirEstFinDeMot(ArbreDeLettres arbre){
+int ADL_obtenirEstFinDeMot(ArbreDeLettres arbre)
+{
     assert(!ADL_estVide(arbre));
     errno = 0;
     return arbre->estFinDeMot;
 }
 
-
-void ADL_supprimer(ArbreDeLettres *arbre){
+void ADL_supprimer(ArbreDeLettres *arbre)
+{
     ArbreDeLettres tmp = ADL_creerADLVide();
-    if (!ADL_estVide(*arbre)){
-        tmp=ADL_obtenirFils(*arbre);
+    if (!ADL_estVide(*arbre))
+    {
+        tmp = ADL_obtenirFils(*arbre);
         ADL_supprimer(&tmp);
-        tmp=ADL_obtenirFrere(*arbre);
+        tmp = ADL_obtenirFrere(*arbre);
         ADL_supprimer(&tmp);
     }
     free(*arbre);
-    
 }

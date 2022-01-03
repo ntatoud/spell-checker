@@ -4,10 +4,17 @@
 #include "Mot.h"
 
 /* Partie privee */
+
+/**
+ * \brief Le type Noeud est un élément d'une liste chainée de mot
+ *
+*/
+
 typedef struct Noeud *ListeChaineeDeMot;
-typedef struct Noeud {
-	Mot mot;
-	ListeChaineeDeMot listeSuivante;
+typedef struct Noeud
+{
+	Mot mot; /**<le mot du Noeud>*/
+	ListeChaineeDeMot listeSuivante;/**<la liste suivante>*/
 } Noeud;
 
 /* Partie publique */
@@ -27,7 +34,7 @@ int LCDM_estVide(ListeChaineeDeMot);
  *\param[in] ListeChaineeDeMot la liste où l'on veut ajouter le Mot
  *\param[in] Mot le Mot à ajouter 
  */
-void LCDM_ajouter(ListeChaineeDeMot*,Mot);
+void LCDM_ajouter(ListeChaineeDeMot *, Mot);
 
 /*!
  * Fonction qui permet d'obtenir un mot
@@ -51,7 +58,7 @@ ListeChaineeDeMot LCDM_obtenirListeSuivante(ListeChaineeDeMot);
  *\param[in] ListeChaineeDeMot la liste de départ
  *\param[in] ListeChaineeDeMot la liste suivante 
  */
-void LCDM_fixerListeSuivante(ListeChaineeDeMot*, ListeChaineeDeMot);
+void LCDM_fixerListeSuivante(ListeChaineeDeMot *, ListeChaineeDeMot);
 
 /*!
  * Fonction qui permet de fixer le mot
@@ -59,7 +66,7 @@ void LCDM_fixerListeSuivante(ListeChaineeDeMot*, ListeChaineeDeMot);
  *\param[in] ListeChaineeDeMot la liste de départ
  *\param[in] Mot le mot à fixer
  */
-void LCDM_fixerMot(ListeChaineeDeMot*,Mot);
+void LCDM_fixerMot(ListeChaineeDeMot *, Mot);
 
 /*!
  * Fonction qui permet de supprimer un mot
@@ -67,20 +74,20 @@ void LCDM_fixerMot(ListeChaineeDeMot*,Mot);
  *\param[in] ListeChaineeDeMot la liste de départ
  *\param[in] Mot le mot à fixer
  */
-void LCDM_supprimerMot(ListeChaineeDeMot*, Mot);
+void LCDM_supprimerMot(ListeChaineeDeMot *, Mot);
 
 /*!
  * Fonction qui permet de supprimer la tete de la liste
  *\pre la liste ne doit pas être vide
  *\param[in] ListeChaineeDeMot la liste dont on veut supprimer la tête
  */
-void LCDM_supprimerTete(ListeChaineeDeMot*);
+void LCDM_supprimerTete(ListeChaineeDeMot *);
 
 /*!
  * Fonction qui permet de supprimer une liste
  *\param[in] ListeChaineeDeMot la liste à supprimer
  */
-void LCDM_supprimer(ListeChaineeDeMot*);
+void LCDM_supprimer(ListeChaineeDeMot *);
 
 /*!
  * Fonction qui permet de copier une liste
@@ -95,5 +102,5 @@ ListeChaineeDeMot LCDM_copier(ListeChaineeDeMot);
  *\param[in] ListeChaineeDeMot2 la 2ème liste à comparer
  *\param[out] int, 1 si les listes sont identiques, 0 sinon 
  */
-int LCDM_egale(ListeChaineeDeMot,ListeChaineeDeMot);
-#endif 
+int LCDM_egale(ListeChaineeDeMot, ListeChaineeDeMot);
+#endif

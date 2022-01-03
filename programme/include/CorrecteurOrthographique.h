@@ -7,7 +7,6 @@
  *
  */
 
-
 #ifndef __CORRECTEUR_ORTHOGRAPHIQUE__
 #define __CORRECTEUR_ORTHOGRAPHIQUE__
 #include "Dictionnaire.h"
@@ -18,9 +17,10 @@
  * \brief Le type CorrecteurOrthographique permet de représenter un correcteur et l'ensemble des éléments dont il a besoin.
  *
 */
-typedef struct CorrecteurOrthographique{
-    Dictionnaire leDictionnaire ; /**< un dictionnaire genéré à partir d'une liste de mots >*/
-    Mot motACorriger ; /**< le mot à corriger>*/
+typedef struct CorrecteurOrthographique
+{
+    Dictionnaire leDictionnaire;  /**< un dictionnaire genéré à partir d'une liste de mots >*/
+    Mot motACorriger;             /**< le mot à corriger>*/
     EnsembleDeMot lesCorrections; /** < l'ensemble des corrections possiblespour le mot à corriger> */
 } CorrecteurOrthographique;
 
@@ -30,8 +30,7 @@ typedef struct CorrecteurOrthographique{
  *
  * \param unCorrecteur : un correcteur orthographique
 */
-void CO_supprimerCorrecteur(CorrecteurOrthographique*);
-
+void CO_supprimerCorrecteur(CorrecteurOrthographique *);
 
 /**
  * \fn CorrecteurOrthographique CO_correcteur(Dictionnaire, Mot);
@@ -78,7 +77,7 @@ EnsembleDeMot CO_obtenirCorrections(CorrecteurOrthographique unCorrecteur);
  * \param CorrecteurOrthogrpahique : un pointeur sur un CorrecteurOrthographique
  * \param unDico : un dictionnaire à fournir au correcteur
 */
-void CO_fixerDico(CorrecteurOrthographique* unCorrecteur , Dictionnaire unDico);
+void CO_fixerDico(CorrecteurOrthographique *unCorrecteur, Dictionnaire unDico);
 
 /**
  * \fn void CO_fixerMotACorriger(CorrecteurOrthographique*, Mot);
@@ -88,7 +87,7 @@ void CO_fixerDico(CorrecteurOrthographique* unCorrecteur , Dictionnaire unDico);
  * \param unCorrecteur : un pointeur sur un CorrecteurOrthographique
  * \param unMotFaux : un mot qui n'est pas dans le dictionnaire
 */
-void CO_fixerMotACorriger(CorrecteurOrthographique* unCorrecteur, Mot unMotFaux);
+void CO_fixerMotACorriger(CorrecteurOrthographique *unCorrecteur, Mot unMotFaux);
 
 /**
  * \fn void CO_ajouterNouvellesCorrections (CorrecteurOrthographique*, EnsembleDeMot);
@@ -100,14 +99,14 @@ void CO_fixerMotACorriger(CorrecteurOrthographique* unCorrecteur, Mot unMotFaux)
  *
 
 */
-void CO_ajouterNouvellesCorrections (CorrecteurOrthographique* unCorrecteur, EnsembleDeMot desCorrections);
+void CO_ajouterNouvellesCorrections(CorrecteurOrthographique *unCorrecteur, EnsembleDeMot desCorrections);
 
 /**
  * \fn void CO_trouverCorrectionsPossibles(CorrecteurOrthographique*);
  * \brief Fonction de calcul de l'ensemble des corrections valides d'un mot *
  * \param unCorrecteur : un pointeur sur un CorrecteurOrthographique
 */
-void CO_trouverCorrectionsPossibles(CorrecteurOrthographique* unCorrecteur);
+void CO_trouverCorrectionsPossibles(CorrecteurOrthographique *unCorrecteur);
 
 /**
  * \fn EnsembleDeMot CO_remplacerIemeLettreEnBoucle(Mot unMot, int i);
@@ -125,7 +124,7 @@ EnsembleDeMot CO_remplacerIemeLettreEnBoucle(Mot unMot, int i);
  *
  * \param unCorrecteur : un pointeur sur un CorrecteurOrthographique
 */
-void CO_strategieRemplacerLettres(CorrecteurOrthographique* unCorrecteur);
+void CO_strategieRemplacerLettres(CorrecteurOrthographique *unCorrecteur);
 
 /**
  * \fn void CO_strategieSupprimerLettres(CorrecteurOrthographique*);
@@ -133,7 +132,7 @@ void CO_strategieRemplacerLettres(CorrecteurOrthographique* unCorrecteur);
  *
  * \param unCorrecteur : un pointeur sur un CorrecteurOrthographique
 */
-void CO_strategieSupprimerLettres(CorrecteurOrthographique* unCorrecteur);
+void CO_strategieSupprimerLettres(CorrecteurOrthographique *unCorrecteur);
 
 /**
  * \fn void CO_strategieInverserDeuxLettresConsecutives(CorrecteurOrthographique*);
@@ -141,7 +140,7 @@ void CO_strategieSupprimerLettres(CorrecteurOrthographique* unCorrecteur);
  *
  * \param unCorrecteur : un pointeur sur un CorrecteurOrthographique
 */
-void CO_strategieInverserDeuxLettresConsecutives(CorrecteurOrthographique* unCorrecteur);
+void CO_strategieInverserDeuxLettresConsecutives(CorrecteurOrthographique *unCorrecteur);
 
 /**
  * \fn EnsembleDeMot CO_insererIemeLettreEnBoucle(Mot unMot, int i);
@@ -159,7 +158,7 @@ EnsembleDeMot CO_insererIemeLettreEnBoucle(Mot unMot, int i);
  *
  * \param unCorrecteur : un pointeur sur un CorrecteurOrthographique
 */
-void CO_strategieInsererLettres(CorrecteurOrthographique* unCorrecteur);
+void CO_strategieInsererLettres(CorrecteurOrthographique *unCorrecteur);
 
 /**
  * \fn void CO_strategieDecomposerMot(CorrecteurOrthographique*);
@@ -167,8 +166,6 @@ void CO_strategieInsererLettres(CorrecteurOrthographique* unCorrecteur);
  *
  * \param unCorrecteur : un pointeur sur un CorrecteurOrthographique
 */
-void CO_strategieDecomposerMot(CorrecteurOrthographique* unCorrecteur); 
-
-
+void CO_strategieDecomposerMot(CorrecteurOrthographique *unCorrecteur);
 
 #endif
