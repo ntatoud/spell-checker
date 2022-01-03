@@ -17,11 +17,11 @@
  * \brief Le type EnsembleDeMot permet de traiter un groupe de mots sous forme d'ensemble
  *
 */
-typedef struct EnsembleDeMot{
+typedef struct EnsembleDeMot
+{
     ListeChaineeDeMot lesMots; /**<les mots de l'ensemble>*/
-    long int nbMots; /**<le nombre de mots dans l'ensemble>*/
+    long int nbMots;           /**<le nombre de mots dans l'ensemble>*/
 } EnsembleDeMot;
-
 
 #define EDM_ERREUR_MEMOIRE 1
 
@@ -39,7 +39,7 @@ EnsembleDeMot ensembleDeMot();
  *
  * \param unEDM : un pointeur sur un ensemble de Mot
 */
-void EDM_vider(EnsembleDeMot * unEDM);
+void EDM_vider(EnsembleDeMot *unEDM);
 /**
  * \fn EnsembleDeMot EDM_copier(EnsembleDeMot); 
  * \brief Fonction de copie d'un ensemble de Mot
@@ -47,7 +47,7 @@ void EDM_vider(EnsembleDeMot * unEDM);
  * \param unEDM : un ensemble de Mot
  * \return EnsembleDeMot : la copie de l'ensemble en entrée
 */
-EnsembleDeMot EDM_copier(EnsembleDeMot unEDM); 
+EnsembleDeMot EDM_copier(EnsembleDeMot unEDM);
 /**
  * \fn int EDM_egale(EnsembleDeMot, EnsembleDeMot);
  * \brief Fonction de comparaison de deux ensembles (égaux si contiennent les mêmes mots)
@@ -64,7 +64,7 @@ int EDM_egale(EnsembleDeMot edm1, EnsembleDeMot edm2);
  * \param unEDM : un pointeur sur un ensemble de Mot
  * \param unMot : un Mot qu'on veut ajouter à l'ensemble
 */
-void EDM_ajouter(EnsembleDeMot * unEDM, Mot unMot); 
+void EDM_ajouter(EnsembleDeMot *unEDM, Mot unMot);
 
 /**
  * \fn void EDM_retirer(EnsembleDeMot *, Mot); 
@@ -73,7 +73,7 @@ void EDM_ajouter(EnsembleDeMot * unEDM, Mot unMot);
  * \param unEDM : un pointeur sur un ensemble de Mot
  * \param unMot : un Mot qu'on veut ajouter retirer de l'ensemble
 */
-void EDM_retirer(EnsembleDeMot * unEDM, Mot unMot);
+void EDM_retirer(EnsembleDeMot *unEDM, Mot unMot);
 
 /**
  * \fn int EDM_estPresent(EnsembleDeMot, Mot); 
@@ -110,6 +110,6 @@ EnsembleDeMot EDM_union(EnsembleDeMot edm1, EnsembleDeMot emd2);
  *
  * \param unEDM : un ensemble de Mot
  * \return Mot : le dernier mot ajouté à l'ensemble
-*/      
+*/
 Mot EDM_obtenirMot(EnsembleDeMot unEDM);
 #endif
