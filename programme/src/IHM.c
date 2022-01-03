@@ -99,14 +99,10 @@ void gererCommandeCorrection(char *commande, char *fichier)
             while (continuer)
             {
                 char *phraseACorriger = lireChaineEntreeStandard();
-                if (strcmp(phraseACorriger, "quit\n") == 0)
-                    continuer = 0;
-                else
+                if (phraseACorriger && (strcmp(phraseACorriger, "q\n") != 0))
                     CT_corrigerTexte(phraseACorriger, leDico);
-                }
-                else{
+                else
                     continuer = 0;
-                }
                 free(phraseACorriger);
             }
             ADL_supprimer(&leDico);
