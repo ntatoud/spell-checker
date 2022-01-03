@@ -78,15 +78,17 @@ void gererCommandeCorrection(char *commande, char *fichier){
         
         if(FT_estOuvert(dicoSauvegarde)){
             FT_fermer(&dicoSauvegarde);
-            printf("Pour mettre un terme à la correction : tapez 'quit'\n");
+            printf("Pour mettre un terme à la correction : tapez 'q'\n");
             Dictionnaire leDico = D_chargerDico(dicoSauvegarde);
             int continuer = 1;
             while(continuer){
                 char *phraseACorriger = lireChaineEntreeStandard();
-                if(strcmp(phraseACorriger, "quit\n") ==0)
-                    continuer = 0;
-                else
+                if(phraseACorriger && strcmp(phraseACorriger, "q\n") != 0){
                     CT_corrigerTexte(phraseACorriger, leDico);
+                }
+                else{
+                    continuer = 0;
+                }
                 free(phraseACorriger);
             }
             ADL_supprimer(&leDico);
