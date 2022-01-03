@@ -114,7 +114,7 @@ void CO_strategieSupprimerLettres(CorrecteurOrthographique *unCorrecteur)
     longueur = M_longueurMot(leMotACorriger);
     EnsembleDeMot desCorrections = ensembleDeMot();
 
-    for (i = 1; i < longueur; i++)
+    for (i = 1; i <= longueur; i++)
     {
         uneCorrection = M_copierMot(leMotACorriger);
         M_supprimerIemeLettre(&uneCorrection, i);
@@ -137,7 +137,7 @@ void CO_strategieInverserDeuxLettresConsecutives(CorrecteurOrthographique *unCor
     longueur = M_longueurMot(leMotACorriger);
     EnsembleDeMot desCorrections = ensembleDeMot();
 
-    for (i = 1; i < longueur - 1; i++)
+    for (i = 1; i < longueur; i++)
     {
         uneCorrection = M_copierMot(leMotACorriger);
         M_inverserDeuxLettresConsecutives(&uneCorrection, i);
