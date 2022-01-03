@@ -40,19 +40,18 @@ void afficherAideISO()
 }
 
 void gererCommandeAide(char *commande)
-{
-    if ((strcmp(commande, F_AIDE) != 0) && (strcmp(commande, F_AIDE_ISO) != 0))
-    {
-        printf("invalide : commande non reconnue\n");
-    }
-    else if (strcmp(commande, F_AIDE) == 0)
-    {
-        afficherAide();
-    }
-    else if (strcmp(commande, F_AIDE_ISO) == 0)
+{   
+    if (strcmp(commande, F_AIDE_ISO) == 0)
     {
         afficherAideISO();
     }
+    else
+    {
+        if(strcmp(commande, F_AIDE) != 0 && (strcmp(commande, F_AIDE_ISO) != 0))
+            printf("invalide : commande non reconnue\n");
+
+        afficherAide();
+    }  
 }
 
 void gererCommandeCreerDico(char *commande1, char *fichier1, char *commande2, char *fichier2)
