@@ -30,7 +30,7 @@ typedef ArbreDeLettres Dictionnaire;
  * \param unDico : un dictionnaire mis sous forme d'arbre de lettres
  * \param unMot : un mot qui n'est pas dans le dictionnaire
 */
-void D_insererMot(Dictionnaire* unDico, Mot unMot);
+void D_insererMot(Dictionnaire *unDico, Mot unMot);
 
 /**
  * \fn void D_insererLettre(Dictionnaire*, char, int);
@@ -41,7 +41,7 @@ void D_insererMot(Dictionnaire* unDico, Mot unMot);
  * \param lettre : une lettre d'un mot que l'on insère dans le dictionnaire
  * \param estFinDeMot : indique si la lettre insérée est en fin de mot
 */
-void D_insererLettre(Dictionnaire* unDico, char lettre, int estFinDeMot);
+void D_insererLettre(Dictionnaire *unDico, char lettre, int estFinDeMot);
 
 /**
  * \fn int D_lettreEstRacine(Dictionnaire, char);
@@ -62,7 +62,7 @@ int D_lettreEstRacine(Dictionnaire unDico, char lettre);
  * \param  nbMots: le nombre de mots dans le tableau 
   * \return Mot* : le tableau de mot avec les mots supprimés
 */
-Mot* supprimerLesMots(Mot *lesMots, int nbMots);
+Mot *supprimerLesMots(Mot *lesMots, int nbMots);
 
 /**
  * \fn void supprimerTabMots(Mot**, int);
@@ -81,7 +81,7 @@ void supprimerTabMots(Mot **lesMots, int nbMots);
  * \param  nbMots : un pointeur sur un entier qui représente le nombre de mots dans le tableau
   * \return Mot* : le tableau de mot rempli avec les mots du fichier
 */
-Mot* D_genererTableauDeMotAvecFichierTexte(FichierTexte ficDico, int* nbMots);
+Mot *D_genererTableauDeMotAvecFichierTexte(FichierTexte ficDico, int *nbMots);
 
 /**
  * \fn Dictionnaire D_genererDicoAvecTableauDeMots(Mot* , int);
@@ -91,7 +91,7 @@ Mot* D_genererTableauDeMotAvecFichierTexte(FichierTexte ficDico, int* nbMots);
  * \param  nbMots : le nombre de mots dans le tableau
   * \return Dictionnaire : un dictionnaire généré à partir des mots du tableau
 */
-Dictionnaire D_genererDicoAvecTableauDeMots(Mot* lesMots, int nbMots);
+Dictionnaire D_genererDicoAvecTableauDeMots(Mot *lesMots, int nbMots);
 
 /**
  * \fn void D_chargerDicoR(Dictionnaire*, FichierTexte);
@@ -100,7 +100,7 @@ Dictionnaire D_genererDicoAvecTableauDeMots(Mot* lesMots, int nbMots);
  * \param unDico : un dictionnaire mis sous forme d'arbre de lettres
  * \param  sauvegardeDico : le fichier où est sauvegardé le dictionnaire
 */
-void D_chargerDicoR(Dictionnaire* unDico, FichierTexte sauvegardeDico);
+void D_chargerDicoR(Dictionnaire *unDico, FichierTexte sauvegardeDico);
 
 /**
  * \fn void D_sauvegarderDicoR(Dictionnaire*, FichierTexte);
@@ -109,7 +109,7 @@ void D_chargerDicoR(Dictionnaire* unDico, FichierTexte sauvegardeDico);
  * \param unDico : un dictionnaire mis sous forme d'arbre de lettres
  * \param  sauvegardeDico : le fichier où on veut sauvegarder le dictionnaire
 */
-void D_sauvegarderDicoR(Dictionnaire* unDico, FichierTexte sauvegardeDico);
+void D_sauvegarderDicoR(Dictionnaire *unDico, FichierTexte sauvegardeDico);
 
 /**
  * \fn Dictionnaire D_genererDicoAvecFichierTexte(FichierTexte);
