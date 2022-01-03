@@ -6,7 +6,6 @@
 
 ## Instructions make:
 - **all :** rapport avec la table de contenu
-- **fast :** rapport sans la table de contenu
 - **tad :** tad seulement
 - **conception :** conception seulement
 - **clean :** supprime tout
