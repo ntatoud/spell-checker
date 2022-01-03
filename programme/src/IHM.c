@@ -17,8 +17,10 @@ char *lireChaineEntreeStandard()
     char *buffer = (char *)malloc(sizeof(char) * LONGUEUR_MAX_ENTREE);
     if (fgets(buffer, LONGUEUR_MAX_ENTREE, stdin))
         return buffer;
-    else
+    else{
+        free(buffer);
         return NULL;
+    }
 }
 
 void afficherAide()

@@ -115,6 +115,7 @@ char *FT_lireChaineSansLeRetourChariot(FichierTexte unFichier)
     }
     else
     {
+        free(ligne);
         return "";
     }
 }
@@ -145,7 +146,9 @@ int FT_verifierIdDico(FichierTexte unFichier)
 {
     assert(FT_estOuvert(unFichier) && (FT_obtenirMode(unFichier) == LECTURE));
     char *id = FT_lireChaineSansLeRetourChariot(unFichier);
-    return (strcmp(id, ID_DICO) == 0);
+    int idCorrect = strcmp(id, ID_DICO);
+    free(id);
+    return (idCorrect == 0);
 }
 void FT_ecrireChaine(FichierTexte *unFichier, char *chaine)
 {
