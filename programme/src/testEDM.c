@@ -7,27 +7,32 @@
 #define TRUE 1
 #define FALSE 0
 
-int init_suite_success(void){
+int init_suite_success(void)
+{
     return 0;
 }
 
-int clean_suite_success(void){
+int clean_suite_success(void)
+{
     return 0;
 }
 
-void creer_mots_A(Mot *mot1, Mot *mot2, Mot *mot3){
+void creer_mots_A(Mot *mot1, Mot *mot2, Mot *mot3)
+{
     *mot1 = M_creerUnMot("test");
     *mot2 = M_creerUnMot("unitaires");
     *mot3 = M_creerUnMot("ensembleDeMot");
 }
 
-void creer_mots_B(Mot *mot1, Mot *mot2, Mot *mot3){
+void creer_mots_B(Mot *mot1, Mot *mot2, Mot *mot3)
+{
     *mot1 = M_creerUnMot("test");
     *mot2 = M_creerUnMot("sans");
     *mot3 = M_creerUnMot("problèmes");
 }
 
-void test_ensemble_vide(void){
+void test_ensemble_vide(void)
+{
     EnsembleDeMot e = ensembleDeMot();
 
     CU_ASSERT_TRUE(EDM_cardinalite(e) == 0);
@@ -35,7 +40,8 @@ void test_ensemble_vide(void){
     EDM_vider(&e);
 }
 
-void test_ajouter_non_present(void){
+void test_ajouter_non_present(void)
+{
     int c1, c2;
     Mot mot4 = M_creerUnMot("sans");
     EnsembleDeMot e = ensembleDeMot();
@@ -57,7 +63,8 @@ void test_ajouter_non_present(void){
     M_supprimerMot(&mot4);
 }
 
-void test_ajouter_present(void){
+void test_ajouter_present(void)
+{
     int c1, c2;
     EnsembleDeMot e = ensembleDeMot();
     Mot mot1, mot2, mot3;
@@ -78,7 +85,8 @@ void test_ajouter_present(void){
     M_supprimerMot(&mot3);
 }
 
-void test_present_apres_ajout(void){
+void test_present_apres_ajout(void)
+{
     Mot mot5 = M_creerUnMot("problèmes");
     EnsembleDeMot e = ensembleDeMot();
     Mot mot1, mot2, mot3;
@@ -98,7 +106,8 @@ void test_present_apres_ajout(void){
     M_supprimerMot(&mot3);
 }
 
-void test_retirer_present(void){
+void test_retirer_present(void)
+{
     int c1, c2;
     EnsembleDeMot e = ensembleDeMot();
     Mot mot1, mot2, mot3;
@@ -119,7 +128,8 @@ void test_retirer_present(void){
     M_supprimerMot(&mot3);
 }
 
-void test_retirer_non_present(void){
+void test_retirer_non_present(void)
+{
     int c1, c2;
     Mot mot4 = M_creerUnMot("sans");
     EnsembleDeMot e = ensembleDeMot();
@@ -142,7 +152,8 @@ void test_retirer_non_present(void){
     M_supprimerMot(&mot4);
 }
 
-void test_absent_apres_retrait(void){
+void test_absent_apres_retrait(void)
+{
     EnsembleDeMot e = ensembleDeMot();
     Mot mot1, mot2, mot3;
     creer_mots_A(&mot1, &mot2, &mot3);
@@ -159,7 +170,8 @@ void test_absent_apres_retrait(void){
     M_supprimerMot(&mot3);
 }
 
-void test_union(void){
+void test_union(void)
+{
     EnsembleDeMot e1 = ensembleDeMot();
     Mot mot1, mot1bis, mot2, mot3, mot4, mot5;
     creer_mots_A(&mot1, &mot2, &mot3);
@@ -175,11 +187,7 @@ void test_union(void){
 
     EnsembleDeMot e3 = EDM_union(e1, e2);
 
-    CU_ASSERT_TRUE(EDM_estPresent(e3, mot1) 
-                && EDM_estPresent(e3, mot2) 
-                && EDM_estPresent(e3, mot3)
-                && EDM_estPresent(e3, mot4) 
-                && EDM_estPresent(e3, mot5));
+    CU_ASSERT_TRUE(EDM_estPresent(e3, mot1) && EDM_estPresent(e3, mot2) && EDM_estPresent(e3, mot3) && EDM_estPresent(e3, mot4) && EDM_estPresent(e3, mot5));
 
     EDM_vider(&e1);
     EDM_vider(&e2);
@@ -192,7 +200,8 @@ void test_union(void){
     M_supprimerMot(&mot5);
 }
 
-void test_egalite_meme_ensemble(void){
+void test_egalite_meme_ensemble(void)
+{
     EnsembleDeMot e1 = ensembleDeMot();
     Mot mot1, mot2, mot3;
     creer_mots_A(&mot1, &mot2, &mot3);
@@ -208,7 +217,8 @@ void test_egalite_meme_ensemble(void){
     M_supprimerMot(&mot3);
 }
 
-void test_egalite_ensembles_differents(void){
+void test_egalite_ensembles_differents(void)
+{
     EnsembleDeMot e1 = ensembleDeMot();
     Mot mot1, mot1bis, mot2, mot3, mot4, mot5;
     creer_mots_A(&mot1, &mot2, &mot3);
@@ -235,7 +245,8 @@ void test_egalite_ensembles_differents(void){
     M_supprimerMot(&mot5);
 }
 
-void test_copier(void){
+void test_copier(void)
+{
     EnsembleDeMot e1 = ensembleDeMot();
     Mot mot1, mot2, mot3;
     creer_mots_A(&mot1, &mot2, &mot3);
@@ -254,7 +265,8 @@ void test_copier(void){
     M_supprimerMot(&mot3);
 }
 
-void test_obtenir_element(){
+void test_obtenir_element()
+{
     EnsembleDeMot e = ensembleDeMot();
     Mot mot1, mot2, mot3, mot3test;
     creer_mots_A(&mot1, &mot2, &mot3);
@@ -271,7 +283,8 @@ void test_obtenir_element(){
     M_supprimerMot(&mot3);
 }
 
-int main(int argc, char **argv){
+int main(int argc, char **argv)
+{
     CU_pSuite pSuite = NULL;
 
     /* initialisation du registre de tests */
@@ -280,24 +293,15 @@ int main(int argc, char **argv){
 
     /* ajout d'une suite de test */
     pSuite = CU_add_suite("Tests boite noire", init_suite_success, clean_suite_success);
-    if (NULL == pSuite){
+    if (NULL == pSuite)
+    {
         CU_cleanup_registry();
         return CU_get_error();
     }
 
     /* Ajout des tests à la suite de tests boite noire */
-    if ((NULL == CU_add_test(pSuite, "1 - La création d'un ensemble doit etre vide", test_ensemble_vide)) 
-    || (NULL == CU_add_test(pSuite, "2 - Ajouter un mot non present incrémente la cardinalité", test_ajouter_non_present)) 
-    || (NULL == CU_add_test(pSuite, "3 - Ajouter un mot present n'incrémente pas la cardinalité", test_ajouter_present)) 
-    || (NULL == CU_add_test(pSuite, "4 - un élément ajouté est present", test_present_apres_ajout)) 
-    || (NULL == CU_add_test(pSuite, "5 - retirer un élement présent décrémente la cardinalité", test_retirer_non_present)) 
-    || (NULL == CU_add_test(pSuite, "6 - retirer un élement present ne decremente pas la cardinalite", test_retirer_present)) 
-    || (NULL == CU_add_test(pSuite, "7 - un element retire n'est plus present", test_absent_apres_retrait)) 
-    || (NULL == CU_add_test(pSuite, "8 - union", test_union)) 
-    || (NULL == CU_add_test(pSuite, "9 - un ensemble est égal a lui meme", test_egalite_meme_ensemble)) 
-    || (NULL == CU_add_test(pSuite, "10 - un ensemble est different d'un autre ensemble", test_egalite_ensembles_differents)) 
-    || (NULL == CU_add_test(pSuite, "11 - un ensemble est égal a une de ses copies", test_copier)) 
-    || (NULL == CU_add_test(pSuite, "12 - obtenir un élément d'un ensemble renvoie le dernier élément ajouté", test_obtenir_element))){
+    if ((NULL == CU_add_test(pSuite, "1 - La création d'un ensemble doit etre vide", test_ensemble_vide)) || (NULL == CU_add_test(pSuite, "2 - Ajouter un mot non present incrémente la cardinalité", test_ajouter_non_present)) || (NULL == CU_add_test(pSuite, "3 - Ajouter un mot present n'incrémente pas la cardinalité", test_ajouter_present)) || (NULL == CU_add_test(pSuite, "4 - un élément ajouté est present", test_present_apres_ajout)) || (NULL == CU_add_test(pSuite, "5 - retirer un élement présent décrémente la cardinalité", test_retirer_non_present)) || (NULL == CU_add_test(pSuite, "6 - retirer un élement present ne decremente pas la cardinalite", test_retirer_present)) || (NULL == CU_add_test(pSuite, "7 - un element retire n'est plus present", test_absent_apres_retrait)) || (NULL == CU_add_test(pSuite, "8 - union", test_union)) || (NULL == CU_add_test(pSuite, "9 - un ensemble est égal a lui meme", test_egalite_meme_ensemble)) || (NULL == CU_add_test(pSuite, "10 - un ensemble est different d'un autre ensemble", test_egalite_ensembles_differents)) || (NULL == CU_add_test(pSuite, "11 - un ensemble est égal a une de ses copies", test_copier)) || (NULL == CU_add_test(pSuite, "12 - obtenir un élément d'un ensemble renvoie le dernier élément ajouté", test_obtenir_element)))
+    {
         CU_cleanup_registry();
         return CU_get_error();
     }
