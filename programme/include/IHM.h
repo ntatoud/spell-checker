@@ -2,7 +2,7 @@
 #define __IHM__
 #include <stdio.h>
 
-char* lireChaineEntreeStandard();
+char *lireChaineEntreeStandard();
 
 void afficherAide();
 
