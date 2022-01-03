@@ -25,7 +25,7 @@ typedef ArbreDeLettres Dictionnaire;
 
 /**
  * \fn void D_insererMot(Dictionnaire*, Mot);
- * \brief Fonction d'insértion d'un mot dans un dictionnaire
+ * \brief Fonction d'insertion d'un mot dans un dictionnaire
  *
  * \param unDico : un dictionnaire mis sous forme d'arbre de lettres
  * \param unMot : un mot qui n'est pas dans le dictionnaire
@@ -34,7 +34,7 @@ void D_insererMot(Dictionnaire *unDico, Mot unMot);
 
 /**
  * \fn void D_insererLettre(Dictionnaire*, char, int);
- * \brief Fonction d'insértion d'une lettre d'un mot dans un dictionnaire
+ * \brief Fonction d'insertion d'une lettre d'un mot dans un dictionnaire
  * \attention assertion : sur unDico
  *
  * \param unDico : un dictionnaire mis sous forme d'arbre de lettres
@@ -46,7 +46,6 @@ void D_insererLettre(Dictionnaire *unDico, char lettre, int estFinDeMot);
 /**
  * \fn int D_lettreEstRacine(Dictionnaire, char);
  * \brief Fonction de comparaison d'une lettre et de la lettre racine d'un dictionnaire sous forme d'arbre
- * \attention assertion : sur unDico
  *
  * \param unDico : un dictionnaire mis sous forme d'arbre de lettres
  * \param lettre : une lettre d'un mot 

@@ -1,0 +1,38 @@
+\section*{Arbre de lettres}
+\subsection*{Conception préliminaire}
+\subsubsection*{Structure}
+
+Type ArbreDeLettres = Structure
+\begin{itemize}[label=$\ $, leftmargin=2cm]
+     \item fils, frere : ArbreDeLettres
+     \item lettre : Caractere
+     \item estFinDeMot : Booleen 
+\end{itemize}
+finStructure
+
+\subsubsection*{Signatures}
+
+\begin{itemize}[label=$\ $, leftmargin=1cm]
+     \item \textbf{fonction} creerADLVide() : ArbreDeLettres
+     \item \textbf{fonction} creerADL(fils : ArbreDeLettres,frere : ArbreDeLettres,lettre : Caractere,estFinDeMot : Booleen) : ArbreDeLettres
+     \item \textbf{procedure} fixerEstFinDeMot(\textbf{E/S} arbre : ArbreDeLettres, \textbf{E} estFinDeMot : Booleen)
+     \item \textbf{procedure} fixerLettre(\textbf{E/S} arbre : ArbreDeLettres, \textbf{E} lettre : Caractere)
+     \item \textbf{procedure} fixerElement(\textbf{E/S} arbre : ArbreDeLettres, \textbf{E} lettre : Caractere, estFinDeMot : Booleen)
+     \item \textbf{procedure} fixerFrere(\textbf{E/S} arbre : ArbreDeLettres, \textbf{E} frere : ArbreDeLettres)
+     \item \textbf{procedure} fixerFils(\textbf{E/S} arbre : ArbreDeLettres, \textbf{E} fils : ArbreDeLettres)
+     \item \textbf{fonction} obtenirFils(arbre : ArbreDeLettres) : ArbreDeLettres
+     \begin{itemize}[label=$| $]
+        \item \textbf{précondition : } non estVide(arbre)
+     \end{itemize}
+     \item \textbf{fonction} obtenirFrere(arbre : ArbreDeLettres) : ArbreDeLettres
+     \begin{itemize}[label=$| $]
+        \item \textbf{précondition : } non estVide(arbre)
+     \end{itemize}
+     \item \textbf{fonction} obtenirLettre(arbre : ArbreDeLettres) : Caractere
+     \item \textbf{fonction} obtenirEstFinDeMot(arbre : ArbreDeLettres) : Booleen
+     \item \textbf{procedure} supprimer(\textbf{E/S} arbre : ArbreDeLettres)
+
+\end{itemize} 
+
+
+\end{procedure}

@@ -1,105 +1,187 @@
-\documentclass{article}
-\usepackage[utf8]{inputenc}
-\usepackage{enumitem}
-\usepackage{amssymb}
-\usepackage{times}
-\usepackage{fancyhdr,graphicx,amsmath,amssymb}
-\usepackage[ruled,vlined, french]{algorithm2e}
-    \SetKwInput{Declaration}{Declaration}
-    \SetKw{KwA}{a}
-    \SetKw{Retour}{retourner}
-    \SetKwBlock{Deb}{debut}{fin}
-    \SetKwIF{Si}{SinonSi}{Sinon}{si}{alors}{sinon si}{sinon}{finsi}
-    \SetKwFor{Tq}{tant que}{faire}{finTantQue}
-    \SetKwFor{Pour}{pour}{faire}{finPour}
-    \SetKwRepeat{Repeter}{repeter}{jusqu’a}
-    \SetKw{Pre}{Precondition(s)}
-\usepackage[hmargin=2cm,vmargin=0cm]{geometry}
-
-\begin{document}
-    \pagestyle{empty}
-    \noindent
-
     \section*{Dictionnaire}
     \subsection*{Conception préliminaire}
+    
+    \textbf{Dictionnaire} = ArbreDeLettres
     \subsubsection*{Signatures}
 
 	\begin{itemize}[label=$\ $, leftmargin=1cm]
-		 \item \textbf{fonction} genererArbreAvecEnsembleDeMot(lesMots : Ensemble$<$Mot$>$): ArbreDeLettres
+		 \item \textbf{fonction} genererDicoAvecEnsembleDeMot(lesMots : Ensemble$<$Mot$>$): Dictionnaire
 		 \begin{itemize}[label=$| $] 
             \item \textbf{précondition:} non estVide(lesMots) 
          \end{itemize}
-		 \item \textbf{fonction} estUnMotDuDictionnaire(unArbre : ArbreDeLettres, unMot : Mot):Booléen
-         \item \textbf{fonction} chargerDico(unDictionnaire : Dictionnaire) :ArbreDeLettres 
-         \item \textbf{fonction} sauvegarderArbreEnDictionnaire(unArbre : Arbre): Dictionnaire
+		 \item \textbf{fonction} estUnMotDuDictionnaire(unDico : Dictionnaire, unMot : Mot) : Booléen
+         \item \textbf{fonction} chargerDico(unFichier : FichierTexte) :Dictionnaire
+         \item \textbf{fonction} sauvegarderDico(unDico : Dictionnaire) : FichierTexte
+         
+    
+	\end{itemize}
+	\subsubsection*{Signatures des sous fonctions}
+	\begin{itemize}[label=$\ $, leftmargin=1cm]
+		\item \textbf{fonction} lettreEstRacine(unDico : Dictionnaire uneLettre : Caractere):Booléen
+        \item \textbf{procedure} insererLettre (E/S : unDico : Dictionnaire, E : uneLettre : Caractere, estFinDeMot : Booleen)
+        \item \textbf{procedure} insererMot(E/S : unDico : Dictionnaire, E : unMot : Mot)
+        \item \textbf{procedure} chargerDicoR(E/S, unDico : Dictionnaire, E : unFichier : FichierTexte)
+        \item \textbf{procedure} sauvegarderDicoR(E/S, unDico : Dictionnaire,: unFichier : FichierTexte)
+         
 	\end{itemize}
 	
     \subsection*{Conception détaillée}
 
-    \begin{function}
-    \SetAlgoLined
-    \caption{genererArbreAvecEnsembleDeMot (lesMots : Ensemble$<$Mot$>$): ArbreDeLettres}
-    \Pre{non estVide(lesMots)} \\
-    \Declaration{\\
-        unArbre : ArbreDeLettres \\
-        i : Entier
-        }
-    \Deb{
-        \Pour{i $<$- 1 \textbf{allant à} longueur(lesMots)}
-        {insererMotALaBonnePlace(unArbre, obtenirElement(lesMots, i))}
-        \Retour{unArbre}
-    }
-    \end{function}
+
     
-       \begin{function}
+       \begin{procedure}
     \SetAlgoLined
-    \caption{chargerDico(unDictionnaire : Dictionnaire) :ArbreDeLettres }
-    \Declaration{\\
-        }
+    \caption{chargerDicoR(E/S, unDico : Dictionnaire, E : unFichier : FichierTexte)}
+    \Declaration{\\ temp : Dictionnaire \\
+                element : Chaine\\
+                lettre, estFinDeMot, aFils, aFrere : Caractere}
     \Deb{
-        \Retour{}
+        element $\gets$  lireElement(unFichier)\\
+        lettre $\gets$  element[0] \\
+        estFinDeMot $\gets$  element[1] \\
+        aFils $\gets$  element[2] \\
+        aFrere $\gets$  element[3] \\
+        unDico $\gets$  creerADL(creerADLVide(), creerADLVide(), lettre, caractereEnBooleen(estFinDeMot)) \\
+        \Si{caractereEnBooleen(aFils)}
+        {
+            chargerDicoR(temp, unFichier) \\
+            fixerFils(unDico, temp) \\
+        }
+        \Si{caractereEnBooleen(aFrere)}
+        {
+            chargerDicoR(temp, unFichier) \\
+            fixerFrere(unDico, temp) \\
+        }
     }
-    \end{function}
+    \end{procedure}
     
-      \begin{function}
+    \begin{procedure}
     \SetAlgoLined
-    \caption{estUnMotDuDictionnaire(unArbre : ArbreDeLettres, unMot : Mot):Booléen}
-    \Declaration{\\ temp : ArbreDeLettres
-        }
-    \Deb{
-        \Si{longueur(unMot) = 1}
-            {
-            \Retour{non(estVide(unArbre) ou non(obtenirBooleen(unArbre))}
-            }
-        \Sinon
-            {\Si{non estVide(unArbre)}
-                {\Si{iemeCaractere(unMot,1) = obtenirLettre(unArbre)}
-                    {
-                    unMot $<$- supprimerIemeLettre(unMot, 1) \\
-                    temp $<$- obtenirFilsGauche(unArbre)\\
-                    \Retour{estUnMotDuDictionnaire(unMot, temp)}
-                    }
-                 \Sinon
-                    {
-                    temp $<$- obtenirFrere(unArbre)\\
-                    \Retour{estUnMotDuDictionnaire(unMot, temp)}
-                    }
+    \caption{sauvegarderDicoR(E/S, unDico : Dictionnaire,: unFichier : FichierTexte)}
+    \Declaration{\\ tempFils, tempFrere : Dictionnaire \\
                 }
-             \Sinon{\Retour{FAUX}}
-            }
-        
+    \Deb{
+        \Si{non(estVide(unDico))}
+        {
+            ecrireCaractere(unFichier, obtenirLettre(unDico) \\
+            ecrireCaractere(unFichier, booleenEnCaractere(obtenirEstFinDeMot(unDico)) \\
+            tempFils $\gets$ obtenirFils(unDico) \\
+            tempFrere $\gets$  obtenirFrere(unDico) \\
+            ecrireCaractere(unFichier, booleenEnCaractere(non(estVide(tempFils)))) \\
+            ecrireCaractere(unFichier, booleenEnCaractere(non(estVide(tempFils)))) \\
+            sauvegarderDicoR(tempFils, unFichier) \\
+            sauvegarderDicoR(tempFrere, unFichier) \\
         }
-    \end{function}
+    }
+    \end{procedure}
     
       \begin{function}
     \SetAlgoLined
-    \caption{sauvegarderArbreEnDictionnaire(unArbre : Arbre): Dictionnaire}
-    \Declaration{\\
+    \caption{estUnMotDuDictionnaire(unDico : Dictionnaire, unMot : Mot) : Booléen}
+    \Declaration{\\ temp : Dictionnaire \\ 
         }
-    \Deb{
-        \Retour{}
+    \Deb
+    {
+        \Si{longueurMot(unMot) = 1}
+        {
+            \Si{non(estVide(unDico))}
+            {
+                \Si{iemeCaractere(unMot, 1) = obtenirLettre(unDico)}
+                {
+                    \Retour{obtenirEstFinDeMot(unDico)}
+                }
+                \Sinon
+                {
+                    temp $\gets$ obtenirFrere(unDico)  \\
+                    \Retour{estUnMotDuDictionnaire(temp, unMot)}
+                }
+            }
+            \Sinon
+            {
+                \Retour{FAUX}
+            }
+        }
+        \Sinon
+        {
+            \Si{non(estVide(unDico))}
+            {
+                \Si{iemeCaractere(unMot, 1) = obtenirLettre(unDico)}
+                {
+                    supprimerIemeLettre(unMot, 1) \\
+                    temp $\gets$ obtenirFils(unDico) \\
+                    \Retour{estUnMotDuDictionnaire(temp, unMot}
+                }
+                \Sinon
+                {
+                    temp $\gets$ obtenirFrere(unDico) \\
+                    \Retour{estUnMotDuDictionnaire(temp, unMot}
+                }
+            }
+            \Sinon
+            {
+                \Retour{FAUX}
+            }
+        }
     }
     \end{function}
     
+      \begin{procedure}
+    \SetAlgoLined
+    \caption{insererMot(E/S : unDico : Dictionnaire, E : unMot : Mot)}
+    \Declaration{\\ temp : Dictionnaire \\ estFinDeMot : Booleen
+        }
+    \Deb{
+        estFinDeMot $\gets$ FAUX \\
+        \Si{longueurMot(unMot) = 1}
+        {
+            estFinDeMot $\gets$ VRAI \\
+            \Si{estVide(unDico)}
+            {
+                insererLettre(unDico, iemeCaractere(unMot, 1), enFinDeMot)
+            }
+            \Sinon
+            {
+                \Si{lettreEstRacine(unDico, iemeCaractere(unMot, 1))}
+                {
+                    fixerEstFinDeMot(unDico, estFinDeMot)
+                }
+                \Sinon
+                {
+                    temp $\gets$ obtenirFrere(unDico)  \\
+                    insererMot(temp, unMot) \\
+                    fixerFrere(unDico, temp)
+                }
+            }
+        }
+        \Sinon
+        {
+            \Si{estVide(unDico)}
+            {
+                insererLettre(unDico, iemeCaractere(unMot, 1), enFinDeMot) \\
+                supprimerIemeLettre(unMot, 1) \\
+                temp $\gets$ obtenirFils(unDico)  \\
+                insererMot(temp, unMot) \\
+                fixerFils(unDico, temp)
+            }
+            \Sinon
+            {
+                \Si{lettreEstRacine(unDico, iemeCaractere(unMot, 1))}
+                {
+                    supprimerIemeLettre(unMot, 1) \\
+                    temp $\gets$ obtenirFils(unDico)  \\
+                    insererMot(temp, unMot) \\
+                    fixerFils(unDico, temp)
+                }
+                \Sinon
+                {
+                    temp $\gets$ obtenirFrere(unDico)  \\
+                    insererMot(temp, unMot)
+                    fixerFrere(unDico, temp)
+                }
+            }
+        }
+    }
+    \end{procedure}
+
+
  
-\end{document}

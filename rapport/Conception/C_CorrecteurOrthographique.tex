@@ -1,134 +1,207 @@
-\documentclass{article}
-\usepackage[utf8]{inputenc}
-\usepackage{enumitem}
-\usepackage{amssymb}
-\usepackage{times}
-\usepackage{fancyhdr,graphicx,amsmath,amssymb}
-\usepackage[ruled,vlined, french]{algorithm2e}
-    \SetKwInput{Declaration}{Declaration}
-    \SetKw{KwA}{a}
-    \SetKw{Retour}{retourner}
-    \SetKwBlock{Deb}{debut}{fin}
-    \SetKwIF{Si}{SinonSi}{Sinon}{si}{alors}{sinon si}{sinon}{finsi}
-    \SetKwFor{Tq}{tant que}{faire}{finTantQue}
-    \SetKwFor{Pour}{pour}{faire}{finPour}
-    \SetKwRepeat{Repeter}{repeter}{jusqu’a}
-    \SetKw{Pre}{Precondition(s)}
-\usepackage[hmargin=2cm,vmargin=0cm]{geometry}
 
-\begin{document}
-    \pagestyle{empty}
-    \noindent
+\section*{Correcteur Orthographique}
 
-    \section*{Correcteur Orthographique}
-    
-    \subsection*{Conception préliminaire}
-    \textbf{Type} CorrecteurOrthographique = Structure
-	\begin{itemize}[label=$\ $, leftmargin=2cm]
-		 \item motACorriger : ChaineDeCaractere
-		 \item leDictionnaire : Naturel
-		 \item lesCorrections : EnsembleDeMot
-	\end{itemize}
-    finStructure
-    \subsubsection*{Signatures}
+\subsection*{Conception préliminaire}
+\textbf{Type} CorrecteurOrthographique = Structure
+\begin{itemize}[label=$\ $, leftmargin=2cm]
+    \item motACorriger : Mot
+    \item leDictionnaire : Naturel
+    \item lesCorrections : EnsembleDeMot
+\end{itemize}
+finStructure
+\subsubsection*{Signatures}
 
-	\begin{itemize}[label=$\ $, leftmargin=1cm]
-		 
-		 \item \textbf{fonction} correcteur(unDico : Dictionnaire, unMotFaux : unMot): CorrecteurOrthographique
-		 \begin{itemize}[label=$| $]
-            \item \textbf{précondition:} non(estUnMotDuDictionnaire(unDico, unMotFaux))
-         \end{itemize}
-		 \item \textbf{fonction} obtenirMotACorriger(unCorrecteur : CorrecteurOrthographique): Mot
-		 \item \textbf{fonction} obtenirDictionnaire(unCorrecteur : CorrecteurOrthographique): Dictionnaire
-		 \item \textbf{procedure} fixerDico(\textbf{E/S} unCorrecteur : CorrecteurOrthographique,\textbf{E})
-		 \item \textbf{procedure} fixerMotACorriger(\textbf{E/S} unCorrecteur: CorrecteurOrthographique,\textbf{E} unMotFaux : Mot)
-		 \begin{itemize}[label=$| $]
-            \item \textbf{précondition:} non(estUnMotDuDictionnaire(obtenirDictionnaire(unCorrecteur), unMotFaux))
-         \end{itemize}
-		 \item \textbf{procedure} fixerDico(\textbf{E/S} unCorrecteur : CorrecteurOrthographique, \textbf{E} unDico : Dictionnaire)
-		 \item \textbf{procedure} ajouterNouvellesCorrections(\textbf{E/S} cor : CorrecteurOrthographique, 
-		 \textbf{E} corrections : Ensemble$<$Mot$>$)
-		 \item \textbf{procedure} trouverCorrectionsPossibles(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
-		 \item \textbf{fonction} remplacerIemeLettreEnBoucle(unMot : Mot, indice : Naturel) : Ensemble$<$Mot$>$
-		 \item \textbf{procedure} strategieRemplacerLettres(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
-		 \item \textbf{procedure} strategieSupprimerLettres(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
-		 \item \textbf{procedure} strategieInverserDeuxLettresConsecutives(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
-		 \item \textbf{fonction} insererIemeLettreEnBoucle(unMot : Mot, indice : Naturel) : Ensemble$<$Mot$>$
-		 \item \textbf{procedure} strategieInsererLettres(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
-		 \item \textbf{procedure} strategieDecomposerMot(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
-		 
-		 
-		 
-         
-         
-        
-	\end{itemize} 
-    
-    \subsection*{Conception détaillée}
+\begin{itemize}[label=$\ $, leftmargin=1cm]
 
-    \begin{procedure}
+    \item \textbf{fonction} correcteur(unDico : Dictionnaire, unMotFaux : Mot): CorrecteurOrthographique
+          \begin{itemize}[label=$| $]
+              \item \textbf{précondition:} non(Dictionnaire.estUnMotDuDictionnaire(unDico, unMotFaux))
+          \end{itemize}
+    \item \textbf{fonction} obtenirMotACorriger(unCorrecteur : CorrecteurOrthographique) : Mot
+    \item \textbf{fonction} obtenirDictionnaire(unCorrecteur : CorrecteurOrthographique) : Dictionnaire
+    \item \textbf{procedure} fixerDico(\textbf{E/S} unCorrecteur : CorrecteurOrthographique,\textbf{E} unDico : Dictionnaire)
+    \item \textbf{procedure} fixerMotACorriger(\textbf{E/S} unCorrecteur : CorrecteurOrthographique,\textbf{E} unMotFaux : Mot)
+          \begin{itemize}[label=$| $]
+              \item \textbf{précondition:} non(Dictionnaire.estUnMotDuDictionnaire(obtenirDictionnaire(unCorrecteur), unMotFaux))
+          \end{itemize}
+    \item \textbf{procedure} ajouterNouvellesCorrections(\textbf{E/S} unCorrecteur : CorrecteurOrthographique,\textbf{E} desCorrections : EnsembleDeMot)
+    \item \textbf{procedure} trouverCorrectionsPossibles(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
+    \item \textbf{fonction} remplacerIemeLettreEnBoucle(unMot : Mot, indice : Naturel) : EnsembleDeMot
+    \item \textbf{procedure} strategieRemplacerLettres(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
+    \item \textbf{procedure} strategieSupprimerLettres(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
+    \item \textbf{procedure} strategieInverserDeuxLettresConsecutives(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
+    \item \textbf{fonction} insererIemeLettreEnBoucle(unMot : Mot, indice : Naturel) : EnsembleDeMot
+    \item \textbf{procedure} strategieInsererLettres(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
+    \item \textbf{procedure} strategieDecomposerMot(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)
+    \item \textbf{procedure} supprimerCorrecteur(\textbf{E} unCorrecteur : CorrecteurOrthographique)
+
+
+
+
+
+\end{itemize}
+
+\subsection*{Conception détaillée}
+
+\begin{function}
     \SetAlgoLined
-    \caption{remplacerIemeLettre(\textbf{E/S} mot : Mot,\textbf{E} c : Caractere, \textbf{E} position : naturel)}
-    \Declaration{}
+    \caption{correcteur(Dictionnaire : unDico, Mot : unMotFaux):CorrecteurOrthographique}
+    \Pre{non(Dictionnaire.estUnMotDuDictionnaire(unDico,Mot.copierMot(unMotFaux)))}\;
+    \Declaration{unCorrecteur : CorrecteurOrthographique}
     \Deb{
-        supprimerIemeLettre(mot,position)\;
-        insererLettre(mot,position,caractere)\;
+        unCorrecteur.leDictionnaire $\gets$ unDico\;
+        unCorrecteur.motACorriger $\gets$ Mot.copierMot(unMotFaux)\;
+        unCorrecteur.lesCorrections $\gets$ EnsembleDeMot.ensembleDeMot()\;
+        \Retour{unCorrecteur}\;
     }
-    \end{procedure}
-    
-    \begin{procedure}
+\end{function}
+
+\begin{procedure}
     \SetAlgoLined
-    \caption{supprimerIemeLettre(\textbf{E/S} unMot, \textbf{E} position : Naturel)}
-    \Pre{longueur(mot)$\ge$1 et i$\le$longueur}\\
-    \Declaration{}
+    \caption{ajouterNouvellesCorrections(\textbf{E/S} unCorrecteur : CorrecteurOrthographique, \textbf{E} desCorrections : EnsembleDeMot)}
+    \Declaration{temp : EnsembleDeMot}
     \Deb{
-       ChaineDeCaractere.supprimerIemeLettre(unMot.chaine,position)\;
-       unMot.longueur $\gets$ unMot.longueur-1 \;
+        temp $\gets$ unCorrecteur.lesCorrections\;
+        unCorrecteur.lesCorrections $\gets$ EnsembleDeMot.union(desCorrections,temp)\;
     }
-    \end{procedure}
-    
-    \begin{procedure}
+\end{procedure}
+
+\begin{procedure}
     \SetAlgoLined
-    \caption{inverserDeuxLettresConsecutives(\textbf{E/S} unMot : Mot, \textbf{E} i : NaturelNonNul)}
-    \Pre{longueur(mot)$\ge$1 et i$\le$longueur}\\
-    \Declaration{c1,c2 : Caractere}
+    \caption{trouverCorrectionsPossibles(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)}
     \Deb{
-    	c1 $\gets$ Mot.accederAuIemeCaractere(unMot,i)\;
-    	c2 $\gets$ Mot.accederAuIemeCaractere(unMot,i+1)\;
-    	remplacerIemeLettre(unMot, c2, i)\;
-    	remplacerIemeLettre(unMot, c1, i+1)\;
+        strategieRemplacerLettres(unCorrecteur)\;
+        strategieInverserDeuxLettresConsecutives(unCorrecteur)\;
+        strategieSupprimerLettres(unCorrecteur)\;
+        strategieInsererLettres(unCorrecteur)\;
+        strategieDecomposerMot(unCorrecteur)\;
     }
-    \end{procedure}
-    
-     \begin{procedure}
+\end{procedure}
+
+\begin{function}
     \SetAlgoLined
-    \caption{insererLettre(\textbf{E/S} unMot : Mot, \textbf{E} position : Naturel, c : Caractere)}
-    \Pre{i$\le$ longueur(mot)}\\
-    \Declaration{}
+    \caption{remplacerIemeLettreEnBoucle( mot : Mot, position : Naturel):EnsembleDeMot}
+    \Declaration{desCorrections : EnsembleDeMot, uneCorrection : Mot, lettres : Chaine de caractere}
     \Deb{
-       ChaineDeCaratere.insererLettre(unMot.chaine,position,c)\;
-       unMot.longueur $\gets$ unMot.longueur + 1\;
+    desCorrections=EnsembleDeMot.ensembleDeMot()
+    lettres = "abcdefghijklmnopqrstuvwxyzàéèëùûêîïçôö-"\;
+    \Pour{j $\gets$ 0 à longueur(lettres)-1}{
+    uneCorrection $\gets$ Mot.copierMot(mot)
+    Mot.fixierIemeCaractere(uneCorrection,i,lettres[j])\;
+    EnsembleDeMot.ajouter(desCorrections,uneCorrection)\;
+    Mot.insererLettre(mot2, i, c)\;
     }
-    \end{procedure}
-    
-    \begin{function}
+    \Retour{desCorrections}
+    }
+\end{function}
+
+
+\begin{procedure}
     \SetAlgoLined
-    \caption{decomposerMot(unMot : Mot, position : NaturelNonNul) : Mot, Mot}
-    \Pre{i$\le$ longueur(mot)}\\
-    \Declaration{mot1, mot2 : Mot, c : Caractere, chaine1, chaine2 : ChaineDeCaractere}
+    \caption{strategieRemplacerLettres(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)}
+    \Declaration{i,longueur : Naturel, uneCorrection, leMotACorriger : Mot, desCorrections, correctionsCourantes : EnsembleDeMot, leDico : Dictionnaire}
     \Deb{
-    	mot1 $\gets$ creerUnMot("")\;
-    	mot2 $\gets$ creerUnMot("")\;
-       \Pour{i $\gets$ 1 à position-1}{
-        	c $\gets$ Mot.accederAuIemeCaractere(unMot,i)\;
-        	insererLettre(mot1, i, c);
+        leMotACorriger $\gets$ CorrecteurOrthographique.obtenirMotACorriger(unCorrecteur)\;
+        leDico $\gets$ CorrecteurOrthographique.obtenirDictionnaire(unCorrecteur)\;
+        longueur $\gets$ Mot.longueur(leMotACorriger)\;
+        desCorrections $\gets$ EnsembleDeMot.ensembleDeMot()\;
+        correctionsCourantes $\gets$ EnsembleDeMot.ensembleDeMot()\;
+        \Pour{i $\gets$ 1 à longueur}{
+            correctionsCourantes = CorrecteurOrthographique.remplacerIemeLettreEnBoucle(leMotACorriger,i)\;
+            \Tq{ EnsembleDeMot.cardinalité(correctionsCourantes) $\neq $ 0}{
+                uneCorrection $\gets$ EnsembleDeMot.obtenirMot(correctionsCourantes)\;
+                EnsembleDeMot.retirer(correctionsCourantes,uneCorrection)\;
+                \Si{ Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et non(EnsembleDeMot.estPresent(desCorrections,uneCorrection))}{
+                    EnsembleDeMot.ajouter(desCorrections,uneCorrection)\;
+                }
+            }
+            CorrecteurOrthographique.ajouterNouvellesCorrections(uneCorrection)\;
         }
-        \Pour{i $\gets$ position à unMot.longueur}{
-        	c $\gets$ Mot.accederAuIemeCaractere(unMot,i)\;
-        	insererLettre(mot2, i, c);
-        }
-      	\Retour{mot1, mot2}
     }
-    \end{function}
- 
-\end{document}
+\end{procedure}
+
+\begin{procedure}
+    \SetAlgoLined
+    \caption{strategieSupprimerLettres(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)}
+    \Declaration{i,longueur : Naturel, uneCorrection, leMotACorriger : Mot, desCorrections : EnsembleDeMot, leDico : Dictionnaire}
+    \Deb{
+        leMotACorriger $\gets$ CorrecteurOrthographique.obtenirMotACorriger(unCorrecteur)\;
+        leDico $\gets$ CorrecteurOrthographique.obtenirDictionnaire(unCorrecteur)\;
+        longueur $\gets$ Mot.longueur(leMotACorriger)\;
+        desCorrections $\gets$ EnsembleDeMot.ensembleDeMot()\;
+        \Pour{i $\gets$ 1 à longueur-1}{
+            uneCorrection $\gets$ Mot.copierMot(mot)\;
+            Mot.supprimerIemeLettre(uneCorrection,i)\;
+            \Si{Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et non(EnsembleDeMot.estPresent(desCorrections,uneCorrection))}{
+                EnsembleDeMot.ajouter(desCorrections,uneCorrection)\;
+            }
+        }
+        CorrecteurOrthographique.ajouterNouvellesCorrections(uneCorrection)\;
+    }
+\end{procedure}
+
+
+\begin{procedure}
+    \SetAlgoLined
+    \caption{strategieInverserDeuxLettresConsecutives(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)}
+    \Declaration{i,longueur : Naturel, uneCorrection, leMotACorriger : Mot, desCorrections : EnsembleDeMot, leDico : Dictionnaire}
+    \Deb{
+        leMotACorriger $\gets$ CorrecteurOrthographique.obtenirMotACorriger(unCorrecteur)\;
+        leDico $\gets$ CorrecteurOrthographique.obtenirDictionnaire(unCorrecteur)\;
+        longueur $\gets$ Mot.longueur(leMotACorriger)\;
+        desCorrections $\gets$ EnsembleDeMot.ensembleDeMot()\;
+        \Pour{i $\gets$ 1 à longueur}{
+            uneCorrection $\gets$ Mot.copierMot(mot)\;
+            Mot.inverserDeuxLettresConsecutives(uneCorrection,i)\;
+            \Si{Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et non(EnsembleDeMot.estPresent(desCorrections,uneCorrection))}{
+                EnsembleDeMot.ajouter(desCorrections,uneCorrection)\;
+            }
+        }
+        CorrecteurOrthographique.ajouterNouvellesCorrections(uneCorrection)\;
+    }
+\end{procedure}
+
+\begin{procedure}
+    \SetAlgoLined
+    \caption{strategieInsererLettres(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)}
+    \Declaration{i,longueur : Naturel, uneCorrection, leMotACorriger : Mot,correctionsCourantes, desCorrections : EnsembleDeMot, leDico : Dictionnaire}
+    \Deb{
+        leMotACorriger $\gets$ CorrecteurOrthographique.obtenirMotACorriger(unCorrecteur)\;
+        leDico $\gets$ CorrecteurOrthographique.obtenirDictionnaire(unCorrecteur)\;
+        longueur $\gets$ Mot.longueur(leMotACorriger)\;
+        desCorrections $\gets$ EnsembleDeMot.ensembleDeMot()\;
+        correctionsCourantes $\gets$ EnsembleDeMot.ensembleDeMot()\;
+        \Pour{i $\gets$ 1 à longueur)}{
+            correctionsCourantes $\gets$ CorrecteurOrthographique.insererIemeLettreEnBoucle(leMotACorriger,i)\;
+            \Tq{EnsembleDeMot.cardinalité(correctionsCourantes)$\neq$ 0}{
+                uneCorrection $\gets$  EnsembleDeMot.obtenirMot(correctionsCourantes)\;
+                EnsembleDeMot.retirer(correctionsCourantes,uneCorrection)\;
+                \Si {Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et non(EnsembleDeMot.estPresent(desCorrections,uneCorrection))}{
+                    EnsembleDeMot.ajouter(desCorrections,uneCorrection)\;
+                }
+            }
+            CorrecteurOrthographique.ajouterNouvellesCorrections(uneCorrection)\;
+        }
+    }
+\end{procedure}
+
+\begin{procedure}
+    \SetAlgoLined
+    \caption{strategieDecomposerMot(\textbf{E/S} unCorrecteur : CorrecteurOrthographique)}
+    \Declaration{i,longueur : Naturel, uneCorrection, unMotModifiable, leMotACorriger : Mot, desCorrections : EnsembleDeMot, leDico : Dictionnaire}
+    \Deb{
+        leMotACorriger $\gets$ CorrecteurOrthographique.obtenirMotACorriger(unCorrecteur)\;
+        leDico $\gets$ CorrecteurOrthographique.obtenirDictionnaire(unCorrecteur)\;
+        longueur $\gets$ Mot.longueur(leMotACorriger)\;
+        desCorrections $\gets$ EnsembleDeMot.ensembleDeMot()\;
+        \Pour{i $\gets$ 2 à longueur-2}{
+            unMotModifiable = Mot.copierMot(leMotACorriger)\;
+            uneCorrection $\gets$ Mot.decomposerMot(unMotModifiable,i)\;
+            \Si {Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(uneCorrection)) et Dictionnaire.estUnMotDuDictionnaire(leDico,Mot.copierMot(unMotModifiable))}{
+                EnsembleDeMot.ajouter(desCorrections,uneCorrection)\;
+                EnsembleDeMot.ajouter(desCorrections,unMotModifiable)\;
+            }
+        }
+        CorrecteurOrthographique.ajouterNouvellesCorrections(uneCorrection)\;
+    }
+\end{procedure}
